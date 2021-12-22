@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/profileFragment">
+
+    app:startDestination="@id/loveIsFragment">
+
+    <fragment
+        android:id="@+id/loveIsFragment"
+        android:name="com.project.loveis.LoveIsFragment"
+        android:label="LoveIsFragment" >
+        <action
+            android:id="@+id/action_loveIsFragment_to_loveIsDetailsFragment"
+            app:destination="@id/loveIsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.project.loveis.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_verify1Fragment"
+            app:destination="@id/verify1Fragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_phoneNumber1Fragment"
+            app:destination="@id/phoneNumber1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dialogsFragment"
+        android:name="com.project.loveis.DialogsFragment"
+        android:label="DialogsFragment" >
+        <action
+            android:id="@+id/action_dialogsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.project.loveis.EventsFragment"
+        android:label="EventsFragment" >
+        <action
+            android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
+        <action
+            android:id="@+id/action_eventsFragment_to_createEventIsFragment1"
+            app:destination="@id/createEventIsFragment1" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.project.loveis.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_createLoveIsFragment1"
+            app:destination="@id/createLoveIsFragment1" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.project.loveis.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loveIsDetailsFragment"
+        android:name="com.project.loveis.LoveIsDetailsFragment"
+        android:label="LoveIsDetailsFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.project.loveis.ChatFragment"
+        android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.project.loveis.EventDetailsFragment"
+        android:label="EventDetailsFragment" />
+    <fragment
+        android:id="@+id/createEventIsFragment1"
+        android:name="com.project.loveis.CreateEventIsFragment1"
+        android:label="CreateEventIsFragment1" >
+        <action
+            android:id="@+id/action_createEventIsFragment1_to_createEventIsFragment2"
+            app:destination="@id/createEventIsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEventIsFragment2"
+        android:name="com.project.loveis.CreateEventIsFragment2"
+        android:label="CreateEventIsFragment2" >
+        <action
+            android:id="@+id/action_createEventIsFragment2_to_createEventIsFragment3"
+            app:destination="@id/createEventIsFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEventIsFragment3"
+        android:name="com.project.loveis.CreateEventIsFragment3"
+        android:label="CreateEventIsFragment3" >
+        <action
+            android:id="@+id/action_createEventIsFragment3_to_createEventIsFragment4"
+            app:destination="@id/createEventIsFragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEventIsFragment4"
+        android:name="com.project.loveis.CreateEventIsFragment4"
+        android:label="CreateEventIsFragment4" >
+        <action
+            android:id="@+id/action_createEventIsFragment4_to_createEventIsFragment5"
+            app:destination="@id/createEventIsFragment5" />
+        <action
+            android:id="@+id/action_createEventIsFragment4_to_createPlaceFragment1"
+            app:destination="@id/createPlaceFragment1" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEventIsFragment5"
+        android:name="com.project.loveis.CreateEventIsFragment5"
+        android:label="CreateEventIsFragment5" >
+        <action
+            android:id="@+id/action_createEventIsFragment5_to_createEventIsFragment6"
+            app:destination="@id/createEventIsFragment6" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEventIsFragment6"
+        android:name="com.project.loveis.CreateEventIsFragment6"
+        android:label="CreateEventIsFragment6" >
+        <action
+            android:id="@+id/action_createEventIsFragment6_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPlaceFragment1"
+        android:name="com.project.loveis.CreatePlaceFragment1"
+        android:label="CreatePlaceFragment1" >
+        <action
+            android:id="@+id/action_createPlaceFragment1_to_createPlaceFragment2"
+            app:destination="@id/createPlaceFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPlaceFragment2"
+        android:name="com.project.loveis.CreatePlaceFragment2"
+        android:label="CreatePlaceFragment2" >
+        <action
+            android:id="@+id/action_createPlaceFragment2_to_createPlaceFragment3"
+            app:destination="@id/createPlaceFragment3" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPlaceFragment3"
+        android:name="com.project.loveis.CreatePlaceFragment3"
+        android:label="CreatePlaceFragment3" >
+        <action
+            android:id="@+id/action_createPlaceFragment3_to_createEventIsFragment4"
+            app:destination="@id/createEventIsFragment4" />
+        <action
+            android:id="@+id/action_createPlaceFragment3_to_createLoveIsFragment2"
+            app:destination="@id/createLoveIsFragment2" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="adress"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/createLoveIsFragment1"
+        android:name="com.project.loveis.CreateLoveIsFragment1"
+        android:label="CreateLoveIsFragment1" >
+        <action
+            android:id="@+id/action_createLoveIsFragment1_to_createLoveIsFragment2"
+            app:destination="@id/createLoveIsFragment2" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/createLoveIsFragment2"
+        android:name="com.project.loveis.CreateLoveIsFragment2"
+        android:label="CreateLoveIsFragment2" >
+        <action
+            android:id="@+id/action_createLoveIsFragment2_to_createLoveIsFragment3"
+            app:destination="@id/createLoveIsFragment3" />
+        <action
+            android:id="@+id/action_createLoveIsFragment2_to_createPlaceFragment1"
+            app:destination="@id/createPlaceFragment1" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/createLoveIsFragment3"
+        android:name="com.project.loveis.CreateLoveIsFragment3"
+        android:label="CreateLoveIsFragment3" >
+        <action
+            android:id="@+id/action_createLoveIsFragment3_to_createLoveIsFragment4"
+            app:destination="@id/createLoveIsFragment4" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument
+            android:name="place"
+            app:argType="integer" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/createLoveIsFragment4"
+        android:name="com.project.loveis.CreateLoveIsFragment4"
+        android:label="CreateLoveIsFragment4" >
+        <action
+            android:id="@+id/action_createLoveIsFragment4_to_createLoveIsManFragment5"
+            app:destination="@id/createLoveIsManFragment5" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument
+            android:name="place"
+            app:argType="integer" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/createLoveIsManFragment5"
+        android:name="com.project.loveis.CreateLoveIsManFragment5"
+        android:label="CreateLoveIsManFragment5" >
+        <action
+            android:id="@+id/action_createLoveIsManFragment5_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument
+            android:name="place"
+            app:argType="integer" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="telegramUrl"
+            app:argType="string" />
+        <argument android:name="whatsappUrl" />
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+    </fragment>
+=======
+    app:startDestination="@id/phoneNumber1Fragment">
+
+    <fragment
+        android:id="@+id/registration1Fragment"
+        android:name="com.project.loveis.Registration1Fragment"
+        android:label="Registration1Fragment" >
+        <action
+            android:id="@+id/action_registration1Fragment_to_registration2Fragment"
+            app:destination="@id/registration2Fragment" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/registration2Fragment"
+        android:name="com.project.loveis.Registration2Fragment"
+        android:label="Registration2Fragment" >
+        <action
+            android:id="@+id/action_registration2Fragment_to_registration3Fragment"
+            app:destination="@id/registration3Fragment" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/registration3Fragment"
+        android:name="com.project.loveis.Registration3Fragment"
+        android:label="Registration3Fragment" >
+        <action
+            android:id="@+id/action_registration3Fragment_to_registration4Fragment"
+            app:destination="@id/registration4Fragment" />
+        <argument
+            android:name="photo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/registration4Fragment"
+        android:name="com.project.loveis.Registration4Fragment"
+        android:label="Registration4Fragment" >
+        <action
+            android:id="@+id/action_registration4Fragment_to_registration5Fragment"
+            app:destination="@id/registration5Fragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+        <argument
+            android:name="photo"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registration5Fragment"
+        android:name="com.project.loveis.Registration5Fragment"
+        android:label="Registration5Fragment" >
+        <argument
+            android:name="birthDate"
+            app:argType="long" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <argument
+            android:name="gender"
+            app:argType="string" />
+        <argument
+            android:name="photo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_registration5Fragment_to_phoneNumber1Fragment"
+            app:destination="@id/phoneNumber1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.project.loveis.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.project.loveis.MenuFragment"
+        android:label="MenuFragment" >
+        <action
+            android:id="@+id/action_menuFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_techSupportFragment"
+            app:destination="@id/techSupportFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_changePhoneNumber1Fragment"
+            app:destination="@id/changePhoneNumber1Fragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_aboutAppFragment"
+            app:destination="@id/aboutAppFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_walletFragment"
+            app:destination="@id/walletFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMoneyFragment"
+        android:name="com.project.loveis.AddMoneyFragment"
+        android:label="AddMoneyFragment" />
+    <fragment
+        android:id="@+id/getMoneyFragment"
+        android:name="com.project.loveis.GetMoneyFragment"
+        android:label="GetMoneyFragment" />
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.project.loveis.VideoFragment"
+        android:label="VideoFragment" />
+    <fragment
+        android:id="@+id/techSupportFragment"
+        android:name="com.project.loveis.TechSupportFragment"
+        android:label="TechSupportFragment" />
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.project.loveis.AboutAppFragment"
+        android:label="AboutAppFragment" />
+    <fragment
+        android:id="@+id/changePhoneNumber1Fragment"
+        android:name="com.project.loveis.ChangePhoneNumber1Fragment"
+        android:label="ChangePhoneNumber1Fragment" >
+        <action
+            android:id="@+id/action_changePhoneNumber1Fragment_to_changePhoneNumber2Fragment"
+            app:destination="@id/changePhoneNumber2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/premiumFragment"
+        android:name="com.project.loveis.PremiumFragment"
+        android:label="PremiumFragment" />
+    <fragment
+        android:id="@+id/changePhoneNumber2Fragment"
+        android:name="com.project.loveis.ChangePhoneNumber2Fragment"
+        android:label="ChangePhoneNumber2Fragment" >
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_changePhoneNumber2Fragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneNumber1Fragment"
+        android:name="com.project.loveis.PhoneNumber1Fragment"
+        android:label="PhoneNumber1Fragment" >
+        <action
+            android:id="@+id/action_phoneNumber1Fragment_to_phoneNumber2Fragment"
+            app:destination="@id/phoneNumber2Fragment" />
+        <action
+            android:id="@+id/action_phoneNumber1Fragment_to_registration1Fragment"
+            app:destination="@id/registration1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneNumber2Fragment"
+        android:name="com.project.loveis.PhoneNumber2Fragment"
+        android:label="PhoneNumber2Fragment" >
+        <action
+            android:id="@+id/action_phoneNumber2Fragment_to_registration1Fragment"
+            app:destination="@id/registration1Fragment" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_phoneNumber2Fragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verify1Fragment"
+        android:name="com.project.loveis.Verify1Fragment"
+        android:label="Verify1Fragment" >
+        <action
+            android:id="@+id/action_verify1Fragment_to_verify2Fragment"
+            app:destination="@id/verify2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verify2Fragment"
+        android:name="com.project.loveis.Verify2Fragment"
+        android:label="Verify2Fragment" >
+        <action
+            android:id="@+id/action_verify2Fragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.project.loveis.WalletFragment"
+        android:label="WalletFragment" >
+        <action
+            android:id="@+id/action_walletFragment_to_getMoneyFragment"
+            app:destination="@id/getMoneyFragment" />
+        <action
+            android:id="@+id/action_walletFragment_to_addMoneyFragment"
+            app:destination="@id/addMoneyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.project.loveis.ErrorFragment"
+        android:label="ErrorFragment" />
+    <fragment
+        android:id="@+id/serverErrorFragment"
+        android:name="com.project.loveis.ServerErrorFragment"
+        android:label="ServerErrorFragment" />
+    >>>>>>> origin/main
+</navigation>

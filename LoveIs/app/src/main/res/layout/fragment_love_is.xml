@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/chips_group_background"
+        android:paddingHorizontal="2dp"
+        app:chipSpacingHorizontal="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/activeChip"
+            style="@style/chipsStyle"
+            android:layout_width="104dp"
+            android:layout_height="match_parent"
+            android:checkable="true"
+            android:checked="true"
+            app:checkedIconEnabled="false"
+            app:chipBackgroundColor="@color/white"
+            android:text="@string/active" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/myChip"
+            android:checkable="true"
+            app:checkedIconEnabled="false"
+            style="@style/chipsStyle"
+            app:chipBackgroundColor="@color/chips_background"
+            android:elevation="0dp"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:text="@string/my" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/newChip"
+            android:checkable="true"
+            app:checkedIconEnabled="false"
+            style="@style/chipsStyle"
+            app:chipBackgroundColor="@color/chips_background"
+            android:elevation="0dp"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:text="@string/new_loveis" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/historyChip"
+            android:checkable="true"
+            app:checkedIconEnabled="false"
+            style="@style/chipsStyle"
+            app:chipBackgroundColor="@color/chips_background"
+            android:elevation="0dp"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:text="@string/history" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
+        tools:listitem="@layout/item_loveis_eventis" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

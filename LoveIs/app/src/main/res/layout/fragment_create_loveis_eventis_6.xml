@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/stepTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/step"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/stepTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/_6"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView1"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView1" />
+
+    <TextView
+        android:id="@+id/stepTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/of"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView2"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView2" />
+
+    <TextView
+        android:id="@+id/stepTextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/_6"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView3" />
+
+    <TextView
+        android:id="@+id/writeTelegramRefTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:text="@string/telegram_ref"
+        android:textAppearance="@style/infoText3"
+        app:layout_constraintBottom_toTopOf="@+id/telegramRefEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/writeWhatsAppRefTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:gravity="center"
+        android:text="@string/whatsapp_ref"
+        android:textAppearance="@style/infoText3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/telegramRefEditText" />
+
+    <EditText
+        android:id="@+id/telegramRefEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:drawableBottom="@drawable/ic_line_1"
+        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/whatsAppRefEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:drawableBottom="@drawable/ic_line_1"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeWhatsAppRefTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueBtn"
+        style="@style/buttonFilled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/create_loveis_eventis"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

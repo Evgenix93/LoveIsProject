@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="22dp"
+    android:background="@drawable/ic_liveis_item_background">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="17dp"
+        app:cardCornerRadius="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/placeImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            tools:src="@drawable/cafe"
+            android:scaleType="centerCrop"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/placeNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="#808080"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/placeIcon"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        tools:text="Smile"
+        />
+
+    <TextView
+        android:id="@+id/placeAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="#808080"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/addressIcon"
+        app:layout_constraintTop_toBottomOf="@+id/placeNameTextView"
+        tools:text="Санкт Петербург" />
+
+    <ImageView
+        android:id="@+id/placeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_coffee_blue"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/placeNameTextView"
+        app:tint="?attr/colorPrimaryVariant" />
+
+    <ImageView
+        android:id="@+id/addressIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/ic_place"
+        app:layout_constraintBottom_toBottomOf="@+id/placeAddressTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_date_background"
+        android:fontFamily="@font/roboto_regular"
+        android:paddingHorizontal="13dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeAddressTextView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="22.10.21" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/ic_date_background"
+        android:fontFamily="@font/roboto_regular"
+        android:paddingHorizontal="13dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/dateTextView"
+        app:layout_constraintTop_toTopOf="@+id/dateTextView"
+        tools:text="22:30" />
+
+    <ImageView
+        android:id="@+id/personIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_person"
+
+        app:layout_constraintEnd_toStartOf="@+id/personCountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+    <TextView
+        android:id="@+id/personCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/personQuantityTextView"
+        app:layout_constraintTop_toTopOf="@+id/personQuantityTextView"
+        tools:text="2" />
+
+    <TextView
+        android:id="@+id/personQuantityTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="19dp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="#C2C2C2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        tools:text="/10" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/accessBtn"
+
+        style="@style/buttonOutlined"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="18dp"
+        android:text="@string/access"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:backgroundTint="?attr/colorPrimaryVariant"
+        app:icon="@drawable/ic_check"
+        app:iconPadding="55dp"
+        app:iconTint="?attr/colorPrimaryVariant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+
+    <ImageView
+        android:id="@+id/closeImageView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toEndOf="@+id/accessBtn"
+        app:layout_constraintTop_toTopOf="@+id/accessBtn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

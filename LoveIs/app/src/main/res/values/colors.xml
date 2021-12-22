@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pink">#F73378</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#FF007AFF</color>
+    <color name="lightBlue">#03A9F4</color>
+    <color name="hint">#3303A9F4</color>
+    <color name="green">#4CAF50</color>
+    <color name="chips_background">#E6F2FF</color>
+    <color name="remove_person">#FF9999</color>
+    <color name="orange">#FF9800</color>
+    <color name="gray">#CCCCCC</color>
+    <color name="gray2">#999999</color>
+    <color name="gray3">#808080</color>
+    <color name="gray4">#C4C4C4</color>
+    <color name="gray5">#E7E7E7</color>
+    <color name="gray6">#B3B3B3</color>
+    <color name="blue2">#80BDFF</color>
+
+
+</resources>

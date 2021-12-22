@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/stepTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="sans-serif"
+        android:gravity="bottom"
+        android:text="@string/step"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/stepTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="sans-serif"
+        android:gravity="bottom"
+        android:text="@string/_3"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView1"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView1" />
+
+    <TextView
+        android:id="@+id/stepTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="sans-serif"
+        android:gravity="bottom"
+        android:text="@string/of"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView2"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView2" />
+
+    <TextView
+        android:id="@+id/stepTextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:fontFamily="sans-serif"
+        android:gravity="bottom"
+        android:text="@string/_3"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView3" />
+
+    <TextView
+        android:id="@+id/uploadPhotoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upload_photo"
+        android:textAppearance="@style/infoText3"
+        app:layout_constraintTop_toBottomOf="@+id/stepTextView1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="111dp"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/placeCardView"
+        android:layout_width="254dp"
+        android:layout_height="254dp"
+        app:layout_constraintTop_toBottomOf="@+id/uploadPhotoTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="33dp"
+        android:backgroundTint="?attr/colorPrimary"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="13dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camera"
+        android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/placePhotoImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueBtn"
+        style="@style/buttonFilled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/filled_button"
+        android:text="@string/create"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

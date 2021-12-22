@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/usersList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_user"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/filterCardView"
+        android:layout_width="133dp"
+        android:layout_height="154dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_marginEnd="23dp"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/genderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/gender"
+                android:textAppearance="@style/filterText"
+                android:lineSpacingExtra="14sp"
+                android:fontFamily="@font/roboto_medium"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:layout_marginTop="11dp"
+                android:gravity="center"/>
+
+            <ImageView
+                android:id="@+id/maleImageView"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:src="@drawable/male_image"
+                app:layout_constraintTop_toBottomOf="@+id/genderTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="2dp"
+                app:tint="#33000000"/>
+
+            <ImageView
+                android:id="@+id/femaleImageView"
+                android:layout_width="16.6dp"
+                android:layout_height="25dp"
+                android:src="@drawable/female_image"
+                app:tint="@color/pink"
+                app:layout_constraintTop_toBottomOf="@+id/genderTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="40.2dp"/>
+
+            <TextView
+                android:id="@+id/ageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/age"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="?attr/colorPrimaryVariant"
+                app:layout_constraintTop_toBottomOf="@+id/maleImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="19dp"
+                android:gravity="center"
+                android:lineSpacingExtra="14sp"
+                android:textAppearance="@style/filterText"/>
+
+            <TextView
+                android:id="@+id/fromTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="31dp"
+                android:layout_marginBottom="11dp"
+                android:textAppearance="@style/filterText"/>
+
+            <br.com.sapereaude.maskedEditText.MaskedEditText
+                android:id="@+id/yearEditText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_18"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/fromTextView"
+                android:layout_marginStart="2dp"
+                android:textAppearance="@style/filterText"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:backgroundTint="@color/white"
+                app:mask="##"/>
+
+            <TextView
+                android:id="@+id/untilTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/until"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/yearEditText1"
+                android:layout_marginStart="2dp"
+                android:layout_marginBottom="11dp"
+                android:textAppearance="@style/filterText"/>
+
+            <EditText
+                android:id="@+id/yearEditText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/untilTextView"
+                android:layout_marginStart="2dp"
+                android:textAppearance="@style/filterText"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:backgroundTint="@color/white"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

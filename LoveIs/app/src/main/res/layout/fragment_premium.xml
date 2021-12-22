@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="317dp"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="1sp"
+        android:text="@string/free_version"
+        android:textAlignment="center"
+        android:textAppearance="@style/infoText4"
+        android:textColor="@color/pink"
+        app:layout_constraintBottom_toTopOf="@+id/subscribeTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/subscribeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/subscribe"
+        android:textAppearance="@style/infoText"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintBottom_toTopOf="@+id/moreEventsTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusTextView" />
+
+    <TextView
+        android:id="@+id/moreEventsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/more_events"
+        android:textAppearance="@style/infoText4"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/useFiltersTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subscribeTextView" />
+
+    <TextView
+        android:id="@+id/unlimitedEventsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/create_events"
+        android:textAppearance="@style/infoText4"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moreEventsTextView" />
+
+    <TextView
+        android:id="@+id/useFiltersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/use_filters"
+        android:textAppearance="@style/infoText4"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/topOfSearchTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moreEventsTextView" />
+
+    <TextView
+        android:id="@+id/sortingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/sorting"
+        android:textAppearance="@style/infoText4"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/useFiltersTextView" />
+
+    <TextView
+        android:id="@+id/topOfSearchTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/top_search"
+        android:textAppearance="@style/infoText4"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pricesCardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/useFiltersTextView" />
+
+    <TextView
+        android:id="@+id/goToTopTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/top_search_text"
+        android:textAppearance="@style/infoText4"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topOfSearchTextView" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/pricesCardView"
+        android:layout_width="374dp"
+        android:layout_height="121dp"
+        android:background="#1A007AFF"
+        app:cardBackgroundColor="#1A007AFF"
+        app:cardCornerRadius="9dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topOfSearchTextView">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120.01dp"
+            android:layout_height="105.88dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="7.56dp"
+            app:cardBackgroundColor="#00000000"
+            app:cardCornerRadius="9dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="23.04dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/_1"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.01"
+                android:text="@string/month"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.01"
+                android:text="@string/_349"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:textSize="15sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120.01dp"
+            android:layout_height="105.88dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7.56dp"
+            app:cardBackgroundColor="?attr/colorPrimaryVariant"
+            app:cardCornerRadius="9dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="23.04dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/_3"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.01"
+                android:text="@string/month2"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.01"
+                android:text="@string/_306"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120.01dp"
+            android:layout_height="105.88dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="7.56dp"
+            android:layout_marginEnd="2dp"
+            app:cardBackgroundColor="#00000000"
+            app:cardCornerRadius="9dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="23.04dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/_6"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.01"
+                android:text="@string/month3"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="0.01"
+                android:text="@string/_266"
+                android:textColor="?attr/colorPrimaryVariant"
+                android:textSize="15sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto_regular"
+        android:letterSpacing="-0.03"
+        android:text="@string/_306_3"
+        android:textColor="#66000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/continueButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pricesCardView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueButton"
+        style="@style/buttonFilled"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/filled_button"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

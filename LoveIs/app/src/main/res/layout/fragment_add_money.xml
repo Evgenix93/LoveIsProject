@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/enter_requisitesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_requisites"
+        android:textAppearance="@style/infoText3"
+        app:layout_constraintBottom_toTopOf="@+id/creditCard1CardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/creditCard1CardView"
+        android:layout_width="264.6dp"
+        android:layout_height="157.31dp"
+        android:layout_marginStart="35dp"
+        app:cardBackgroundColor="#E1F5FE"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/addAmountTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_requisitesTextView">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="15.8dp"
+            android:layout_marginEnd="16.46dp"
+            android:src="@drawable/logo_mir" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="13.16dp"
+            android:layout_marginEnd="59.9dp"
+            android:src="@drawable/visa_logo" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="14.48dp"
+            android:layout_marginEnd="102.68dp"
+            android:src="@drawable/mastercard_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="33.87dp"
+            android:text="@string/card_number"
+            android:textAppearance="@style/some_id" />
+
+        <EditText
+            android:layout_width="238.27dp"
+            android:layout_height="28.96dp"
+            android:layout_marginStart="12.51dp"
+            android:layout_marginTop="49.37dp"
+            android:background="@drawable/rectangle3"
+            android:inputType="number" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="59.24dp"
+            android:layout_marginEnd="23.7dp"
+            android:src="@drawable/cross" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="13dp"
+            android:layout_marginBottom="53.45dp"
+            android:text="@string/card_holder"
+            android:textAppearance="@style/some_id" />
+
+        <EditText
+            android:layout_width="170.47dp"
+            android:layout_height="28.96dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="12.51dp"
+            android:layout_marginBottom="21.72dp"
+            android:background="@drawable/rectangle3"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="192dp"
+            android:layout_marginTop="79.87dp"
+            android:text="@string/expire_time"
+            android:textAppearance="@style/some_id" />
+
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:layout_width="59.9dp"
+            android:layout_height="28.96dp"
+            android:layout_marginStart="190.88dp"
+            android:layout_marginTop="106.63dp"
+            android:background="@drawable/rectangle8"
+            android:hint="@string/mmgg"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColorHint="#D8D6D4"
+            android:textSize="10sp"
+            app:mask="##/##" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/creditCard2CardView"
+        android:layout_width="264.6dp"
+        android:layout_height="157.31dp"
+        android:layout_marginStart="107.4dp"
+        android:layout_marginTop="78dp"
+        app:cardBackgroundColor="#81D4FA"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_requisitesTextView">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="33.57dp"
+            android:layout_marginTop="18.43dp"
+            android:background="?attr/colorPrimaryVariant" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200.6dp"
+            android:layout_marginTop="61.9dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/cvc"
+            android:textColor="#333333"
+            android:textSize="11sp" />
+
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:layout_width="50.02dp"
+            android:layout_height="28.96dp"
+            android:layout_marginStart="199.44dp"
+            android:layout_marginTop="77.67dp"
+            android:background="@drawable/rectangle8"
+            android:hint="@string/_000"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textColorHint="#D8D6D4"
+            android:textSize="12sp"
+            app:mask="###" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/addAmountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/add_amount"
+        android:textAppearance="@style/infoText3"
+        app:layout_constraintBottom_toTopOf="@+id/amountEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creditCard1CardView" />
+
+    <EditText
+        android:id="@+id/amountEditText"
+        style="@style/InputStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableBottom="@drawable/ic_line_1"
+        android:text="@string/_300"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAmountTextView" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/currency_rate"
+        android:textAppearance="@style/infoText3"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/_1_1"
+        android:textAppearance="@style/infoText3"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountEditText" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addButton"
+        style="@style/buttonFilled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="36dp"
+        android:text="@string/add_money"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

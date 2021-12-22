@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/currentPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/currentNumber"
+        android:textAppearance="@style/infoText"
+        app:layout_constraintBottom_toTopOf="@+id/phoneNumberTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/phoneNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:letterSpacing="-0.01"
+        android:text="@string/phone_number"
+        android:textColor="#4D212121"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/enterNewNumberTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentPhoneNumber" />
+
+    <TextView
+        android:id="@+id/enterNewNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/enter_new_number"
+        android:textAppearance="@style/infoText"
+        app:layout_constraintBottom_toTopOf="@+id/phoneNumberEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <br.com.sapereaude.maskedEditText.MaskedEditText
+        android:id="@+id/phoneNumberEditText"
+        style="@style/InputStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789 -."
+        android:gravity="center"
+        android:hint="@string/__________"
+        android:inputType="phone"
+        android:textColorHint="?attr/colorPrimaryVariant"
+        android:typeface="monospace"
+        app:backgroundTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:mask="+7(###)-###-##-##" />
+
+    <TextView
+        android:id="@+id/acceptTermsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="46dp"
+        android:text="@string/accept_terms"
+        android:textAppearance="@style/infoText2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
+
+    <TextView
+        android:id="@+id/agreementTextView"
+        android:layout_width="382dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/agreement"
+        android:textAppearance="@style/infoText2"
+        android:textColor="?attr/colorPrimaryVariant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acceptTermsTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueBtn"
+        style="@style/buttonFilled"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/filled_button"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

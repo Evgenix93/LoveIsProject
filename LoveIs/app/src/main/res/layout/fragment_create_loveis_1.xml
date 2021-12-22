@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/stepTextView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/step"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/stepTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/_1"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView1"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView1" />
+
+    <TextView
+        android:id="@+id/stepTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/of"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView2"
+        app:layout_constraintEnd_toStartOf="@+id/stepTextView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView2" />
+
+    <TextView
+        android:id="@+id/stepTextView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="bottom"
+        android:text="@string/_6"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/stepTextView3" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/walkCardView"
+        style="@style/loveIs_EventIs_typeCard_Checked"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="20dp"
+        app:cardElevation="20dp"
+        app:strokeColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stepTextView1">
+
+        <ImageView
+            android:id="@+id/walkIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="19dp"
+            android:src="@drawable/ic_relaxing_walk" />
+
+        <TextView
+            android:id="@+id/type1Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="52dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/walk"
+            android:textColor="?attr/colorPrimaryVariant"
+            android:textSize="18sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/winterSportsCardView"
+        style="@style/loveIs_EventIs_typeCard_NotChecked"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/walkCardView">
+
+        <ImageView
+            android:id="@+id/skiIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="19dp"
+            android:src="@drawable/ic_skiing_man"
+            app:tint="@color/gray"/>
+
+        <TextView
+            android:id="@+id/type2Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="52dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/ski"
+            android:textColor="@color/gray2"
+            android:textSize="18sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/tripCardView"
+        style="@style/loveIs_EventIs_typeCard_NotChecked"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/winterSportsCardView">
+
+        <ImageView
+            android:id="@+id/carIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="19dp"
+            android:src="@drawable/ic_sports_car"
+            app:tint ="@color/gray"/>
+
+        <TextView
+            android:id="@+id/type3Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="52dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/trip"
+            android:textColor="@color/gray2"
+            android:textSize="18sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/sushiCardView"
+        style="@style/loveIs_EventIs_typeCard_NotChecked"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tripCardView">
+
+        <ImageView
+            android:id="@+id/rollsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="19dp"
+            android:src="@drawable/ic_sushi_1"
+            app:tint ="@color/gray"/>
+
+        <TextView
+            android:id="@+id/type4Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="52dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/sushi"
+            android:textColor="@color/gray2"
+            android:textSize="18sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cafeCardView"
+        style="@style/loveIs_EventIs_typeCard_NotChecked"
+        android:layout_width="0dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sushiCardView">
+
+        <ImageView
+            android:id="@+id/cafeIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="19dp"
+            android:src="@drawable/ic_coffee"
+            app:tint ="@color/gray"/>
+
+        <TextView
+            android:id="@+id/type5Description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="52dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/cafe"
+            android:textColor="@color/gray2"
+            android:textSize="18sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueBtn"
+        style="@style/buttonFilled"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
