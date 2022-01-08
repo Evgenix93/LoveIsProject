@@ -23,12 +23,12 @@
     <string name="more_futures">Больше возможностей</string>
     <string name="about_app">О приложении</string>
     <string name="verify">Верифицировать</string>
-    <string name="verify_desription1">Пройдите верификацию и станьте пользователем которому доверяют</string>
-    <string name="verify_description2">Верифицированным пользователем</string>
-    <string name="verify_description3">Ваши данные останутся скрыты от остальных</string>
+    <string name="verify_desription1">Пройдите верификацию\nи станьте пользователем\nкоторому доверяют</string>
+    <string name="verify_description2">Верифицированным\nпользователем</string>
+    <string name="verify_description3">Ваши данные останутся\nскрыты от остальных</string>
     <string name="verify_description4">Мы действуем согласно</string>
-    <string name="personal_info_politics">политике о персональных данных</string>
-    <string name="verify_description5">и защищаем информацию о вас</string>
+    <string name="personal_info_politics">политике о персональных</string>
+    <string name="verify_description5">информацию о вас</string>
     <string name="finish">Завершить</string>
     <string name="access">Принять</string>
     <string name="join_event_info">Для вступления в Event is\nвам необходимо оплатить\nвзнос администратору\nсобытия в размере</string>
@@ -99,7 +99,7 @@
     <string name="use_filters">Пользуйтесь фильтрами!</string>
     <string name="sorting">Возможность сортировки событий и\nпользователей</string>
     <string name="top_search">Поднятие в Топ поиска!</string>
-    <string name="top_search_text">Поднятие в топ, чтобы тебя увидело больше\nлюдей</string>
+    <string name="top_search_text">Поднятие в топ, чтобы тебя увидело больше людей</string>
     <string name="month">месяц</string>
     <string name="_349">349 руб / мес</string>
     <string name="month2">месяца</string>
@@ -177,5 +177,6 @@
     <string name="tech_support2">Техподдержка</string>
     <string name="verification">Верификация</string>
     <string name="server_error">Технические неполадки\nпожалуйста попробуйте\nпозже</string>
+    <string name="defense">   и защищаем</string>
 
 </resources>

@@ -11,7 +11,7 @@
         android:id="@+id/describeProblemTextView"
         android:layout_width="335dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="80dp"
         android:text="@string/tell_your_problem"
         android:textAlignment="center"
         android:textAppearance="@style/infoText"
@@ -20,20 +20,22 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle6"
-        app:layout_constraintTop_toBottomOf="@+id/describeProblemTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="36dp"
-        android:inputType="textLongMessage"/>
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rectangle6"
+        android:inputType="textLongMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/describeProblemTextView" />
 
     <com.google.android.material.button.MaterialButton
         style="@style/buttonFilled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

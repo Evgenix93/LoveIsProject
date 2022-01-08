@@ -104,7 +104,7 @@
         style="@style/buttonFilled"
         android:layout_width="371dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/filled_button"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"

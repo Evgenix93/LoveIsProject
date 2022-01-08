@@ -66,9 +66,10 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     }
 
     private fun showProfileInfo(user: User){
+        val photoUrl = "https://loveis.scratch.studio/" + user.photo
         Glide.with(this)
-            .load(user.photo)
-            .into(binding.uploadPhotoImageView.findViewById(R.id.mainPhotoImageView))
+            .load(photoUrl)
+            .into(binding.mainPhotoImageView)
 
         val strings = user.birthday.split('-')
 
