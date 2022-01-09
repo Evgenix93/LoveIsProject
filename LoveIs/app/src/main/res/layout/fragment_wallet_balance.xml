@@ -9,23 +9,24 @@
         android:id="@+id/coinImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
         android:layout_marginTop="45dp"
+        android:layout_marginEnd="22dp"
         android:src="@drawable/ic_coin"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/amountTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/amountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/_2_000"
         android:textColor="#FF9800"
         android:textSize="48sp"
-        app:layout_constraintStart_toEndOf="@+id/coinImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

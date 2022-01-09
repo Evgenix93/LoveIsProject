@@ -52,24 +52,25 @@
     <br.com.sapereaude.maskedEditText.MaskedEditText
         android:id="@+id/phoneNumberEditText"
         style="@style/InputStyle"
-        android:textSize="45sp"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="18dp"
         android:digits="0123456789 -."
         android:hint="@string/__________"
         android:inputType="phone"
+        android:singleLine="true"
         android:textColorHint="?attr/colorPrimaryVariant"
+        android:textSize="38sp"
         android:typeface="monospace"
         app:backgroundTint="@color/white"
-        app:mask="+7(###)-###-##-##"
         app:keep_hint="true"
-        android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-         />
+        app:mask="+7(###)-###-##-##" />
 
     <TextView
         android:id="@+id/acceptTermsTextView"

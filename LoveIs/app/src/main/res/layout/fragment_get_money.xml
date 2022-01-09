@@ -25,11 +25,11 @@
         android:id="@+id/creditCard1CardView"
         android:layout_width="333.04dp"
         android:layout_height="198dp"
-        android:layout_marginStart="35dp"
         app:cardBackgroundColor="#E1F5FE"
         app:cardCornerRadius="8dp"
         app:cardElevation="16dp"
         app:layout_constraintBottom_toTopOf="@+id/addAmountTextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_requisitesTextView">
 

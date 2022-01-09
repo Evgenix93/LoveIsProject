@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/toolbar"
@@ -85,13 +85,15 @@
         android:layout_width="0dp"
         android:layout_height="62dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="84dp"
         android:layout_marginEnd="20dp"
         app:cardElevation="20dp"
-        app:strokeColor="@color/gray"
+        app:layout_constraintBottom_toTopOf="@+id/winterSportsCardView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stepTextView1">
+        app:layout_constraintTop_toBottomOf="@+id/stepTextView2"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:strokeColor="@color/gray">
 
         <ImageView
             android:id="@+id/walkIcon"
@@ -122,8 +124,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/tripCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/walkCardView">
 
@@ -134,7 +137,7 @@
             android:layout_gravity="start|center"
             android:layout_marginStart="19dp"
             android:src="@drawable/ic_skiing_man"
-            app:tint="@color/gray"/>
+            app:tint="@color/gray" />
 
         <TextView
             android:id="@+id/type2Description"
@@ -157,8 +160,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/sushiCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/winterSportsCardView">
 
@@ -169,7 +173,7 @@
             android:layout_gravity="start|center"
             android:layout_marginStart="19dp"
             android:src="@drawable/ic_sports_car"
-            app:tint ="@color/gray"/>
+            app:tint="@color/gray" />
 
         <TextView
             android:id="@+id/type3Description"
@@ -192,8 +196,9 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/cafeCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tripCardView">
 
@@ -204,7 +209,7 @@
             android:layout_gravity="start|center"
             android:layout_marginStart="19dp"
             android:src="@drawable/ic_sushi_1"
-            app:tint ="@color/gray"/>
+            app:tint="@color/gray" />
 
         <TextView
             android:id="@+id/type4Description"
@@ -227,8 +232,10 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sushiCardView">
 
@@ -239,7 +246,7 @@
             android:layout_gravity="start|center"
             android:layout_marginStart="19dp"
             android:src="@drawable/ic_coffee"
-            app:tint ="@color/gray"/>
+            app:tint="@color/gray" />
 
         <TextView
             android:id="@+id/type5Description"

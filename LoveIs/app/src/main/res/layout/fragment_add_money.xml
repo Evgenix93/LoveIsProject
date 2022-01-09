@@ -126,10 +126,11 @@
         android:id="@+id/creditCard2CardView"
         android:layout_width="264.6dp"
         android:layout_height="157.31dp"
-        android:layout_marginStart="107.4dp"
         android:layout_marginTop="78dp"
         app:cardBackgroundColor="#81D4FA"
         app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enter_requisitesTextView">
 

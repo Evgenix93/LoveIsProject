@@ -35,7 +35,7 @@
 
         <com.google.android.material.chip.Chip
             style="@style/chipsStyle"
-            android:layout_width="106dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:checkable="true"
             app:checkedIconEnabled="false"
@@ -45,7 +45,7 @@
 
         <com.google.android.material.chip.Chip
             style="@style/chipsStyle"
-            android:layout_width="106dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkable="true"
             app:checkedIconEnabled="false"
