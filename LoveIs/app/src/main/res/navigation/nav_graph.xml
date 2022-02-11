@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     app:startDestination="@id/loveIsFragment">
 
@@ -483,5 +483,13 @@
         android:id="@+id/serverErrorFragment"
         android:name="com.project.loveis.ServerErrorFragment"
         android:label="ServerErrorFragment" />
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.project.loveis.SplashScreenFragment"
+        android:label="SplashScreenFragment" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     >>>>>>> origin/main
 </navigation>

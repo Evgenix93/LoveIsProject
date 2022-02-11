@@ -1,6 +1,10 @@
 package com.project.loveis
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsetsController
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
        // findNavController(R.id.navHostFragment).navigate(R.id.registration1Fragment)
         initBottomNavBar()
+        initNavController()
 
     }
 
@@ -113,5 +118,42 @@ class MainActivity : AppCompatActivity() {
             setTextColor(resources.getColor(R.color.blue))
         }
 
+    }
+
+    private fun changeStatusBarColor(colorRes: Int){
+        window?.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+            setStatusBarColor(resources.getColor(colorRes))
+        }
+    }
+
+    private fun initNavController(){
+        findNavController(R.id.navHostFragment).addOnDestinationChangedListener { controller, destination, arguments ->
+            if(destination.id != R.id.splashScreenFragment){
+                changeStatusBarColor(R.color.white)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    window.insetsController?.setSystemBarsAppearance(
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                } else {
+                    @Suppress("DEPRECATION")
+                    window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                    } else {
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    }
+
+                }
+                    //window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+            }else{
+                changeStatusBarColor(R.color.blue)
+                window.decorView.systemUiVisibility = 0
+            }
+        }
     }
 }

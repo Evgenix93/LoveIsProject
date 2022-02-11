@@ -1,7 +1,9 @@
 package com.project.loveis
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,6 +21,7 @@ class Registration4Fragment : Fragment(R.layout.fragment_registration4) {
         super.onViewCreated(view, savedInstanceState)
 
         setOnClickListener()
+        initEditText()
     }
 
     private fun setOnClickListener() {
@@ -44,6 +47,14 @@ class Registration4Fragment : Fragment(R.layout.fragment_registration4) {
         }
 
 
+    }
+
+    private fun initEditText(){
+        binding.dayEditText.setOnFocusChangeListener { view, focused ->
+            if(focused) {
+                binding.dayEditText.compoundDrawables.set(3, ResourcesCompat.getDrawable(resources, R.drawable.ic_line_4, null))
+            }
+        }
     }
 
     private fun showChoosenDate() {

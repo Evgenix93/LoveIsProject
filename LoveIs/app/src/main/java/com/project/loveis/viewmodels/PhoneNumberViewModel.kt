@@ -25,6 +25,7 @@ class PhoneNumberViewModel(app: Application): AndroidViewModel(app) {
                404 -> stateLiveData.postValue(State.ErrorState(404))
                 408 -> stateLiveData.postValue(State.ErrorState(408))
                 409 -> stateLiveData.postValue(State.ErrorState(409))
+                400 -> stateLiveData.postValue(State.ErrorState(400))
                null -> stateLiveData.postValue(State.ErrorState(0))
                 else -> stateLiveData.postValue(State.ErrorState(2))
            }
@@ -39,6 +40,7 @@ class PhoneNumberViewModel(app: Application): AndroidViewModel(app) {
                 200 -> performAuth(phone, code)
                 409 -> stateLiveData.postValue(State.ErrorState(409))
                 410 -> performAuth(phone, code)
+                400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> stateLiveData.postValue(State.ErrorState(0))
                 else -> stateLiveData.postValue(State.ErrorState(2))
             }
@@ -70,6 +72,7 @@ class PhoneNumberViewModel(app: Application): AndroidViewModel(app) {
                     stateLiveData.postValue(State.SuccessState)
                 }
                 401 -> stateLiveData.postValue(State.ErrorState(401))
+                400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> stateLiveData.postValue(State.ErrorState(0))
                 else -> stateLiveData.postValue(State.ErrorState(2))
 

@@ -27,7 +27,7 @@ class PhoneNumber2Fragment: Fragment(R.layout.fragment_phone_number2) {
 
     private fun setOnClickListener() {
         binding.continueBtn.setOnClickListener{
-                viewModel.performPhoneCheck(args.phone, binding.enterCodeEditText.rawText)
+                viewModel.performPhoneCheck(args.phone, binding.enterCodeEditText.code)
         }
     }
 
