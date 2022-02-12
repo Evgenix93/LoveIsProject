@@ -16,6 +16,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.project.loveis.databinding.FragmentProfileBinding
 import com.project.loveis.models.User
+import com.project.loveis.singletones.Tokens
 import com.project.loveis.viewmodels.ProfileViewModel
 import java.util.*
 
@@ -43,6 +44,10 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             burgerMenu.setOnClickListener {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMenuFragment())
 
+            }
+            logOut.setOnClickListener {
+                Tokens.token = ""
+                findNavController().navigate(R.id.phoneNumber1Fragment)
             }
 
         }

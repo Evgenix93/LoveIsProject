@@ -2,6 +2,7 @@ package com.project.loveis
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,6 +24,18 @@ class PhoneNumber2Fragment: Fragment(R.layout.fragment_phone_number2) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListener()
         bindViewModel()
+        initEditText()
+    }
+
+    private fun initEditText(){
+        binding.enterCodeEditText.setEditCodeListener { code ->
+            if(code.length == 4){
+                (requireActivity() as MainActivity).hideKeyboard()
+            }
+
+
+        }
+
     }
 
     private fun setOnClickListener() {
