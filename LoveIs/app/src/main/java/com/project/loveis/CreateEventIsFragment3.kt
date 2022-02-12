@@ -38,8 +38,11 @@ class CreateEventIsFragment3: Fragment(R.layout.fragment_create_eventis_3) {
              binding.switchCompat.thumbTintList = null
               binding.switchCompat.trackTintList = null
               binding.switchCompat2.isChecked = false
+                binding.freeEventTextView.setTextColor(resources.getColor(R.color.blue))
             }
             else{
+                binding.freeEventTextView.setTextColor(resources.getColor(R.color.gray2))
+                binding.switchCompat2.isChecked = true
                 binding.switchCompat.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.gray4))
                 binding.switchCompat.trackTintList = ColorStateList.valueOf(resources.getColor(R.color.gray5))
             }
@@ -49,8 +52,12 @@ class CreateEventIsFragment3: Fragment(R.layout.fragment_create_eventis_3) {
                 binding.switchCompat2.thumbTintList = null
                 binding.switchCompat2.trackTintList = null
                 binding.switchCompat.isChecked = false
+                binding.paidEventTextView.setTextColor(resources.getColor(R.color.blue))
+
             }
             else{
+                binding.paidEventTextView.setTextColor(resources.getColor(R.color.gray2))
+                binding.switchCompat.isChecked = true
                 binding.switchCompat2.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.gray4))
                 binding.switchCompat2.trackTintList = ColorStateList.valueOf(resources.getColor(R.color.gray5))
             }

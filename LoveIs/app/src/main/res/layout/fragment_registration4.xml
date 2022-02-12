@@ -92,7 +92,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="@string/birth_date"
-        android:textSize="20sp"
         android:textAppearance="@style/infoText"
         app:layout_constraintBottom_toTopOf="@+id/dayEditText"
         app:layout_constraintEnd_toEndOf="parent"

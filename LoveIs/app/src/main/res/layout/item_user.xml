@@ -104,8 +104,8 @@
 
     <ImageView
         android:id="@+id/loveIsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:background="@drawable/circle"
         android:src="@drawable/love_is_small"
         app:layout_constraintBottom_toTopOf="@+id/chatButton"
@@ -121,8 +121,8 @@
         android:src="@drawable/chat"
         app:backgroundTint="@color/white"
         app:tint = "?attr/colorPrimaryVariant"
-        app:fabCustomSize="80dp"
-        app:maxImageSize="26dp"
+        app:fabCustomSize="70dp"
+        app:maxImageSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="85dp"

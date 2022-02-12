@@ -92,7 +92,6 @@
         android:layout_height="wrap_content"
         android:text="@string/bio"
         android:textAppearance="@style/infoText"
-        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/bioEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
