@@ -92,58 +92,62 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="@string/birth_date"
+        android:textSize="20sp"
         android:textAppearance="@style/infoText"
         app:layout_constraintBottom_toTopOf="@+id/dayEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <br.com.sapereaude.maskedEditText.MaskedEditText
+    <AutoCompleteTextView
         android:id="@+id/dayEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-
         style="@style/InputStyle"
+        android:textSize="30sp"
         android:drawableBottom="@drawable/ic_line_2"
         android:hint="@string/day_hint"
+        android:focusable="false"
         android:textAlignment="center"
-        android:inputType="number"
+        android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toStartOf="@+id/monthEditText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registrationTextView"
-        app:mask="##"
          />
 
-    <br.com.sapereaude.maskedEditText.MaskedEditText
+    <AutoCompleteTextView
         android:id="@+id/monthEditText"
         style="@style/InputStyle"
+        android:textSize="30sp"
         android:drawableBottom="@drawable/ic_line_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:focusable="false"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:hint="@string/month_hint"
-        android:inputType="number"
+        android:inputType="date"
         app:layout_constraintEnd_toStartOf="@+id/yearEditText"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/dayEditText"
         app:layout_constraintTop_toTopOf="@+id/dayEditText"
-        app:mask="##" />
+         />
 
-    <br.com.sapereaude.maskedEditText.MaskedEditText
+    <AutoCompleteTextView
         android:id="@+id/yearEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="30sp"
         style="@style/InputStyle"
+        android:focusable="false"
         android:drawableBottom="@drawable/ic_line_3"
         android:hint="@string/year_hint"
-        android:inputType="number"
-        app:mask="####"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/monthEditText"

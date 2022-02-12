@@ -14,11 +14,12 @@ import com.project.loveis.databinding.FragmentCreateLoveis1Binding
 import com.project.loveis.databinding.FragmentCreateLoveisEventis4Binding
 import com.project.loveis.models.PlaceListResult
 import com.project.loveis.util.AutoClearedValue
+import com.project.loveis.util.autoCleared
 import com.project.loveis.viewmodels.CreateLoveIsViewModel
 
 class CreateLoveIsFragment2 : Fragment(R.layout.fragment_create_loveis_eventis_4) {
     private val binding: FragmentCreateLoveisEventis4Binding by viewBinding()
-    private var placeAdapter: PlaceAdapter by AutoClearedValue()
+    private var placeAdapter: PlaceAdapter by autoCleared()
     private val args: CreateLoveIsFragment2Args by navArgs()
     private val viewModel: CreateLoveIsViewModel by viewModels()
     private var place = 1

@@ -164,7 +164,7 @@
     <string name="create_event_is">Создать Event is</string>
     <string name="write_address">Укажите адрес</string>
     <string name="create_place">Создать место</string>
-    <string name="create_free_event">Создать бесплатное мероприятие</string>
+    <string name="create_free_event">Создать бесплатное\nмероприятие</string>
     <string name="or">или</string>
     <string name="write_event_cost">Указать стоимость брони</string>
     <string name="create_love_is">Создать Love is</string>
@@ -178,5 +178,6 @@
     <string name="verification">Верификация</string>
     <string name="server_error">Технические неполадки\nпожалуйста попробуйте\nпозже</string>
     <string name="defense">   и защищаем</string>
+    <string name="apply">Принять</string>
 
 </resources>

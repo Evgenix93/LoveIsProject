@@ -39,7 +39,7 @@
         android:gravity="bottom"
         android:text="@string/_3"
         android:textColor="?attr/colorPrimaryVariant"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView1"
         app:layout_constraintEnd_toStartOf="@+id/stepTextView3"
@@ -71,7 +71,7 @@
         android:gravity="bottom"
         android:text="@string/_6"
         android:textColor="?attr/colorPrimaryVariant"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/stepTextView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,8 +81,8 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchCompat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="41dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:checked="true"
         android:thumb="@drawable/ic_thumb"
@@ -93,8 +93,8 @@
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchCompat2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="41dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:checked="false"
         android:thumb="@drawable/ic_thumb"

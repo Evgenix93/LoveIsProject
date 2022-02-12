@@ -1,5 +1,6 @@
 package com.project.loveis
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -14,6 +15,7 @@ class CreateEventIsFragment3: Fragment(R.layout.fragment_create_eventis_3) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+        initCheckBoxes()
         binding.continueBtn.setOnClickListener {
             findNavController().navigate(CreateEventIsFragment3Directions.actionCreateEventIsFragment3ToCreateEventIsFragment4())
         }
@@ -27,6 +29,31 @@ class CreateEventIsFragment3: Fragment(R.layout.fragment_create_eventis_3) {
                 findNavController().popBackStack()
             }
             burgerMenu.isVisible = false
+        }
+    }
+
+    private fun initCheckBoxes(){
+        binding.switchCompat.setOnCheckedChangeListener{_, isChecked ->
+            if(isChecked){
+             binding.switchCompat.thumbTintList = null
+              binding.switchCompat.trackTintList = null
+              binding.switchCompat2.isChecked = false
+            }
+            else{
+                binding.switchCompat.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.gray4))
+                binding.switchCompat.trackTintList = ColorStateList.valueOf(resources.getColor(R.color.gray5))
+            }
+        }
+        binding.switchCompat2.setOnCheckedChangeListener{_, isChecked ->
+            if(isChecked){
+                binding.switchCompat2.thumbTintList = null
+                binding.switchCompat2.trackTintList = null
+                binding.switchCompat.isChecked = false
+            }
+            else{
+                binding.switchCompat2.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.gray4))
+                binding.switchCompat2.trackTintList = ColorStateList.valueOf(resources.getColor(R.color.gray5))
+            }
         }
     }
 }
