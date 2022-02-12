@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.FragmentCreateLoveisEventis4Binding
 import com.project.loveis.util.AutoClearedValue
+import com.project.loveis.util.autoCleared
 
 class CreateEventIsFragment4: Fragment(R.layout.fragment_create_loveis_eventis_4) {
     private val binding: FragmentCreateLoveisEventis4Binding by viewBinding()
-    private var placeAdapter: PlaceAdapter by AutoClearedValue()
+    private var placeAdapter: PlaceAdapter by autoCleared()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,24 +1,48 @@
 package com.project.loveis.util
 
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.observe
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class AutoClearedValue<T : Any> : ReadWriteProperty<Fragment, T>, LifecycleEventObserver {
+/**
+ * A lazy property that gets cleaned up when the fragment's view is destroyed.
+ *
+ * Accessing this variable while the fragment's view is destroyed will throw NPE.
+ */
+class AutoClearedValue<T : Any>(val fragment: Fragment) : ReadWriteProperty<Fragment, T> {
     private var _value: T? = null
 
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T =
-        _value ?: throw IllegalStateException("Trying to call an auto-cleared value outside of the view lifecycle.")
+    init {
+        fragment.lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onCreate(@NonNull owner: LifecycleOwner) {
+                fragment.viewLifecycleOwnerLiveData.observe(fragment) { viewLifecycleOwner ->
+                    viewLifecycleOwner?.lifecycle?.addObserver(object : DefaultLifecycleObserver {
+                        override fun onDestroy(owner: LifecycleOwner) {
+                            _value = null
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
+        return _value ?: throw IllegalStateException(
+            "should never call auto-cleared-value get when it might not be available"
+        )
+    }
 
     override fun setValue(thisRef: Fragment, property: KProperty<*>, value: T) {
-        thisRef.viewLifecycleOwner.lifecycle.removeObserver(this)
         _value = value
-        thisRef.viewLifecycleOwner.lifecycle.addObserver(this)
-    }
-
-    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
-        if (event == Lifecycle.Event.ON_DESTROY)
-            _value = null
     }
 }
+
+/**
+ * Creates an [AutoClearedValue] associated with this fragment.
+ */
+fun <T : Any> Fragment.autoCleared() =
+    AutoClearedValue<T>(this)
