@@ -12,222 +12,240 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/uploadPhotoImageView"
-        android:layout_width="185dp"
-        android:layout_height="185dp"
-        app:cardCornerRadius="13dp"
-        app:cardElevation="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/addPhoto1"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_chainStyle="spread">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-        <ImageView
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/uploadPhotoImageView"
+                android:layout_width="234dp"
+                android:layout_height="234dp"
+                android:layout_marginTop="47dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread">
 
-            android:layout_width="wrap_content"
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/upload_photo_image"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_selfie_1" />
+
+                <ImageView
+                    android:id="@+id/mainPhotoImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/addPhoto1"
+                android:layout_width="65dp"
+                android:layout_height="101dp"
+                android:layout_marginTop="27dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/addPhoto2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/uploadPhotoImageView"
+                app:layout_constraintTop_toBottomOf="@+id/uploadPhotoImageView">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_plus" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/addPhoto2"
+                android:layout_width="65dp"
+                android:layout_height="101dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/addPhoto3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/addPhoto1"
+                app:layout_constraintTop_toTopOf="@+id/addPhoto1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_plus" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/addPhoto3"
+                android:layout_width="65dp"
+                android:layout_height="101dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/uploadPhotoImageView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/addPhoto2"
+                app:layout_constraintTop_toTopOf="@+id/addPhoto2">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_plus" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/upload_photo_image"
-            android:scaleType="center"
-            android:src="@drawable/ic_selfie_1" />
-
-        <ImageView
-            android:id="@+id/mainPhotoImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/addPhoto1"
-        android:layout_width="50dp"
-        android:layout_height="85dp"
-        app:cardCornerRadius="13dp"
-        app:cardElevation="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/nameTextView"
-        app:layout_constraintEnd_toStartOf="@+id/addPhoto2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/uploadPhotoImageView"
-        app:layout_constraintTop_toBottomOf="@+id/uploadPhotoImageView">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="center"
-            android:src="@drawable/ic_plus" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/addPhoto2"
-        android:layout_width="50dp"
-        android:layout_height="85dp"
-        app:cardCornerRadius="13dp"
-        app:cardElevation="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/addPhoto3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/addPhoto1"
-        app:layout_constraintTop_toTopOf="@+id/addPhoto1">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="center"
-            android:src="@drawable/ic_plus" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/addPhoto3"
-        android:layout_width="50dp"
-        android:layout_height="85dp"
-        app:cardCornerRadius="13dp"
-        app:cardElevation="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/uploadPhotoImageView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/addPhoto2"
-        app:layout_constraintTop_toTopOf="@+id/addPhoto2">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="center"
-            android:src="@drawable/ic_plus" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/coinsCardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPhoto1"
-        android:text="Alex, 24" />
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/coinsCardView"
-        android:layout_width="90dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="28dp"
-        app:cardCornerRadius="13dp"
-        app:cardElevation="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/verifyBtn"
-        app:layout_constraintEnd_toStartOf="@+id/loveIsCardView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginTop="38dp"
+            android:fontFamily="@font/roboto_medium"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/coinImageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_coin" />
-
-            <TextView
-                android:id="@+id/coinsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="2 000" />
+            android:text="Alex, 24"
+            android:textColor="@color/black"
+            android:textSize="21sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addPhoto1" />
 
 
-        </LinearLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/coinsCardView"
+                android:layout_width="113dp"
+                android:layout_height="103dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="28dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/loveIsCardView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameTextView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/coinImageView"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:src="@drawable/ic_coin" />
+
+                    <TextView
+                        android:id="@+id/coinsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="2 000"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
 
-    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/loveIsCardView"
-        android:layout_width="90dp"
-        android:layout_height="80dp"
-        app:cardCornerRadius="13dp"
-        app:cardElevation="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/coinsCardView"
-        app:layout_constraintTop_toTopOf="@+id/coinsCardView">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/loveIsImageView"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-
-                android:src="@drawable/love_is_small" />
-
-            <TextView
-                android:id="@+id/loveIsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="5" />
+            </com.google.android.material.card.MaterialCardView>
 
 
-        </LinearLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/loveIsCardView"
+                android:layout_width="113dp"
+                android:layout_height="103dp"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/coinsCardView"
+                app:layout_constraintTop_toTopOf="@+id/coinsCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/loveIsImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+
+                        android:src="@drawable/love_is_small" />
+
+                    <TextView
+                        android:id="@+id/loveIsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="5"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
 
-    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/verifyBtn"
-        style="@style/buttonOutlined"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:text="@string/verify"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinsCardView" />
+            </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editFloatingBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="12dp"
-        app:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_pen"
-        app:tint="?attr/colorPrimaryVariant" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/verifyBtn"
+            style="@style/buttonOutlined"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="80dp"
+            android:text="@string/verify"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coinsCardView" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editFloatingBtn"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            android:foreground="@drawable/ic_pen"
+            android:foregroundGravity="center"
+            app:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?attr/colorPrimaryVariant" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,10 +1,12 @@
 package com.project.loveis
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         initNavController()
 
     }
+
+
 
 
     private fun initBottomNavBar(){
@@ -155,5 +159,10 @@ class MainActivity : AppCompatActivity() {
                 window.decorView.systemUiVisibility = 0
             }
         }
+    }
+
+    fun hideKeyboard(){
+        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }

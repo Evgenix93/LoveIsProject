@@ -53,16 +53,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/stepTextView1" />
 
-    <TextView
-        android:id="@+id/infoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="41dp"
-        android:text="@string/upload_photo"
-        android:textAppearance="@style/infoText"
-        app:layout_constraintBottom_toTopOf="@+id/uploadPhotoImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/stepTextView3"
@@ -96,36 +86,61 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/stepTextView3" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/uploadPhotoImageView"
-        android:layout_width="254dp"
-        android:layout_height="254dp"
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationTextView"
-        app:cardElevation="20dp"
-        app:cardCornerRadius="13dp"
-        android:backgroundTint="?attr/colorPrimary"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/stepTextView1">
 
-        <ImageView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:scaleType="center"
-        android:src="@drawable/ic_selfie_1"
-         />
-
-        <ImageView
-            android:id="@+id/photoImageView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:layout_height="match_parent">
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="110dp"
+                android:text="@string/upload_photo"
+                android:textAppearance="@style/infoText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/uploadPhotoImageView"
+                android:layout_width="234dp"
+                android:layout_height="234dp"
+                android:layout_marginTop="42dp"
+                android:backgroundTint="?attr/colorPrimary"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoTextView">
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_selfie_1" />
+
+                <ImageView
+                    android:id="@+id/photoImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/continueBtn"

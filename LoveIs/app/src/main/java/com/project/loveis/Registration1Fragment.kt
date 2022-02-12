@@ -59,7 +59,7 @@ class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
                 if (gender == Gender.male) {
                     R.color.gray
                 } else {
-                    R.color.blue
+                    R.color.pink
                 }
             )
         )
@@ -79,7 +79,7 @@ class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
                 if (gender == Gender.male) {
                     R.color.gray
                 } else {
-                    R.color.blue
+                    R.color.pink
                 }
             )
         )

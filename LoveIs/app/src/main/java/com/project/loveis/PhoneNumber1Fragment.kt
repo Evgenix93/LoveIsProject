@@ -4,6 +4,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -25,6 +26,18 @@ class PhoneNumber1Fragment : Fragment(R.layout.fragment_phone_number1) {
         hideBottomNavigation()
         setOnClickListener()
         bindViewModel()
+        initEditText()
+
+    }
+
+    private fun initEditText(){
+        binding.phoneNumberEditText.setOnEditorActionListener { textView, i, keyEvent ->
+            if(i == EditorInfo.IME_ACTION_DONE){
+                (requireActivity() as MainActivity).hideKeyboard()
+            }
+            false
+
+        }
 
     }
 

@@ -89,27 +89,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/personCountTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/_3"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/white"
         android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:inputType="number"
+        android:text="@string/_3"
         android:textColor="?attr/colorPrimaryVariant"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toStartOf="@+id/minusIcon"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/plusIcon"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <ImageView
         android:id="@+id/plusIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toStartOf="@+id/personCountTextView"
@@ -123,6 +126,7 @@
         android:id="@+id/minusIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="122dp"
         android:src="@drawable/ic_minus"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"

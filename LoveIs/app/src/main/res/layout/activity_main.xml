@@ -28,6 +28,7 @@
         app:navGraph="@navigation/nav_graph" />
 
     <include
+        android:visibility="gone"
         android:id="@+id/bottomNavBar"
         layout="@layout/bottom_navigation_menu"
         android:layout_gravity="bottom"
