@@ -1,7 +1,9 @@
 package com.project.loveis
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.webkit.PermissionRequest
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,6 +32,7 @@ class Registration5Fragment : Fragment(R.layout.fragment_registration5) {
         setOnClickListener()
         bindViewModel()
         initPermissionLauncher()
+        initEditText()
     }
 
     private fun setOnClickListener() {
@@ -83,5 +86,17 @@ class Registration5Fragment : Fragment(R.layout.fragment_registration5) {
     private fun showLoading(loading: Boolean) {
         binding.continueBtn.isEnabled = !loading
         binding.progressBar.isVisible = loading
+    }
+
+    private fun initEditText(){
+       // binding.bioEditText.imeOptions = EditorInfo.IME_FLAG_NO_ENTER_ACTION
+       // binding.bioEditText.setOnEditorActionListener {_, action, _ ->
+       //     Log.d("mylog", "editor action")
+        //    if(action == EditorInfo.IME_FLAG_NO_ENTER_ACTION) {
+         //       (requireActivity() as MainActivity).hideKeyboard()
+         //   }
+         //   false
+
+       // }
     }
 }
