@@ -45,6 +45,7 @@ class CreateEventIsFragment3: Fragment(R.layout.fragment_create_eventis_3) {
                 binding.switchCompat2.isChecked = true
                 binding.switchCompat.thumbTintList = ColorStateList.valueOf(resources.getColor(R.color.gray4))
                 binding.switchCompat.trackTintList = ColorStateList.valueOf(resources.getColor(R.color.gray5))
+                
             }
         }
         binding.switchCompat2.setOnCheckedChangeListener{_, isChecked ->

@@ -57,11 +57,40 @@ class MainRepository(val context: Context) {
                 null
             }
         }
-
-
-
     }
 
+    suspend fun updateAdditionalPhoto(photo: Uri): Response<User>?{
+        return withContext(Dispatchers.IO) {
+            val file = File(context.cacheDir, "image2.jpg")
+            Log.d("debug", photo.path.toString())
+            context.contentResolver.openInputStream(photo).use { input ->
+                file.outputStream().use { output ->
+                    input?.copyTo(output)
+                }
+
+            }
+            try {
+                val part = MultipartBody.Part.createFormData(
+                    "url", file.name,
+                    file.asRequestBody("image/*".toMediaTypeOrNull())
+                )
+
+                val response = profileApi.updateAdditionalPhoto(part)
+                response
+            } catch (e: Throwable) {
+                Log.d("debug", e.message.toString())
+                null
+            }
+        }
+    }
+
+    suspend fun deleteAdditionalPhoto(uuid: String): Response<User>? {
+        return try{
+            profileApi.deleteAdditionalPhoto(uuid)
+        }catch (e: Throwable){
+            null
+        }
+    }
 
     suspend fun updateUserInfo(name: String, about: String): Response<User>?{
         val part1 = MultipartBody.Part.createFormData("name", null, name.toRequestBody())

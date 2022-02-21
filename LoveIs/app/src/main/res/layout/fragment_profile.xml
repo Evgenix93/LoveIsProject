@@ -76,6 +76,12 @@
                     android:scaleType="center"
                     android:src="@drawable/ic_plus" />
 
+                <ImageView
+                    android:id="@+id/additionalPhoto1ImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
@@ -94,6 +100,12 @@
                     android:layout_height="match_parent"
                     android:scaleType="center"
                     android:src="@drawable/ic_plus" />
+
+                <ImageView
+                    android:id="@+id/additionalPhoto2ImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -114,6 +126,12 @@
                     android:layout_height="match_parent"
                     android:scaleType="center"
                     android:src="@drawable/ic_plus" />
+
+                <ImageView
+                    android:id="@+id/additionalPhoto3ImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
 
             </com.google.android.material.card.MaterialCardView>
 
