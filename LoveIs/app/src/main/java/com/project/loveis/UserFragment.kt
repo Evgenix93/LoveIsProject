@@ -10,16 +10,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.project.loveis.adapters.UserPhotoViewPagerAdapter
 import com.project.loveis.adapters.UsersViewPagerAdapter
 import com.project.loveis.databinding.ItemUserBinding
 import com.project.loveis.models.User
+import com.project.loveis.util.autoCleared
 import java.util.*
 
 class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user) {
     private val binding: ItemUserBinding by viewBinding()
+    private var photoAdapter: UserPhotoViewPagerAdapter by autoCleared()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewPager()
         bind(arguments?.getParcelable(UsersViewPagerAdapter.USER), arguments?.getParcelable(UsersViewPagerAdapter.USERS)!!)
     }
 
@@ -47,10 +51,8 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
             binding.notVerifiedCardView.isVisible = true
             binding.nameTextView.setTextColor(requireContext().resources.getColor(R.color.pink))
         }
-        val photoUrl = "https://loveis.scratch.studio" + user.photo
-        Glide.with(binding.root)
-            .load(photoUrl)
-            .into(binding.photoImageView)
+        val photoUrls = user.images.map {"https://loveis.scratch.studio" + it.url}
+        photoAdapter.updateList(photoUrls)
       //  val startLatitude = Location.convert(currentUser?.coordinates?.latitude)
       //  val startLongitude = Location.convert(currentUser?.coordinates?.longitude)
         val endLatitude = Location.convert(user.coordinates.latitude)
@@ -71,6 +73,11 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
             binding.distanceTextView.text = "-"
         }
 
+    }
+
+    private fun initViewPager(){
+        photoAdapter = UserPhotoViewPagerAdapter(this)
+        binding.photoImageView.adapter = photoAdapter
     }
 
 }

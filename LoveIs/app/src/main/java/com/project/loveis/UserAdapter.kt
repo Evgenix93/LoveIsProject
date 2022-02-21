@@ -59,9 +59,9 @@ class UserAdapter(private val context: Context, private val onClick: () -> Unit,
                 binding.nameTextView.setTextColor(context.resources.getColor(R.color.pink))
             }
             val photoUrl = urlPrefix + user.photo
-            Glide.with(itemView)
-                .load(photoUrl)
-                .into(binding.photoImageView)
+           // Glide.with(itemView)
+             //   .load(photoUrl)
+              //  .into(binding.photoImageView)
             val startLatitude = Location.convert(currentUser.coordinates.latitude)
             val startLongitude = Location.convert(currentUser.coordinates.longitude)
             val endLatitude = Location.convert(user.coordinates.latitude)

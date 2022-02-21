@@ -20,7 +20,7 @@ class PhoneNumberViewModel(app: Application): AndroidViewModel(app) {
     fun getPhoneCode(phone: String){
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
-            when (authRepository.getPhoneCode(phone, true)?.code()){
+            when (authRepository.getPhoneCode(phone, false)?.code()){
                200 -> stateLiveData.postValue(State.SuccessState)
                404 -> stateLiveData.postValue(State.ErrorState(404))
                 408 -> stateLiveData.postValue(State.ErrorState(408))

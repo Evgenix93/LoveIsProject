@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/chatFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     app:startDestination="@id/loveIsFragment">
 
@@ -346,8 +346,8 @@
             android:name="name"
             app:argType="string" />
         <action
-            android:id="@+id/action_registration5Fragment_to_phoneNumber1Fragment"
-            app:destination="@id/phoneNumber1Fragment" />
+            android:id="@+id/action_registration5Fragment_to_phoneNumber2Fragment"
+            app:destination="@id/phoneNumber2Fragment" />
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"

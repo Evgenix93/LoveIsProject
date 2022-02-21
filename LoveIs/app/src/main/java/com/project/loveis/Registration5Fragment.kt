@@ -50,7 +50,7 @@ class Registration5Fragment : Fragment(R.layout.fragment_registration5) {
                     showLoading(false)
                     (requireActivity() as MainActivity).showSuccessNotification()
                     findNavController().navigate(
-                    Registration5FragmentDirections.actionRegistration5FragmentToPhoneNumber1Fragment()
+                    Registration5FragmentDirections.actionRegistration5FragmentToPhoneNumber2Fragment(args.phone)
                 )}
 
                 is State.ErrorState -> {
