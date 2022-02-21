@@ -66,14 +66,19 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
 
         binding.addPhoto1.setOnClickListener {
-            viewModel.deleteAdditionalPhoto(1)
+            viewModel.savePhotoNumber(1)
+            filePickerLauncher2.launch(arrayOf("image/*"))
+
         }
         binding.addPhoto2.setOnClickListener {
-            viewModel.deleteAdditionalPhoto(2)
+            viewModel.savePhotoNumber(2)
+            filePickerLauncher2.launch(arrayOf("image/*"))
         }
 
         binding.addPhoto3.setOnClickListener {
-            viewModel.deleteAdditionalPhoto(3)
+            viewModel.savePhotoNumber(3)
+            filePickerLauncher2.launch(arrayOf("image/*"))
+
         }
     }
 
@@ -115,7 +120,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             viewModel.updateUserPhoto(uri)
         }
         filePickerLauncher2 = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
-            viewModel.updateAdditionalPhoto(uri)
+            //viewModel.updateAdditionalPhoto(uri)
+            viewModel.deleteAdditionalPhoto(uri)
         }
     }
 
