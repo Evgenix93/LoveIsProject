@@ -15,6 +15,13 @@ interface ProfileApi {
     @Multipart
     suspend fun updateUserPhoto(@Part photo: MultipartBody.Part): Response<User>
 
+    @PUT("user/images/")
+    @Multipart
+    suspend fun updateAdditionalPhoto(@Part url: MultipartBody.Part): Response<User>
+
+    @DELETE("user/images/{uuid}/")
+    suspend fun deleteAdditionalPhoto(@Path("uuid") uuid: String): Response<User>
+
     @POST("user/")
     @Multipart
     suspend fun updateUserInfo(@Part name: MultipartBody.Part, @Part about: MultipartBody.Part ): Response<User>

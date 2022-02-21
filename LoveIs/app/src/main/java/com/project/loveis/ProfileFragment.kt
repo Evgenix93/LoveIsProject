@@ -1,12 +1,10 @@
 package com.project.loveis
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,18 +22,16 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private val binding: FragmentProfileBinding by viewBinding()
     private val viewModel: ProfileViewModel by viewModels()
     private lateinit var filePickerLauncher: ActivityResultLauncher<Array<String>>
+    private lateinit var filePickerLauncher2: ActivityResultLauncher<Array<String>>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         showBottomNavigation()
         setClickListeners()
-        initFilePickerLauncher()
+        initFilePickerLaunchers()
         bindViewModel()
     }
-
-
-
 
 
     private fun initToolbar(){
@@ -68,16 +64,41 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         binding.uploadPhotoImageView.setOnClickListener {
             filePickerLauncher.launch(arrayOf("image/*"))
         }
+
+        binding.addPhoto1.setOnClickListener {
+            viewModel.deleteAdditionalPhoto(1)
+        }
+        binding.addPhoto2.setOnClickListener {
+            viewModel.deleteAdditionalPhoto(2)
+        }
+
+        binding.addPhoto3.setOnClickListener {
+            viewModel.deleteAdditionalPhoto(3)
+        }
     }
 
     private fun showProfileInfo(user: User){
-        val photoUrl = "https://loveis.scratch.studio/" + user.photo
+        val prefix = "https://loveis.scratch.studio/"
+        val mainPhoto = prefix + user.photo
         Glide.with(this)
-            .load(photoUrl)
+            .load(mainPhoto)
             .into(binding.mainPhotoImageView)
+         Log.d("Debug", user.images.toString())
+        user.images.forEach{image ->
+            when(image.number){
+                1 -> Glide.with(this)
+                    .load(prefix + image.url)
+                    .into(binding.additionalPhoto1ImageView)
+                2 -> Glide.with(this)
+                    .load(prefix + image.url)
+                    .into(binding.additionalPhoto2ImageView)
+                3 -> Glide.with(this)
+                    .load(prefix + image.url)
+                    .into(binding.additionalPhoto3ImageView)
+            }
+        }
 
         val strings = user.birthday.split('-')
-
 
         val birthDate = Calendar.getInstance().apply {
             set(strings[0].toInt(), strings[1].toInt(), strings[2].toInt())
@@ -89,11 +110,13 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     }
 
-    private fun initFilePickerLauncher(){
+    private fun initFilePickerLaunchers(){
         filePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
             viewModel.updateUserPhoto(uri)
         }
-
+        filePickerLauncher2 = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
+            viewModel.updateAdditionalPhoto(uri)
+        }
     }
 
     private fun bindViewModel(){
@@ -107,8 +130,11 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 is State.LoadingState -> {showLoading(true)}
                 is State.LoadedSingleState -> {
                     showLoading(false)
-                    val user = state.result as User
-                    showProfileInfo(user)
+                    if(state.result is User) {
+                        val user = state.result as User
+                        showProfileInfo(user)
+                    }else
+                        filePickerLauncher2.launch(arrayOf("image/*"))
                 }
                 is State.ErrorState -> {
                     showLoading(false)

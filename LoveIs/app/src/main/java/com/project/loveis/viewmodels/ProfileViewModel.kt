@@ -2,8 +2,10 @@ package com.project.loveis.viewmodels
 
 import android.app.Application
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
+import com.project.loveis.models.Image
 import com.project.loveis.repositories.AuthRepository
 import com.project.loveis.repositories.MainRepository
 import kotlinx.coroutines.launch
@@ -12,7 +14,8 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
     private val stateLiveData = MutableLiveData<State>().apply { value = State.StartState }
     private val mainRepository = MainRepository(app)
     private val authRepository = AuthRepository(app)
-
+    private var images = listOf<Image>()
+    private var photoNumber = 1
 
     val state: LiveData<State>
     get() = stateLiveData
@@ -26,7 +29,20 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
             stateLiveData.postValue(State.LoadingState)
             val response = mainRepository.getCurrentUserInfo()
             when(response?.code()) {
-                200 -> stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
+                200 -> {
+                    val user = response.body()!!
+                    Log.d("Debug", user.images.toString())
+                    user.images = user.images.mapIndexed{index, image ->
+                        Image(
+                            index + 1,
+                            image.uuid,
+                            image.url
+                        )
+                    }
+                    Log.d("Debug", user.images.toString())
+                    images = user.images
+                    stateLiveData.postValue(State.LoadedSingleState(user))
+                }
                 404 -> stateLiveData.postValue(State.ErrorState(404))
                 null -> stateLiveData.postValue(State.ErrorState(0))
                 else -> stateLiveData.postValue(State.ErrorState(2))
@@ -45,6 +61,44 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> {stateLiveData.postValue(State.ErrorState(0))}
                 else -> stateLiveData.postValue(State.ErrorState(2))
+            }
+        }
+    }
+
+    fun updateAdditionalPhoto(uri: Uri){
+        viewModelScope.launch {
+            stateLiveData.postValue(State.LoadingState)
+            val response = mainRepository.updateAdditionalPhoto(uri)
+            when(response?.code()){
+                200 -> {
+                    val user = response.body()!!
+                    user.images[photoNumber - 1].number = photoNumber
+                    images = user.images
+                    stateLiveData.postValue(State.LoadedSingleState(user))
+                }
+                400 -> stateLiveData.postValue(State.ErrorState(400))
+                null -> {stateLiveData.postValue(State.ErrorState(0))}
+                else -> stateLiveData.postValue(State.ErrorState(2))
+            }
+        }
+    }
+
+    fun deleteAdditionalPhoto(number: Int){
+        viewModelScope.launch {
+            photoNumber = number
+            val image = images.firstOrNull{it.number == number}
+            if(image == null)
+                stateLiveData.postValue(State.LoadedSingleState(Unit))
+            else {
+               val response = mainRepository.deleteAdditionalPhoto(image.uuid)
+                when(response?.code()){
+                    200 -> {
+                        stateLiveData.postValue(State.LoadedSingleState(Unit))
+                    }
+                    400 -> stateLiveData.postValue(State.ErrorState(400))
+                    null -> {stateLiveData.postValue(State.ErrorState(0))}
+                    else -> stateLiveData.postValue(State.ErrorState(2))
+                }
             }
         }
     }
