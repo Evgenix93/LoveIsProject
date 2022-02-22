@@ -121,7 +121,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
         filePickerLauncher2 = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
             //viewModel.updateAdditionalPhoto(uri)
-            viewModel.deleteAdditionalPhoto(uri)
+            viewModel.updateAdditionalPhoto(uri)
         }
     }
 

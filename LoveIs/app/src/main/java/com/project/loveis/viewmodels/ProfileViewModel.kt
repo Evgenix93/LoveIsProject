@@ -65,20 +65,12 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
-    fun updateAdditionalPhoto(uri: Uri){
+    private fun addAdditionalPhoto(uri: Uri){
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             val response = mainRepository.updateAdditionalPhoto(uri)
             when(response?.code()){
                 200 -> {
-                    //val user = response.body()!!
-                    //user.images[photoNumber - 1].number = photoNumber
-                    //val index = images.indexOfFirst { it.number == photoNumber }
-                    //Log.d("mylog", images.toString())
-                   // images[index] = user.images[photoNumber - 1]
-                   // user.images = images
-                    //stateLiveData.postValue(State.LoadedSingleState(user))
-                   // Log.d("mylog", user.images.toString())
                     getUserInfo()
                 }
                 400 -> stateLiveData.postValue(State.ErrorState(400))
@@ -88,19 +80,18 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
-    fun deleteAdditionalPhoto(newPhotoUri: Uri){
+    fun updateAdditionalPhoto(newPhotoUri: Uri){
         viewModelScope.launch {
             val image = images.firstOrNull{it.number == photoNumber}
             if(image == null) {
                 Log.d("mylog", "image null")
-                //stateLiveData.postValue(State.LoadedSingleState(Unit))
-                updateAdditionalPhoto(newPhotoUri)
+                addAdditionalPhoto(newPhotoUri)
             }
             else {
                val response = mainRepository.deleteAdditionalPhoto(image.uuid)
                 when(response?.code()){
                     200 -> {
-                        updateAdditionalPhoto(newPhotoUri)
+                        addAdditionalPhoto(newPhotoUri)
                     }
                     400 -> stateLiveData.postValue(State.ErrorState(400))
                     null -> {stateLiveData.postValue(State.ErrorState(0))}

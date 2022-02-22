@@ -52,7 +52,7 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
             binding.nameTextView.setTextColor(requireContext().resources.getColor(R.color.pink))
         }
         val photoUrls = user.images.map {"https://loveis.scratch.studio" + it.url}
-        photoAdapter.updateList(photoUrls)
+        photoAdapter.updateList(listOf("https://loveis.scratch.studio${user.photo}") + photoUrls)
       //  val startLatitude = Location.convert(currentUser?.coordinates?.latitude)
       //  val startLongitude = Location.convert(currentUser?.coordinates?.longitude)
         val endLatitude = Location.convert(user.coordinates.latitude)
