@@ -22,6 +22,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 import java.io.File
+import java.io.IOException
 import java.net.URI
 
 class MainRepository(val context: Context) {
@@ -162,6 +163,32 @@ class MainRepository(val context: Context) {
           null
        }
    }
+
+    suspend fun createEventIs(
+        type: Int,
+        place: Int,
+        price: Int,
+        date: String,
+        personCount: Int,
+        telegramUrl:String,
+        whatsAppUrl:String
+    ): Response<EventIs>?{
+      return try {
+        Network.loveIsApi.createEventIs(CreateEventIsRequest(
+              date,
+              telegramUrl.ifEmpty{null},
+              whatsAppUrl.ifEmpty { null },
+              type,
+              place,
+              price,
+              personCount,
+              "test event"
+          ))
+      }catch (e: Throwable){
+          Log.e("MyDebug", "error = ${e.message}")
+              null
+      }
+    }
 
     suspend fun createPlace(name: String, address: String, photo: Uri): Response<Unit>?{
         val file = File(context.cacheDir, "image.jpg")

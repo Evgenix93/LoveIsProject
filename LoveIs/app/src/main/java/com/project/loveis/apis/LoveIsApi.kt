@@ -1,6 +1,8 @@
 package com.project.loveis.apis
 
+import com.project.loveis.models.CreateEventIsRequest
 import com.project.loveis.models.CreateLoveIsRequest
+import com.project.loveis.models.EventIs
 import com.project.loveis.models.LoveIs
 import com.project.loveis.models.LoveIsListResult
 import com.squareup.moshi.Json
@@ -31,4 +33,7 @@ interface LoveIsApi {
 
     @PATCH("meeting/status/change/{meeting_id}/accept")
     suspend fun acceptLoveIs(@Path("meeting_id") id: Long): Response<LoveIs>
+
+    @POST("event/")
+    suspend fun createEventIs(@Body eventIs: CreateEventIsRequest): Response<EventIs>
 }

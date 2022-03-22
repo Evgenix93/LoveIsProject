@@ -80,6 +80,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             filePickerLauncher2.launch(arrayOf("image/*"))
 
         }
+        binding.coinsCardView.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToWalletFragment())
+        }
+        binding.loveIsCardView.setOnClickListener{
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoveIsFragment())
+        }
     }
 
     private fun showProfileInfo(user: User){

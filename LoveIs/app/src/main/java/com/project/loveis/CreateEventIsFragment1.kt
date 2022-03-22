@@ -20,10 +20,8 @@ class CreateEventIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initEventTypeCards()
-        (requireActivity() as MainActivity).hideBottomNavigationBar(true)
-        binding.continueBtn.setOnClickListener {
-            findNavController().navigate(CreateEventIsFragment1Directions.actionCreateEventIsFragment1ToCreateEventIsFragment2())
-        }
+        hideBottomNavBar()
+        initContinueButton()
     }
 
 
@@ -100,5 +98,15 @@ class CreateEventIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
         }
         iconImageView.drawable.setTint(ContextCompat.getColor(requireContext(), R.color.gray))
         descriptionTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+    }
+
+    private fun hideBottomNavBar(){
+        (requireActivity() as MainActivity).hideBottomNavigationBar(true)
+    }
+
+    private fun initContinueButton(){
+        binding.continueBtn.setOnClickListener {
+            findNavController().navigate(CreateEventIsFragment1Directions.actionCreateEventIsFragment1ToCreateEventIsFragment2(type))
+        }
     }
 }

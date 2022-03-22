@@ -2,6 +2,7 @@ package com.project.loveis
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private val viewModel: SearchViewModel by viewModels()
     private var userAdapter by autoCleared<UserAdapter>()
     private var usersViewPagerAdapter by autoCleared<UsersViewPagerAdapter>()
+    private var currentUser: User? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +58,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
           //  layoutManager = LinearLayoutManager(requireContext())
            // setHasFixedSize(true)
             setOnClickListener{
+                Log.d("MyDebug", "onClick viewPager")
                 binding.filterCardView.isVisible = false
             }
         }
@@ -73,13 +76,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     showLoading(false)
                     when(state.result){
                         is User -> {
+                            currentUser = state.result
 //                            userAdapter.updateCurrentUser(state.result)
-                            usersViewPagerAdapter.setCurrentUser(state.result)
+                           // usersViewPagerAdapter.setCurrentUser(state.result)
                             viewModel.searchUsers()
                         }
                         is SearchResult -> {
+                            usersViewPagerAdapter = UsersViewPagerAdapter(this@SearchFragment){binding.filterCardView.isVisible = false}
+                            binding.usersList.adapter = usersViewPagerAdapter
+                            usersViewPagerAdapter.setCurrentUser(currentUser!!)
                             usersViewPagerAdapter.updateList(state.result.list)
-                           // initList(state.result.list)
                         }
                     }
                 }

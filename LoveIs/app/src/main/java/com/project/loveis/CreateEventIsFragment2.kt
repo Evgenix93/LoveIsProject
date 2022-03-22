@@ -9,25 +9,21 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.FragmentCreateEventis2Binding
 import com.project.loveis.databinding.FragmentCreateLoveis1Binding
 
 class CreateEventIsFragment2: Fragment(R.layout.fragment_create_eventis_2) {
     private val binding: FragmentCreateEventis2Binding by viewBinding()
+    private val args: CreateEventIsFragment2Args by navArgs()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
-        binding.continueBtn.setOnClickListener {
-            val count = binding.personCountTextView.text.toString().toIntOrNull()
-            count ?: run {
-                Toast.makeText(requireContext(), "укажите количество мест", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            findNavController().navigate(CreateEventIsFragment2Directions.actionCreateEventIsFragment2ToCreateEventIsFragment3())
-        }
         initPersonCounter()
+        initContinueButton()
     }
 
     private fun initToolbar(){
@@ -125,6 +121,18 @@ class CreateEventIsFragment2: Fragment(R.layout.fragment_create_eventis_2) {
            //     binding.personCountTextView.setText("")
            // }
 
+        }
+    }
+
+    private fun initContinueButton(){
+        binding.continueBtn.setOnClickListener {
+            val count = binding.personCountTextView.text.toString().toIntOrNull()
+            count ?: run {
+                Toast.makeText(requireContext(), "укажите количество мест", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            findNavController().navigate(CreateEventIsFragment2Directions.actionCreateEventIsFragment2ToCreateEventIsFragment3(args.type, count))
         }
     }
 }
