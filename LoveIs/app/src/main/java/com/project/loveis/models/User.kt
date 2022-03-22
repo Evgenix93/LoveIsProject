@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class User(
-    val id: Int,
+    val id: Long?,
     val groups: List<Group>,
     val coordinates: Coordinates,
     val verified: Boolean,

@@ -10,6 +10,7 @@ import androidx.core.net.toFile
 import com.project.loveis.models.*
 import com.project.loveis.singletones.Network
 import com.project.loveis.singletones.ProfileId
+import com.project.loveis.singletones.ProfileInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType
@@ -145,7 +146,7 @@ class MainRepository(val context: Context) {
        date: String,
        telegramUrl:String,
        whatsAppUrl:String,
-       userId:Int
+       userId:Long
    ): Response<LoveIs>? {
      return  try {
         Network.loveIsApi.createLoveIs(CreateLoveIsRequest(
@@ -187,5 +188,15 @@ class MainRepository(val context: Context) {
             null
         }
     }
+
+    fun setUpCurrentUser(user: User){
+        ProfileInfo.currentUser = user
+    }
+
+    fun getCurrentUser(): User?{
+        return ProfileInfo.currentUser
+    }
+
+
 
 }

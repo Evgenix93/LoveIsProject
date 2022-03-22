@@ -73,7 +73,14 @@
     <fragment
         android:id="@+id/loveIsDetailsFragment"
         android:name="com.project.loveis.LoveIsDetailsFragment"
-        android:label="LoveIsDetailsFragment" />
+        android:label="LoveIsDetailsFragment" >
+        <argument
+            android:name="loveIs"
+            app:argType="com.project.loveis.models.LoveIs" />
+        <argument
+            android:name="filterType"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.project.loveis.ChatFragment"
@@ -178,7 +185,7 @@
             app:destination="@id/createLoveIsFragment2" />
         <argument
             android:name="userId"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/createLoveIsFragment2"
@@ -195,7 +202,7 @@
             app:argType="integer" />
         <argument
             android:name="userId"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/createLoveIsFragment3"
@@ -212,7 +219,7 @@
             app:argType="integer" />
         <argument
             android:name="userId"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/createLoveIsFragment4"
@@ -232,7 +239,7 @@
             app:argType="string" />
         <argument
             android:name="userId"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/createLoveIsManFragment5"
@@ -256,7 +263,7 @@
         <argument android:name="whatsappUrl" />
         <argument
             android:name="userId"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
 =======
     app:startDestination="@id/phoneNumber1Fragment">

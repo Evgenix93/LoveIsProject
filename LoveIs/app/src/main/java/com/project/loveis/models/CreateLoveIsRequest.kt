@@ -13,5 +13,5 @@ data class CreateLoveIsRequest(
     val type: Int,
     val place: Int,
     @Json(name = "invited_user")
-    val invitedUser: Int
+    val invitedUser: Long
 )

@@ -3,12 +3,10 @@ package com.project.loveis.repositories
 import android.content.Context
 import android.util.Log
 import androidx.core.net.toUri
-import com.project.loveis.models.Phone
-import com.project.loveis.models.PhoneWithCode
-import com.project.loveis.models.TokenData
-import com.project.loveis.models.TokenResponse
+import com.project.loveis.models.*
 import com.project.loveis.singletones.Network
 import com.project.loveis.singletones.ProfileId
+import com.project.loveis.singletones.ProfileInfo
 import com.project.loveis.singletones.Tokens
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -164,6 +162,12 @@ class AuthRepository(val context: Context) {
 
 
     }
+
+    fun getUserId(): Long{
+        return ProfileId.id
+    }
+
+
 
 
     companion object {

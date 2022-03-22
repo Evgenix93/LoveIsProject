@@ -14,10 +14,13 @@ import com.project.loveis.databinding.FragmentEventsBinding
 
 class EventsFragment: Fragment(R.layout.fragment_events) {
     private val binding: FragmentEventsBinding by viewBinding()
-    private val eventAdapter = LoveIsEventIsAdapter{
+    private val eventAdapter = LoveIsEventIsAdapter(onClick = {
         findNavController().navigate(EventsFragmentDirections.actionEventsFragmentToEventDetailsFragment())
 
-    }
+    },
+    onAccept = {},
+    onDecline = {})
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

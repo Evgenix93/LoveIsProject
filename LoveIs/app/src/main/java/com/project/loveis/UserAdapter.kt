@@ -14,7 +14,7 @@ import com.project.loveis.databinding.ItemUserBinding
 import com.project.loveis.models.User
 import java.util.*
 
-class UserAdapter(private val context: Context, private val onClick: () -> Unit, private val onChatClick: () -> Unit, private val onLoveIsClick: (Int) -> Unit) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val context: Context, private val onClick: () -> Unit, private val onChatClick: () -> Unit, private val onLoveIsClick: (Long) -> Unit) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
     private var userList = emptyList<User>()
     private var currentUser: User? = null
 
@@ -36,11 +36,11 @@ class UserAdapter(private val context: Context, private val onClick: () -> Unit,
             binding.distanceTextView.text = "21км от вас"
         }
 
-        fun bind(context: Context, currentUser:User?, user: User, onLoveIsClick: (Int) -> Unit) {
+        fun bind(context: Context, currentUser:User?, user: User, onLoveIsClick: (Long) -> Unit) {
             if (currentUser == null)
                 return
             binding.loveIsButton.setOnClickListener {
-                onLoveIsClick(user.id)
+                onLoveIsClick(user.id ?: 0)
             }
             val strings = user.birthday.split('-')
             val birthDate = Calendar.getInstance().apply {
@@ -62,11 +62,11 @@ class UserAdapter(private val context: Context, private val onClick: () -> Unit,
            // Glide.with(itemView)
              //   .load(photoUrl)
               //  .into(binding.photoImageView)
-            val startLatitude = Location.convert(currentUser.coordinates.latitude)
-            val startLongitude = Location.convert(currentUser.coordinates.longitude)
-            val endLatitude = Location.convert(user.coordinates.latitude)
-            val endLongitude = Location.convert(user.coordinates.longitude)
-            val results = floatArrayOf(0.0f)
+            //val startLatitude = Location.convert(currentUser.coordinates.latitude)
+            //val startLongitude = Location.convert(currentUser.coordinates.longitude)
+            //val endLatitude = Location.convert(user.coordinates.latitude)
+           // val endLongitude = Location.convert(user.coordinates.longitude)
+           /* val results = floatArrayOf(0.0f)
             try{Location.distanceBetween(
                 61.0,
                 32.0,
@@ -79,7 +79,7 @@ class UserAdapter(private val context: Context, private val onClick: () -> Unit,
             }catch (e: Exception){
                Log.e("Debug", "error = ${e.message}")
                 binding.distanceTextView.text = "-"
-            }
+            }*/
 
         }
     }

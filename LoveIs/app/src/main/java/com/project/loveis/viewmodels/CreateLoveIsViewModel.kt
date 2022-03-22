@@ -18,7 +18,7 @@ class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
         date: String,
         telegramUrl:String,
         whatsApp:String,
-        userId:Int
+        userId:Long
     ){
         stateLiveData.postValue(State.LoadingState)
         viewModelScope.launch {

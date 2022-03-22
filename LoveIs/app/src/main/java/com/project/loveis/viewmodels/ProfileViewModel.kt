@@ -31,6 +31,7 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
             when(response?.code()) {
                 200 -> {
                     val user = response.body()!!
+                    mainRepository.setUpCurrentUser(user)
                     Log.d("Debug", user.images.toString())
                     user.images = user.images.mapIndexed{index, image ->
                         Image(

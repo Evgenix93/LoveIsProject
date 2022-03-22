@@ -45,7 +45,7 @@ class CreateLoveIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
 
     private fun initContinueButton(){
         binding.continueBtn.setOnClickListener {
-            findNavController().navigate(CreateLoveIsFragment1Directions.actionCreateLoveIsFragment1ToCreateLoveIsFragment2(type, arguments?.getInt("user id")!!))
+            findNavController().navigate(CreateLoveIsFragment1Directions.actionCreateLoveIsFragment1ToCreateLoveIsFragment2(type, arguments?.getLong("user id")!!))
         }
     }
 

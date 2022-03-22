@@ -9,7 +9,7 @@ import retrofit2.http.*
 interface ProfileApi {
 
     @GET("user/{user_id}/")
-    suspend fun getUserInfoById(@Path("user_id") id: Int): Response<User>
+    suspend fun getUserInfoById(@Path("user_id") id: Long): Response<User>
 
     @POST("user/")
     @Multipart
