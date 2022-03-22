@@ -1,6 +1,8 @@
 package com.project.loveis.apis
 
+import com.project.loveis.models.CreateEventIsRequest
 import com.project.loveis.models.CreateLoveIsRequest
+import com.project.loveis.models.EventIs
 import com.project.loveis.models.LoveIs
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -17,4 +19,7 @@ interface LoveIsApi {
 
     @GET("meetings/types")
     suspend fun getTypes()
+
+    @POST("event/")
+    suspend fun createEventIs(@Body eventIs: CreateEventIsRequest): Response<EventIs>
 }

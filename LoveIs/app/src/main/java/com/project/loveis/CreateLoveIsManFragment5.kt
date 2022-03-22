@@ -2,6 +2,7 @@ package com.project.loveis
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -50,6 +51,7 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
                         400 -> (requireActivity() as MainActivity).showErrorNotification()
                         404 -> findNavController().navigate(R.id.serverErrorFragment)
                         409 -> (requireActivity() as MainActivity).showErrorNotification()
+                        500 -> Toast.makeText(requireContext(), "error 500", Toast.LENGTH_LONG).show()
                         0 -> findNavController().navigate(R.id.errorFragment)
                     }
                 }

@@ -40,7 +40,7 @@ class UserAdapter(private val context: Context, private val onClick: () -> Unit,
             if (currentUser == null)
                 return
             binding.loveIsButton.setOnClickListener {
-                onLoveIsClick(user.id)
+                onLoveIsClick(user.id!!)
             }
             val strings = user.birthday.split('-')
             val birthDate = Calendar.getInstance().apply {

@@ -19,7 +19,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
         tools:itemCount="1"
-        tools:listitem="@layout/item_user"/>
+        tools:listitem="@layout/item_user"
+        />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/filterCardView"
@@ -112,7 +113,8 @@
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="?attr/colorPrimaryVariant"
                 android:backgroundTint="@color/white"
-                app:mask="##"/>
+                app:mask="##"
+                android:inputType="number"/>
 
             <TextView
                 android:id="@+id/untilTextView"
@@ -139,7 +141,9 @@
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="?attr/colorPrimaryVariant"
                 android:backgroundTint="@color/white"
-                app:mask="##"/>
+                app:mask="##"
+                android:inputType="number"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

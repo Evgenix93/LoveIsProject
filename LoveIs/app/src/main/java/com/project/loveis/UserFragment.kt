@@ -42,9 +42,9 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
         binding.descriptionTextView.text = user.about
 
       binding.loveIsButton.setOnClickListener {
-          findNavController().navigate(R.id.createLoveIsFragment1, Bundle().apply { putInt("user id", user.id) })
+          findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(user.id!!))
       }
-      binding.root.setOnClickListener { onClick() }
+
       binding.chatButton.setOnClickListener { findNavController().navigate(R.id.chatFragment)}
         if (user.verified.not()){
             binding.checkImageView.setImageResource(R.drawable.ic_fail)
@@ -76,7 +76,7 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
     }
 
     private fun initViewPager(){
-        photoAdapter = UserPhotoViewPagerAdapter(this)
+        photoAdapter = UserPhotoViewPagerAdapter(this){onClick()}
         binding.photoImageView.adapter = photoAdapter
     }
 

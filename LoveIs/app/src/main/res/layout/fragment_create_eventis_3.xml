@@ -143,9 +143,9 @@
         app:layout_constraintStart_toEndOf="@+id/switchCompat2"
         app:layout_constraintTop_toBottomOf="@+id/orTextView" />
 
-    <TextView
+    <EditText
         android:id="@+id/eventCostTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="37dp"
@@ -157,7 +157,11 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/plusIcon"
         app:layout_constraintTop_toBottomOf="@+id/paidEventTextView"
-        android:text="@string/_300" />
+        android:text="@string/_300"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:background="@color/white"
+        />
 
     <ImageView
         android:id="@+id/plusIcon"
@@ -170,6 +174,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/eventCostTextView"
+        android:layout_marginStart="80dp"
         app:tint="@color/gray6" />
 
     <ImageView
@@ -180,8 +185,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/eventCostTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginEnd="80dp"
         app:layout_constraintStart_toEndOf="@+id/eventCostTextView"
-        app:layout_constraintTop_toTopOf="@+id/eventCostTextView" />
+        app:layout_constraintTop_toTopOf="@+id/eventCostTextView"
+        app:tint="@color/gray6"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/continueBtn"

@@ -30,6 +30,12 @@
         <action
             android:id="@+id/action_profileFragment_to_phoneNumber1Fragment"
             app:destination="@id/phoneNumber1Fragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_walletFragment"
+            app:destination="@id/walletFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loveIsFragment"
+            app:destination="@id/loveIsFragment" />
     </fragment>
     <fragment
         android:id="@+id/dialogsFragment"
@@ -97,6 +103,9 @@
         <action
             android:id="@+id/action_createEventIsFragment2_to_createEventIsFragment3"
             app:destination="@id/createEventIsFragment3" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/createEventIsFragment3"
@@ -105,6 +114,12 @@
         <action
             android:id="@+id/action_createEventIsFragment3_to_createEventIsFragment4"
             app:destination="@id/createEventIsFragment4" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument
+            android:name="personCount"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/createEventIsFragment4"
@@ -116,6 +131,14 @@
         <action
             android:id="@+id/action_createEventIsFragment4_to_createPlaceFragment1"
             app:destination="@id/createPlaceFragment1" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument android:name="personCount"
+            app:argType="integer" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/createEventIsFragment5"
@@ -124,6 +147,18 @@
         <action
             android:id="@+id/action_createEventIsFragment5_to_createEventIsFragment6"
             app:destination="@id/createEventIsFragment6" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument
+            android:name="personCount"
+            app:argType="integer" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="place"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/createEventIsFragment6"
@@ -132,6 +167,21 @@
         <action
             android:id="@+id/action_createEventIsFragment6_to_eventsFragment"
             app:destination="@id/eventsFragment" />
+        <argument
+            android:name="type"
+            app:argType="integer" />
+        <argument
+            android:name="personCount"
+            app:argType="integer" />
+        <argument
+            android:name="price"
+            app:argType="integer" />
+        <argument
+            android:name="place"
+            app:argType="integer" />
+        <argument
+            android:name="date"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/createPlaceFragment1"
@@ -253,7 +303,8 @@
         <argument
             android:name="telegramUrl"
             app:argType="string" />
-        <argument android:name="whatsappUrl" />
+        <argument android:name="whatsappUrl"
+            app:argType="string" />
         <argument
             android:name="userId"
             app:argType="integer" />

@@ -16,7 +16,7 @@ import com.project.loveis.databinding.FragmentCreateLoveis1Binding
 class CreateLoveIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
     private val binding: FragmentCreateLoveis1Binding by viewBinding()
     private var type = 1
-   // private val args = arguments?.getInt("user id")!!
+    private val args: CreateLoveIsFragment1Args by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +45,7 @@ class CreateLoveIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
 
     private fun initContinueButton(){
         binding.continueBtn.setOnClickListener {
-            findNavController().navigate(CreateLoveIsFragment1Directions.actionCreateLoveIsFragment1ToCreateLoveIsFragment2(type, arguments?.getInt("user id")!!))
+            findNavController().navigate(CreateLoveIsFragment1Directions.actionCreateLoveIsFragment1ToCreateLoveIsFragment2(type, args.userId))
         }
     }
 

@@ -39,7 +39,39 @@ class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
                     400 -> stateLiveData.postValue(State.ErrorState(400))
                     404 -> stateLiveData.postValue(State.ErrorState(404))
                     409 -> stateLiveData.postValue(State.ErrorState(409))
+                    500 -> stateLiveData.postValue(State.ErrorState(500))
                 }
+        }
+    }
+
+    fun createEventIs(
+        type: Int,
+        place: Int,
+        date: String,
+        price: Int,
+        personCount: Int,
+        telegramUrl:String,
+        whatsAppUrl:String
+    ){
+        stateLiveData.postValue(State.LoadingState)
+        viewModelScope.launch {
+          val response = repository.createEventIs(
+              type,
+              place,
+              price,
+              date,
+              personCount,
+              telegramUrl,
+              whatsAppUrl
+          )
+            when(response?.code()){
+                200 -> stateLiveData.postValue(State.SuccessState)
+                400 -> stateLiveData.postValue(State.ErrorState(400))
+                404 -> stateLiveData.postValue(State.ErrorState(404))
+                409 -> stateLiveData.postValue(State.ErrorState(409))
+                500 -> stateLiveData.postValue(State.ErrorState(500))
+                null -> stateLiveData.postValue(State.ErrorState(0))
+            }
         }
     }
 

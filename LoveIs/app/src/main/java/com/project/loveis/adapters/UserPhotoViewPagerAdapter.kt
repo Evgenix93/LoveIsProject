@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.project.loveis.UserPhotoFragment
 
-class UserPhotoViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+class UserPhotoViewPagerAdapter(fragment: Fragment, private val onClick:() -> Unit): FragmentStateAdapter(fragment) {
     var photoList = listOf<String>()
     override fun getItemCount(): Int {
         return photoList.size
@@ -13,7 +13,7 @@ class UserPhotoViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragme
     }
 
     override fun createFragment(position: Int): Fragment {
-        return UserPhotoFragment().apply {
+        return UserPhotoFragment{onClick()}.apply {
             arguments = Bundle().apply {
                 putString(UserPhotoFragment.PHOTO_KEY, photoList[position])
             }

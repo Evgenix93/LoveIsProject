@@ -1,13 +1,14 @@
 package com.project.loveis
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.project.loveis.databinding.FragmentUserPhotoBinding
 
-class UserPhotoFragment: Fragment(R.layout.fragment_user_photo) {
+class UserPhotoFragment(private val onClick: () -> Unit ): Fragment(R.layout.fragment_user_photo) {
     private val binding: FragmentUserPhotoBinding by viewBinding()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -20,6 +21,10 @@ class UserPhotoFragment: Fragment(R.layout.fragment_user_photo) {
         Glide.with(this)
             .load(photo)
             .into(binding.photoImageView)
+        binding.root.setOnClickListener {
+            Log.d("MyDebug", "onClick viewPager")
+            onClick()
+        }
     }
 
     companion object{

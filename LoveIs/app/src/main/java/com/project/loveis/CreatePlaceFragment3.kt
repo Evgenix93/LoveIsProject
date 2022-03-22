@@ -47,7 +47,7 @@ class CreatePlaceFragment3: Fragment(R.layout.fragment_add_place2) {
     }
 
     private fun initIsFromCreateEvent(){
-        isFromCreateEvent = findNavController().backStack.elementAt(findNavController().backStack.size - 4).destination.id == R.id.createEventIsFragment4
+        isFromCreateEvent = findNavController().backQueue.elementAt(findNavController().backQueue.size - 4).destination.id == R.id.createEventIsFragment4
     }
 
     private fun initPlaceCardView(){
@@ -83,7 +83,7 @@ class CreatePlaceFragment3: Fragment(R.layout.fragment_add_place2) {
                 is State.SuccessState -> {
                     (requireActivity() as MainActivity).showSuccessNotification()
                     if(isFromCreateEvent) {
-                    findNavController().navigate(CreatePlaceFragment3Directions.actionCreatePlaceFragment3ToCreateEventIsFragment4())
+                    findNavController().popBackStack(R.id.createEventIsFragment4, false)
                 }else{
                     findNavController().navigate(CreatePlaceFragment3Directions.actionCreatePlaceFragment3ToCreateLoveIsFragment2(1, 1))
                 }}
