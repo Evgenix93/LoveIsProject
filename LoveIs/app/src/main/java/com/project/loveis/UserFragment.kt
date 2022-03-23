@@ -42,7 +42,7 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
         binding.descriptionTextView.text = user.about
 
       binding.loveIsButton.setOnClickListener {
-          findNavController().navigate(R.id.createLoveIsFragment1, Bundle().apply { putLong("user id", user.id ?: 0) })
+          findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(user.id!!))
       }
 
       binding.chatButton.setOnClickListener { findNavController().navigate(R.id.chatFragment)}
@@ -53,9 +53,9 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
         }
         val photoUrls = user.images.map {"https://loveis.scratch.studio" + it.url}
         photoAdapter.updateList(listOf("https://loveis.scratch.studio${user.photo}") + photoUrls)
-      //  val startLatitude = Location.convert(currentUser?.coordinates?.latitude)
-      //  val startLongitude = Location.convert(currentUser?.coordinates?.longitude)
-        /*val endLatitude = Location.convert(user.coordinates.latitude)
+        val startLatitude = Location.convert(currentUser?.coordinates?.latitude)
+        val startLongitude = Location.convert(currentUser?.coordinates?.longitude)
+        val endLatitude = Location.convert(user.coordinates.latitude)
         val endLongitude = Location.convert(user.coordinates.longitude)
         val results = floatArrayOf(0.0f)
         try{
@@ -71,7 +71,7 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
         }catch (e: Exception){
             Log.e("Debug", "error = ${e.message}")
             binding.distanceTextView.text = "-"
-        }*/
+        }
 
     }
 

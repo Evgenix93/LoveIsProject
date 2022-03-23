@@ -2,11 +2,8 @@ package com.project.loveis
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.MarginLayoutParamsCompat
 import androidx.core.view.isVisible
-import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,13 +20,13 @@ import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.models.User
 import com.project.loveis.util.MeetingStatus
 import com.project.loveis.util.autoCleared
-import com.project.loveis.viewmodels.LoveIsViewModel
+import com.project.loveis.viewmodels.LoveIsEveintIsViewModel
 import java.util.*
 
 
 class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) {
     private val binding: FragmentLoveisEventisDetailsBinding by viewBinding()
-    private val viewModel: LoveIsViewModel by viewModels()
+    private val viewModel: LoveIsEveintIsViewModel by viewModels()
     private val args: LoveIsDetailsFragmentArgs by navArgs()
     private var personAdapter: MemberAdapter by autoCleared()
 

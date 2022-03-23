@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.project.loveis.databinding.ItemLoveisEventisBinding
+import com.project.loveis.models.EventIs
 import com.project.loveis.models.LoveIs
 import com.project.loveis.models.MeetingFilterType
 
 class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -> Unit, val onDecline: (Long) -> Unit) : RecyclerView.Adapter<LoveIsEventIsAdapter.LoveIsEventIsViewHolder>() {
     private var items = listOf<LoveIs>()
+    private var eventIsItems = listOf<EventIs>()
     private var currentType = MeetingFilterType.ACTIVE
 
 
@@ -68,6 +70,29 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -
             }
         }
 
+        fun bind(eventIs: EventIs){
+            Glide.with(itemView)
+                .load(eventIs.place.photo)
+                .into(binding.placeImage)
+            binding.placeNameTextView.text = eventIs.place.name
+            binding.placeAddressTextView.text = eventIs.place.address
+            val dateStringList = eventIs.date.split("-")
+            binding.dateTextView.text = "${dateStringList[2].substringBefore("T")}.${dateStringList[1]}.${dateStringList[0]}"
+            val timeString = eventIs.date.substringAfter("T").removeSuffix("+").split(":").subList(0,2).joinToString(":")
+            binding.timeTextView.text = timeString
+            binding.personCountTextView.text = eventIs.participantsCount
+            binding.personQuantityTextView.text = " / 10"
+            binding.personCountTextView.isVisible = true
+            binding.personQuantityTextView.isVisible = true
+            binding.personIcon.isVisible = true
+
+
+
+
+
+
+        }
+
 
     }
 
@@ -89,17 +114,28 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -
     }
 
     override fun onBindViewHolder(holder: LoveIsEventIsViewHolder, position: Int) {
+        if(items.isNotEmpty())
         holder.bind(items[position], currentType)
+        else
+            holder.bind(eventIsItems[position])
 
 
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return if(items.isNotEmpty())
+            items.size
+        else eventIsItems.size
     }
 
-    fun updateList(newList: List<LoveIs>, type: MeetingFilterType){
+    fun updateLoveIsList(newList: List<LoveIs>, type: MeetingFilterType){
         items = newList
+        currentType = type
+        notifyDataSetChanged()
+    }
+
+    fun updateEventIsList(newList: List<EventIs>, type: MeetingFilterType){
+        eventIsItems = newList
         currentType = type
         notifyDataSetChanged()
     }

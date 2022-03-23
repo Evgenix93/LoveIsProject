@@ -3,11 +3,13 @@ package com.project.loveis.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.project.loveis.State
-import com.project.loveis.repositories.MainRepository
+import com.project.loveis.repositories.LoveIsEventIsRepository
+import com.project.loveis.repositories.PlaceRepository
 import kotlinx.coroutines.launch
 
 class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
-    private val repository = MainRepository(app)
+    private val loveIsEventIsRepository = LoveIsEventIsRepository()
+    private val placeRepository = PlaceRepository(app)
     private val stateLiveData = MutableLiveData<State>(State.StartState)
     val state: LiveData<State>
     get() = stateLiveData
@@ -22,7 +24,7 @@ class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
     ){
         stateLiveData.postValue(State.LoadingState)
         viewModelScope.launch {
-          val response =  repository.createLoveIs(
+          val response =  loveIsEventIsRepository.createLoveIs(
               type,
               place,
               date,
@@ -55,7 +57,7 @@ class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
     ){
         stateLiveData.postValue(State.LoadingState)
         viewModelScope.launch {
-          val response = repository.createEventIs(
+          val response = loveIsEventIsRepository.createEventIs(
               type,
               place,
               price,
@@ -77,7 +79,7 @@ class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
 
     fun getPlaces(){
         viewModelScope.launch{
-            val response = repository.getPlaces()
+            val response = placeRepository.getPlaces()
             if (response == null)
                 stateLiveData.postValue(State.ErrorState(0))
             else{

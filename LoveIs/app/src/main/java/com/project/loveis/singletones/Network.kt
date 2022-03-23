@@ -31,7 +31,7 @@ object Network {
     val searchApi: SearchApi
     get() = retrofit.create()
 
-    val loveIsApi: LoveIsApi
+    val loveIsEventIsApi: LoveIsEventIsApi
     get() = retrofit.create()
 
     val placeApi: PlaceApi

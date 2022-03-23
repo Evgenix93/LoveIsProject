@@ -1,17 +1,18 @@
 package com.project.loveis.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
 import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.repositories.AuthRepository
-import com.project.loveis.repositories.LoveIsRepository
+import com.project.loveis.repositories.LoveIsEventIsRepository
 import com.project.loveis.repositories.MainRepository
 import com.project.loveis.util.MeetingStatus
 import kotlinx.coroutines.launch
 
-class LoveIsViewModel(app: Application): AndroidViewModel(app) {
-    private val loveIsRepository = LoveIsRepository()
+class LoveIsEveintIsViewModel(app: Application): AndroidViewModel(app) {
+    private val loveIsRepository = LoveIsEventIsRepository()
     private val authRepository = AuthRepository(app)
     private val mainRepository = MainRepository(app)
     private val stateLiveData = MutableLiveData<State>(State.StartState)
@@ -41,6 +42,25 @@ class LoveIsViewModel(app: Application): AndroidViewModel(app) {
 
         }
 
+    }
+
+    fun getEventIsMeetings(page: Int = 1, size: Int = 25, type: MeetingFilterType){
+        Log.d("debug", "getEvents")
+        viewModelScope.launch {
+            stateLiveData.postValue(State.LoadingState)
+            val response = loveIsRepository.getEventIsMeetings(page, size, type)
+            when (response?.code()){
+                200 -> {
+                    val eventIsList = response.body()!!.list
+
+                    stateLiveData.postValue(State.EventIsMeetingsLoadedState(eventIsList, type))
+                }
+                400 -> stateLiveData.postValue(State.ErrorState(400))
+                null -> stateLiveData.postValue(State.ErrorState(0))
+                else -> stateLiveData.postValue(State.ErrorState(2))
+            }
+
+        }
     }
 
     fun getCurrentUserId(){

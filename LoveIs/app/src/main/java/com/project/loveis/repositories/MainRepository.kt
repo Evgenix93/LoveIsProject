@@ -141,80 +141,9 @@ class MainRepository(val context: Context) {
         }
     }
 
-   suspend fun createLoveIs(
-       type: Int,
-       place: Int,
-       date: String,
-       telegramUrl:String,
-       whatsAppUrl:String,
-       userId:Long
-   ): Response<LoveIs>? {
-     return  try {
-        Network.loveIsApi.createLoveIs(CreateLoveIsRequest(
-          date,
-          telegramUrl.ifEmpty { null },
-          whatsAppUrl.ifEmpty { null },
-          type,
-          place,
-          userId
-        ))
-       }catch (e: Exception){
-          Log.e("Debug", "error ${e.message}")
-          null
-       }
-   }
 
-    suspend fun createEventIs(
-        type: Int,
-        place: Int,
-        price: Int,
-        date: String,
-        personCount: Int,
-        telegramUrl:String,
-        whatsAppUrl:String
-    ): Response<EventIs>?{
-      return try {
-        Network.loveIsApi.createEventIs(CreateEventIsRequest(
-              date,
-              telegramUrl.ifEmpty{null},
-              whatsAppUrl.ifEmpty { null },
-              type,
-              place,
-              price,
-              personCount,
-              "test event"
-          ))
-      }catch (e: Throwable){
-          Log.e("MyDebug", "error = ${e.message}")
-              null
-      }
-    }
 
-    suspend fun createPlace(name: String, address: String, photo: Uri): Response<Unit>?{
-        val file = File(context.cacheDir, "image.jpg")
-        context.contentResolver.openInputStream(photo).use { input ->
-            file.outputStream().use { output ->
-                input?.copyTo(output)
-            }
 
-        }
-        val photoPart =
-            MultipartBody.Part.createFormData("photo", file.name, file.asRequestBody())
-      return try {
-           Network.placeApi.createPlace(name, address, photoPart)
-       }catch (e: Exception){
-           Log.e("Debug", "error ${e.message}")
-          null
-       }
-    }
-
-    suspend fun getPlaces(): Response<PlaceListResult>?{
-        return try {
-            Network.placeApi.getPlaces()
-        }catch (e: Exception){
-            null
-        }
-    }
 
     fun setUpCurrentUser(user: User){
         ProfileInfo.currentUser = user

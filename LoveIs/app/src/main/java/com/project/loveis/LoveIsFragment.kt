@@ -1,12 +1,9 @@
 package com.project.loveis
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.allViews
 import androidx.core.view.descendants
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -19,11 +16,11 @@ import com.google.android.material.chip.Chip
 import com.project.loveis.databinding.FragmentLoveIsBinding
 import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.util.MeetingStatus
-import com.project.loveis.viewmodels.LoveIsViewModel
+import com.project.loveis.viewmodels.LoveIsEveintIsViewModel
 
 class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
     private val binding: FragmentLoveIsBinding by viewBinding()
-    private val viewModel: LoveIsViewModel by viewModels()
+    private val viewModel: LoveIsEveintIsViewModel by viewModels()
     private val loveIsAdapter = LoveIsEventIsAdapter(onClick = { loveIs ->
         findNavController().navigate(
             LoveIsFragmentDirections.actionLoveIsFragmentToLoveIsDetailsFragment(
@@ -45,6 +42,7 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("myLog", "onViewCreated")
         initToolbar()
         initList()
         initChips()
@@ -118,7 +116,7 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
                 is State.LoveIsMeetingsLoadedState -> {
                     currentFilterType = state.type
                     if (state.type != MeetingFilterType.HISTORY)
-                        loveIsAdapter.updateList(state.meetings, state.type)
+                        loveIsAdapter.updateLoveIsList(state.meetings, state.type)
                     else
                         finishedLoveIsAdapter.updateList(state.meetings)
                 }

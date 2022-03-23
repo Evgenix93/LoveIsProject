@@ -8,10 +8,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.project.loveis.State
 import com.project.loveis.repositories.MainRepository
+import com.project.loveis.repositories.PlaceRepository
 import kotlinx.coroutines.launch
 
 class CreatePlaceViewModel(app: Application): AndroidViewModel(app) {
-    private val repository =  MainRepository(app)
+    private val repository =  PlaceRepository(app)
+    private val mainRepository = MainRepository(app)
     private val stateLiveData = MutableLiveData<State>()
     private var photoUri: Uri? = null
     val state: LiveData<State>
@@ -21,7 +23,7 @@ class CreatePlaceViewModel(app: Application): AndroidViewModel(app) {
     fun openPhoto(uri: Uri){
         stateLiveData.postValue(State.LoadingState)
         viewModelScope.launch {
-            val photo = repository.uploadPhoto(uri)
+            val photo = mainRepository.uploadPhoto(uri)
             stateLiveData.postValue(State.LoadedSingleState(photo))
         }
     }
