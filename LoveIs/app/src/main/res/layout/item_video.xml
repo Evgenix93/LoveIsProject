@@ -11,12 +11,14 @@
     android:layout_marginHorizontal="19dp">
 
     <ImageView
+        android:id="@+id/videoImageView"
         android:layout_width="match_parent"
         android:layout_height="213dp"
         android:src="@drawable/cafe"
         android:scaleType="centerCrop"/>
 
     <TextView
+        android:id="@+id/videoNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/video_name"
@@ -27,6 +29,7 @@
         android:layout_marginBottom="21dp"/>
 
     <ImageView
+        android:id="@+id/playIconImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/play"

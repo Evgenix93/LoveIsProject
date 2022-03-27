@@ -126,6 +126,7 @@
     <string name="currency_rate">Курс внутренней валюты</string>
     <string name="_1_1">1 монета = 1 рубль</string>
     <string name="add_money">Пополнить</string>
+    <string name="wallet_add">Пополнить кошелек</string>
     <string name="on_phone_number">На номер телефона</string>
     <string name="sms_was_sent">Было отправлено СМС</string>
     <string name="expire_time2">Срок действия</string>

@@ -43,6 +43,14 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         bindViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        performAuth()
+    }
+
+    private fun performAuth(){
+        viewModel.performAuth()
+    }
 
     private fun initToolbar(){
         with(binding.toolbar){
@@ -128,6 +136,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         val age = Calendar.getInstance().get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
 
         binding.nameTextView.text = "${user.name}, $age"
+        binding.coinsTextView.text = user.wallet?.value?.toString() ?: "0"
 
     }
 

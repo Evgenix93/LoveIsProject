@@ -20,6 +20,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <EditText
+        android:id="@+id/requestContentTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -29,9 +30,12 @@
         android:inputType="textLongMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/describeProblemTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/describeProblemTextView"
+        android:gravity="top"
+        android:padding="10dp"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/sendRequestButton"
         style="@style/buttonFilled"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,5 +47,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="20dp"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

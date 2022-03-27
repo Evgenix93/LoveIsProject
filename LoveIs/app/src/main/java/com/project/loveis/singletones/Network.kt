@@ -39,4 +39,16 @@ object Network {
 
     val sabsriptionApi: SubscriptionApi
     get() = retrofit.create()
+
+    val chatApi: ChatApi
+    get() = retrofit.create()
+
+    val walletApi: WalletApi
+    get() = retrofit.create()
+
+    val techSupportApi: TechSupportApi
+    get() = retrofit.create()
+
+    val videoApi: VideoApi
+    get() = retrofit.create()
 }

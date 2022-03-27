@@ -11,12 +11,12 @@ import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 
 import com.project.loveis.databinding.FragmentCreateLoveisEventis6Binding
-import com.project.loveis.viewmodels.CreateLoveIsViewModel
+import com.project.loveis.viewmodels.CreateLoveIsEventIsViewModel
 
 class CreateEventIsFragment6 : Fragment(R.layout.fragment_create_loveis_eventis_6) {
     private val binding: FragmentCreateLoveisEventis6Binding by viewBinding()
     private val args: CreateEventIsFragment6Args by navArgs()
-    private val viewModel: CreateLoveIsViewModel by viewModels()
+    private val viewModelIsEvent: CreateLoveIsEventIsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,7 +38,7 @@ class CreateEventIsFragment6 : Fragment(R.layout.fragment_create_loveis_eventis_
 
     private fun initContinueButton(){
         binding.continueBtn.setOnClickListener {
-           viewModel.createEventIs(
+           viewModelIsEvent.createEventIs(
                args.type,
                args.place,
                args.date,
@@ -51,7 +51,7 @@ class CreateEventIsFragment6 : Fragment(R.layout.fragment_create_loveis_eventis_
     }
 
     private fun bindViewModel() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
+        viewModelIsEvent.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is State.LoadingState -> {showLoading(true)}
                 is State.SuccessState -> {

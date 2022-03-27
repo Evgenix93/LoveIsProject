@@ -22,15 +22,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
+    <br.com.sapereaude.maskedEditText.MaskedEditText
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:letterSpacing="-0.01"
-        android:text="@string/phone_number"
+        tools:text="9858366943"
         android:textColor="#4D212121"
         android:textSize="36sp"
+        app:mask="##(###)-###-##-##"
+        android:background="@color/white"
+        android:editable="false"
         app:layout_constraintBottom_toTopOf="@+id/enterNewNumberTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

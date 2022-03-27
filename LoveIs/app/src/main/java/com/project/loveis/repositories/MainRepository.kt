@@ -160,10 +160,6 @@ class MainRepository(val context: Context) {
         }
     }
 
-
-
-
-
     fun setUpCurrentUser(user: User){
         ProfileInfo.currentUser = user
     }
@@ -171,7 +167,5 @@ class MainRepository(val context: Context) {
     fun getCurrentUser(): User?{
         return ProfileInfo.currentUser
     }
-
-
 
 }
