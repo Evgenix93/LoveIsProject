@@ -1,6 +1,7 @@
 package com.project.loveis.models
 
 import android.os.Parcelable
+import com.project.loveis.util.Gender
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
@@ -16,9 +17,10 @@ data class User(
     val username: String,
     val name: String,
     val phone: String,
+    val wallet: Wallet?,
     val birthday: String,
     val about: String,
-    val gender: String,
+    val gender: Gender,
     val photo: String,
     var images: List<Image>
 ): Parcelable

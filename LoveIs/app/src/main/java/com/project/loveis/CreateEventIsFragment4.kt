@@ -11,15 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.FragmentCreateLoveisEventis4Binding
 import com.project.loveis.models.PlaceListResult
-import com.project.loveis.util.AutoClearedValue
 import com.project.loveis.util.autoCleared
-import com.project.loveis.viewmodels.CreateLoveIsViewModel
+import com.project.loveis.viewmodels.CreateLoveIsEventIsViewModel
 
 class CreateEventIsFragment4: Fragment(R.layout.fragment_create_loveis_eventis_4) {
     private val binding: FragmentCreateLoveisEventis4Binding by viewBinding()
     private var placeAdapter: PlaceAdapter by autoCleared()
     private var place = 1
-    private val viewModel: CreateLoveIsViewModel by viewModels()
+    private val viewModelIsEvent: CreateLoveIsEventIsViewModel by viewModels()
     private val args: CreateEventIsFragment4Args by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,10 +58,10 @@ class CreateEventIsFragment4: Fragment(R.layout.fragment_create_loveis_eventis_4
     }
 
     private fun bindViewModel(){
-        viewModel.clearState()
-        viewModel.state.observe(viewLifecycleOwner){state ->
+        viewModelIsEvent.clearState()
+        viewModelIsEvent.state.observe(viewLifecycleOwner){ state ->
             when(state){
-                is State.StartState -> viewModel.getPlaces()
+                is State.StartState -> viewModelIsEvent.getPlaces()
                 is State.LoadedSingleState -> {
                     val placeListResult = state.result as PlaceListResult
                     placeAdapter.updateList(placeListResult.list)

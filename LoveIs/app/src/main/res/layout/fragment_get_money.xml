@@ -65,15 +65,19 @@
             android:text="@string/card_number"
             android:textAppearance="@style/some_id" />
 
-        <EditText
+        <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/cardNumberEditText"
             android:layout_width="299.9dp"
             android:layout_height="36.45dp"
             android:layout_marginStart="15.74dp"
             android:layout_marginTop="62.13dp"
             android:background="@drawable/rectangle3"
-            android:inputType="number" />
+            android:inputType="number"
+            android:paddingHorizontal="10dp"
+            app:mask="#### #### #### ####"/>
 
         <ImageView
+            android:id="@+id/clearImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -98,7 +102,9 @@
             android:layout_marginStart="15.74dp"
             android:layout_marginBottom="27.34dp"
             android:background="@drawable/rectangle3"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName|textCapCharacters"
+            android:paddingHorizontal="10dp"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,6 +115,7 @@
             android:textAppearance="@style/some_id" />
 
         <br.com.sapereaude.maskedEditText.MaskedEditText
+            android:id="@+id/expireDateEditText"
             android:layout_width="75.39dp"
             android:layout_height="36.45dp"
             android:layout_marginStart="240.25dp"
@@ -118,7 +125,9 @@
             android:textAlignment="center"
             android:textColorHint="#D8D6D4"
             android:textSize="10sp"
-            app:mask="##/##" />
+            app:mask="##/##"
+            android:inputType="number"
+            android:paddingHorizontal="10dp"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -144,6 +153,7 @@
         android:text="@string/_300"
         android:textAlignment="center"
         android:textSize="36sp"
+        android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -168,14 +178,14 @@
         android:text="@string/_1_1"
         android:textAppearance="@style/infoText3"
         android:textColor="?attr/colorPrimaryVariant"
-        app:layout_constraintBottom_toTopOf="@+id/addButton"
+        app:layout_constraintBottom_toTopOf="@+id/getMoneyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountEditText" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/addButton"
+        android:id="@+id/getMoneyButton"
         style="@style/buttonFilled"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -186,5 +196,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

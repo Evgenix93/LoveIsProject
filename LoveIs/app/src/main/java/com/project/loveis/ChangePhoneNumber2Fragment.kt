@@ -21,10 +21,9 @@ class ChangePhoneNumber2Fragment : Fragment(R.layout.fragment_change_phone_numbe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+        initPhoneTextView()
         setClickListeners()
         bindViewModel()
-
-
     }
 
     private fun initToolbar() {
@@ -40,7 +39,7 @@ class ChangePhoneNumber2Fragment : Fragment(R.layout.fragment_change_phone_numbe
 
     private fun setClickListeners() {
         binding.changeNumberButton.setOnClickListener {
-            viewModel.performPhoneCheck(args.phone, binding.enterCodeEditText.rawText)
+            viewModel.performPhoneCheck(args.phone, binding.enterCodeEditText.code)
         }
     }
 
@@ -67,5 +66,9 @@ class ChangePhoneNumber2Fragment : Fragment(R.layout.fragment_change_phone_numbe
     private fun showLoading(loading: Boolean) {
         binding.changeNumberButton.isEnabled = !loading
         binding.progressBar.isVisible = loading
+    }
+
+    private fun initPhoneTextView(){
+       binding.phoneNumberTextView.text = args.phone
     }
 }

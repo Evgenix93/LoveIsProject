@@ -4,12 +4,14 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.project.loveis.State
 import com.project.loveis.repositories.LoveIsEventIsRepository
+import com.project.loveis.repositories.MainRepository
 import com.project.loveis.repositories.PlaceRepository
 import kotlinx.coroutines.launch
 
-class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
+class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
     private val loveIsEventIsRepository = LoveIsEventIsRepository()
     private val placeRepository = PlaceRepository(app)
+    private val mainRepository = MainRepository(app)
     private val stateLiveData = MutableLiveData<State>(State.StartState)
     val state: LiveData<State>
     get() = stateLiveData
@@ -93,5 +95,9 @@ class CreateLoveIsViewModel(app: Application): AndroidViewModel(app) {
 
     fun clearState(){
         stateLiveData.postValue(State.StartState)
+    }
+
+    fun getCurrentUser(){
+       stateLiveData.postValue(State.LoadedCurrentUser(mainRepository.getCurrentUser()!!))
     }
 }

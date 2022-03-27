@@ -47,10 +47,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun initList() {
-        userAdapter = UserAdapter(requireContext(), onClick = {binding.filterCardView.isVisible = false}, onChatClick = { findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToChatFragment()) },
-            onLoveIsClick = {
-                findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(it))
-            })
+
         with(binding.usersList) {
             usersViewPagerAdapter = UsersViewPagerAdapter(this@SearchFragment){binding.filterCardView.isVisible = false}
           //  usersViewPagerAdapter.updateList(users)

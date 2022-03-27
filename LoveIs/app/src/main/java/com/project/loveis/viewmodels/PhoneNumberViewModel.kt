@@ -7,10 +7,12 @@ import com.project.loveis.State
 import com.project.loveis.models.PhoneWithCode
 import com.project.loveis.models.TokenData
 import com.project.loveis.repositories.AuthRepository
+import com.project.loveis.repositories.MainRepository
 import kotlinx.coroutines.launch
 
 class PhoneNumberViewModel(app: Application): AndroidViewModel(app) {
     private val authRepository = AuthRepository(app)
+    private val mainRepository = MainRepository(app)
     private val stateLiveData = MutableLiveData<State>().apply { value = State.StartState }
 
 
@@ -81,11 +83,8 @@ class PhoneNumberViewModel(app: Application): AndroidViewModel(app) {
 
     }
 
-
-
-
-
-
-
+    fun getCurrentUserPhone(){
+        stateLiveData.postValue(State.LoadedSingleState(mainRepository.getCurrentUser()!!.phone))
+    }
 
 }

@@ -17,17 +17,20 @@ import com.project.loveis.models.User
 import com.project.loveis.util.autoCleared
 import java.util.*
 
-class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user) {
+class UserFragment(private val onClick: () -> Unit) : Fragment(R.layout.item_user) {
     private val binding: ItemUserBinding by viewBinding()
     private var photoAdapter: UserPhotoViewPagerAdapter by autoCleared()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewPager()
-        bind(arguments?.getParcelable(UsersViewPagerAdapter.USER), arguments?.getParcelable(UsersViewPagerAdapter.USERS)!!)
+        bind(
+            arguments?.getParcelable(UsersViewPagerAdapter.USER),
+            arguments?.getParcelable(UsersViewPagerAdapter.USERS)!!
+        )
     }
 
-  private  fun bind(currentUser:User?, user: User) {
+    private fun bind(currentUser: User?, user: User) {
         if (currentUser == null)
             return
 
@@ -38,45 +41,53 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
             set(strings[0].toInt(), strings[1].toInt(), strings[2].toInt())
         }
         val age = Calendar.getInstance().get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
-        binding.nameTextView.text = "${user.username}, $age"
+        binding.nameTextView.text = "${user.name}, $age"
         binding.descriptionTextView.text = user.about
 
-      binding.loveIsButton.setOnClickListener {
-          findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(user.id!!))
-      }
+        binding.loveIsButton.setOnClickListener {
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(
+                    user.id!!
+                )
+            )
+        }
 
-      binding.chatButton.setOnClickListener { findNavController().navigate(R.id.chatFragment)}
-        if (user.verified.not()){
+        binding.chatButton.setOnClickListener {
+            findNavController().navigate(
+                SearchFragmentDirections.actionSearchFragmentToChatFragment(user.id!!, user.username)
+            )
+        }
+        if (user.verified.not()) {
             binding.checkImageView.setImageResource(R.drawable.ic_fail)
             binding.notVerifiedCardView.isVisible = true
             binding.nameTextView.setTextColor(requireContext().resources.getColor(R.color.pink))
         }
-        val photoUrls = user.images.map {"https://loveis.scratch.studio" + it.url}
+        val photoUrls = user.images.map { "https://loveis.scratch.studio" + it.url }
         photoAdapter.updateList(listOf("https://loveis.scratch.studio${user.photo}") + photoUrls)
-        val startLatitude = Location.convert(currentUser?.coordinates?.latitude)
-        val startLongitude = Location.convert(currentUser?.coordinates?.longitude)
+        val startLatitude = Location.convert(currentUser.coordinates.latitude)
+        val startLongitude = Location.convert(currentUser.coordinates.longitude)
         val endLatitude = Location.convert(user.coordinates.latitude)
         val endLongitude = Location.convert(user.coordinates.longitude)
         val results = floatArrayOf(0.0f)
-        try{
+        try {
             Location.distanceBetween(
-            61.0,
-            32.0,
-            endLatitude,
-            endLongitude,
-            results
-        )
+                startLatitude,
+                startLongitude,
+                endLatitude,
+                endLongitude,
+                results
+            )
             val distance = (results[0] / 1000)
             binding.distanceTextView.text = "${distance.toInt()}км от вас"
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Log.e("Debug", "error = ${e.message}")
             binding.distanceTextView.text = "-"
         }
 
     }
 
-    private fun initViewPager(){
-        photoAdapter = UserPhotoViewPagerAdapter(this){onClick()}
+    private fun initViewPager() {
+        photoAdapter = UserPhotoViewPagerAdapter(this) { onClick() }
         binding.photoImageView.adapter = photoAdapter
     }
 

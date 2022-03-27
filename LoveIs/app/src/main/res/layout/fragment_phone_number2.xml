@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:digits="0123456789 -."
-
         app:codeHiddenMask="XXXXX"
         app:codeLength="4"
         app:codeHiddenMode="false"
@@ -48,7 +47,7 @@
         app:underlineStroke="5dp"
         app:underlineReductionScale="0.2"
         android:paddingBottom="10dp"
-        app:textSize="48dp"
+        app:textSize="48sp"
         app:keep_hint="true"
         android:inputType="phone"
         android:singleLine="true"

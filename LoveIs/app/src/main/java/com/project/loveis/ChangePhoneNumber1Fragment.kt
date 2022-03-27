@@ -22,6 +22,7 @@ class ChangePhoneNumber1Fragment : Fragment(R.layout.fragment_change_phone_numbe
         initToolbar()
         setOnClickListener()
         bindViewModel()
+        getCurrentUserPhone()
     }
 
     private fun initToolbar() {
@@ -54,6 +55,7 @@ class ChangePhoneNumber1Fragment : Fragment(R.layout.fragment_change_phone_numbe
                     )
                 )}
                 is State.LoadingState -> showLoading(true)
+                is State.LoadedSingleState -> binding.phoneNumberTextView.setText(state.result as String)
                 is State.ErrorState -> {
                     showLoading(false)
                     when (state.code) {
@@ -71,5 +73,9 @@ class ChangePhoneNumber1Fragment : Fragment(R.layout.fragment_change_phone_numbe
     private fun showLoading(loading: Boolean) {
         binding.continueBtn.isEnabled = !loading
         binding.progressBar.isVisible = loading
+    }
+
+    private fun getCurrentUserPhone(){
+        viewModel.getCurrentUserPhone()
     }
 }
