@@ -1,11 +1,14 @@
 package com.project.loveis.models
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class EventIs(
-    val id: Int,
+    val id: Long,
     val date: String,
     val owner: User,
     @Json(name = "participants_count")
@@ -16,8 +19,8 @@ data class EventIs(
     val whatsAppUrl: String?,
     val status: String,
     val place: Place,
-    val type: Type,
+    val type: MeetingType,
     @Json(name = "persons_number")
     val personsNumber: Int,
     val price: Int
-)
+): Parcelable

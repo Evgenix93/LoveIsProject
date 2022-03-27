@@ -20,5 +20,6 @@ data class User(
     val about: String,
     val gender: String,
     val photo: String,
-    var images: List<Image>
+    var images: List<Image>,
+    val subsription: Subsription?
 ): Parcelable

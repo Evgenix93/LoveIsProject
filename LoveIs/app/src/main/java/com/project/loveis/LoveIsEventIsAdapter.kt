@@ -11,11 +11,14 @@ import com.project.loveis.databinding.ItemLoveisEventisBinding
 import com.project.loveis.models.EventIs
 import com.project.loveis.models.LoveIs
 import com.project.loveis.models.MeetingFilterType
+import com.project.loveis.util.toPhotoUrl
 
-class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -> Unit, val onDecline: (Long) -> Unit) : RecyclerView.Adapter<LoveIsEventIsAdapter.LoveIsEventIsViewHolder>() {
+class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onEventClick: (EventIs) -> Unit, val onAccept: (Long) -> Unit, val onDecline: (Long) -> Unit) : RecyclerView.Adapter<LoveIsEventIsAdapter.LoveIsEventIsViewHolder>() {
     private var items = listOf<LoveIs>()
     private var eventIsItems = listOf<EventIs>()
     private var currentType = MeetingFilterType.ACTIVE
+    private var currentEventTypeId = 0L
+    private var eventIsItemsNotFiltered = listOf<EventIs>()
 
 
 
@@ -32,7 +35,7 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -
 
         fun bind(loveIs: LoveIs, type: MeetingFilterType) {
             Glide.with(itemView)
-                .load(loveIs.place.photo)
+                .load(loveIs.place.photo.toPhotoUrl())
                 .into(binding.placeImage)
             binding.placeNameTextView.text = loveIs.place.name
             binding.placeAddressTextView.text = loveIs.place.address
@@ -72,7 +75,7 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -
 
         fun bind(eventIs: EventIs){
             Glide.with(itemView)
-                .load(eventIs.place.photo)
+                .load(eventIs.place.photo.toPhotoUrl())
                 .into(binding.placeImage)
             binding.placeNameTextView.text = eventIs.place.name
             binding.placeAddressTextView.text = eventIs.place.address
@@ -80,11 +83,13 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -
             binding.dateTextView.text = "${dateStringList[2].substringBefore("T")}.${dateStringList[1]}.${dateStringList[0]}"
             val timeString = eventIs.date.substringAfter("T").removeSuffix("+").split(":").subList(0,2).joinToString(":")
             binding.timeTextView.text = timeString
-            binding.personCountTextView.text = eventIs.participantsCount
+            binding.personCountTextView.text = (eventIs.participantsCount.toInt() + 1).toString()
             binding.personQuantityTextView.text = " / 10"
             binding.personCountTextView.isVisible = true
             binding.personQuantityTextView.isVisible = true
             binding.personIcon.isVisible = true
+            binding.accessBtn.isVisible = false
+            binding.closeImageView.isVisible = false
 
 
 
@@ -100,7 +105,10 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -
         return LoveIsEventIsViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_loveis_eventis, parent, false),
         { position ->
+            if(items.isNotEmpty())
             onClick(items[position])
+            else
+                onEventClick(eventIsItems[position])
         },
             { loveIsId ->
                 onAccept(loveIsId)
@@ -135,8 +143,16 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onAccept: (Long) -
     }
 
     fun updateEventIsList(newList: List<EventIs>, type: MeetingFilterType){
-        eventIsItems = newList
+        eventIsItemsNotFiltered = newList
+        eventIsItems = newList.filter { if(currentEventTypeId != 0L) it.type.id == currentEventTypeId else
+        true}
         currentType = type
+        notifyDataSetChanged()
+    }
+
+    fun setEventTypeId(id: Long){
+        currentEventTypeId = id
+        eventIsItems = eventIsItemsNotFiltered.filter { if(currentEventTypeId != 0L) it.type.id == currentEventTypeId else true}
         notifyDataSetChanged()
     }
 

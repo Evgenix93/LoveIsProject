@@ -33,6 +33,16 @@ class MainRepository(val context: Context) {
         return try{
             profileApi.getUserInfoById(ProfileId.id)
         }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
+            null
+        }
+    }
+
+    suspend fun getUserById(id: Long): Response<User>?{
+        return try{
+            profileApi.getUserInfoById(id)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
             null
         }
     }
@@ -137,6 +147,15 @@ class MainRepository(val context: Context) {
       return  try {
             Network.searchApi.searchUsers(age, gender)
         } catch (e: Exception){
+            null
+        }
+    }
+
+    suspend fun updateCoordinates(coordinates: Coordinates): Response<Coordinates>?{
+        return  try {
+            profileApi.updateCoordinates(coordinates)
+        } catch (e: Exception){
+            Log.d("debug", e.message.toString())
             null
         }
     }

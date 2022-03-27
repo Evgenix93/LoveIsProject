@@ -1,6 +1,8 @@
 package com.project.loveis.repositories
 
+import android.content.Intent
 import android.util.Log
+import androidx.core.net.toUri
 import com.project.loveis.models.*
 import com.project.loveis.singletones.Network
 import com.project.loveis.util.MeetingStatus
@@ -12,6 +14,15 @@ class LoveIsEventIsRepository {
     suspend fun getLoveIsMeetings(page: Int, size: Int, type: MeetingFilterType): Response<LoveIsListResult>?{
         return try {
             loveIsApi.getLoveIsMeetings(page, size, type.value)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
+            null
+        }
+    }
+
+    suspend fun getCurrentUserLoveIsMeetings(page: Int, size: Int): Response<LoveIsListResult>?{
+        return try {
+            loveIsApi.getAllLoveIsMeetingsForCurrentUser(page, size)
         }catch (e: Throwable){
             Log.d("debug", e.message.toString())
             null
@@ -30,6 +41,15 @@ class LoveIsEventIsRepository {
     suspend fun completeLoveIs(id: Long): Response<LoveIs>?{
         return try {
             loveIsApi.completeLoveIs(id)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
+            null
+        }
+    }
+
+    suspend fun completeEventIs(id: Long): Response<EventIs>?{
+        return try {
+            loveIsApi.completeEventIs(id)
         }catch (e: Throwable){
             Log.d("debug", e.message.toString())
             null
@@ -103,6 +123,68 @@ class LoveIsEventIsRepository {
             )
         }catch (e: Throwable){
             Log.e("MyDebug", "error = ${e.message}")
+            null
+        }
+    }
+
+    suspend fun getEventMembers(page: Int, size: Int, eventId: Long): Response<EventMembersListResult>?{
+        return try {
+            loveIsApi.getEventMembers(eventId, page, size)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
+            null
+        }
+    }
+
+    suspend fun joinEventIs(id: Long): Response<EventIs>?{
+        return try {
+            loveIsApi.joinEventIs(id)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
+            null
+        }
+    }
+
+    suspend fun removeParticipantFromEventIs(eventId: Long, userId: Long): Response<Unit>?{
+        return try {
+            loveIsApi.removeParticipantFromEventIs(eventId, userId)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
+            null
+        }
+    }
+
+    fun getShareEventIntent(id: Long): Intent{
+        return Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "https://loveis/event/$id")
+            type = "text/plain"
+        }
+    }
+
+    fun getShareLoveIsIntent(id: Long): Intent{
+        return Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "https://loveis/meeting/$id")
+            type = "text/plain"
+        }
+    }
+
+
+    suspend fun getEventIsById(id: Long): Response<EventIs>?{
+        return try {
+            loveIsApi.getEventIsById(id)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
+            null
+        }
+    }
+
+    suspend fun getLoveIsById(id: Long): Response<LoveIs>?{
+        return try {
+            loveIsApi.getLoveIsById(id)
+        }catch (e: Throwable){
+            Log.d("debug", e.message.toString())
             null
         }
     }

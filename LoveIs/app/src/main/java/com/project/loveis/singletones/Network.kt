@@ -36,4 +36,7 @@ object Network {
 
     val placeApi: PlaceApi
     get() = retrofit.create()
+
+    val sabsriptionApi: SubscriptionApi
+    get() = retrofit.create()
 }

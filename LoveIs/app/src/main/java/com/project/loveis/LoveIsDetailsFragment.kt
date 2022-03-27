@@ -20,6 +20,7 @@ import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.models.User
 import com.project.loveis.util.MeetingStatus
 import com.project.loveis.util.autoCleared
+import com.project.loveis.util.toPhotoUrl
 import com.project.loveis.viewmodels.LoveIsEveintIsViewModel
 import java.util.*
 
@@ -29,6 +30,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
     private val viewModel: LoveIsEveintIsViewModel by viewModels()
     private val args: LoveIsDetailsFragmentArgs by navArgs()
     private var personAdapter: MemberAdapter by autoCleared()
+    private lateinit var currentLoveIs: LoveIs
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +40,8 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
         (requireActivity() as MainActivity).hideBottomNavigationBar(true)
         initList()
         bindViewModel()
-        getCurrentUserInfo()
+        getLoveIsById(args.loveIsId)
+
 
     }
 
@@ -46,8 +49,12 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
     private fun bind(loveIs: LoveIs?) {
         if (loveIs == null)
             return
+        currentLoveIs = loveIs
+        getCurrentUserInfo()
+
+
         Glide.with(this)
-            .load(loveIs.place.photo)
+            .load(loveIs.place.photo.toPhotoUrl())
             .into(binding.placeImage)
         binding.placeNameTextView.text = loveIs.place.name
         binding.placeAddressTextView.text = loveIs.place.address
@@ -81,6 +88,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
 
         if(args.filterType == MeetingFilterType.INCOMING.value){
             binding.finishBtn.isVisible = true
+            binding.closeImageView.isVisible = true
             binding.finishBtn.text = "Принять"
             binding.finishBtn.setOnClickListener {
                 viewModel.acceptLoveIs(loveIs.id)
@@ -106,11 +114,14 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
             logOut.setImageResource(R.drawable.ic_left_arrow)
             logOut.setOnClickListener { findNavController().popBackStack() }
             burgerMenu.setImageResource(R.drawable.ic_share)
+            burgerMenu.setOnClickListener {
+                viewModel.shareLoveIs(args.loveIs?.id ?: args.loveIsId)
+            }
         }
     }
 
     private fun initList() {
-        personAdapter = MemberAdapter(isLoveIs = args.loveIs != null)
+        personAdapter = MemberAdapter(isLoveIs = true){}
         with(binding.loveIsMembers) {
             adapter = personAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -130,12 +141,12 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
                 is State.LoadedCurrentUser -> {
 
                     val members = listOf(
-                            args.loveIs.invitingUser,
-                            args.loveIs.invitedUser
+                            currentLoveIs.invitingUser,
+                            currentLoveIs.invitedUser
                         )
                         personAdapter.updateList(
                             members,
-                            userAdmin = args.loveIs.invitingUser,
+                            userAdmin = currentLoveIs.invitingUser,
                             currentUser = state.user
                         )
                     checkCurrentUserFinishedLoveIs(state.user)
@@ -143,6 +154,9 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
 
                 }
                 is State.SuccessState -> findNavController().popBackStack()
+                is State.LoveIsSingleMeetingLoadedState -> bind(state.meeting)
+                is State.LoadedIntent -> startActivity(state.intent)
+                is State.SubsriptionNeededState -> findNavController().navigate(LoveIsDetailsFragmentDirections.actionLoveIsDetailsFragmentToPremiumFragment())
                 is State.ErrorState -> {
                     when(state.code){
                         400 -> showToast("Ошибка")
@@ -160,9 +174,9 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
     private fun completeMeeting(){
         CompleteMeetingDialog{ completed ->
             if(completed)
-                viewModel.completeLoveIs(args.loveIs.id)
+                viewModel.completeLoveIs(args.loveIs?.id ?: args.loveIsId)
             else
-                viewModel.changeLoveIsStatus(args.loveIs.id , MeetingStatus.NOT_HAPPEN)
+                viewModel.changeLoveIsStatus(args.loveIs?.id ?: args.loveIsId , MeetingStatus.NOT_HAPPEN)
 
         }.show(childFragmentManager, null)
     }
@@ -172,11 +186,17 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
     }
 
     private fun checkCurrentUserFinishedLoveIs(currentUser: User){
-        if((args.loveIs.invitedUser.name == currentUser.name && args.loveIs.invitedUserComplete)
-            || args.loveIs.invitingUser.name == currentUser.name && args.loveIs.invitingUserComplete)
+        if((currentLoveIs.invitedUser.phone == currentUser.phone && currentLoveIs.invitedUserComplete)
+            || currentLoveIs.invitingUser.phone == currentUser.phone && currentLoveIs.invitingUserComplete)
                 binding.finishBtn.isVisible = false
 
 
+    }
+
+    private fun getLoveIsById(id: Long){
+        if(id == 0L)
+            return
+        viewModel.getLoveIsById(id)
     }
 
 

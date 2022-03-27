@@ -1,39 +1,42 @@
 package com.project.loveis.viewmodels
 
 import android.app.Application
+import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
+import com.project.loveis.models.Coordinates
 import com.project.loveis.models.Image
+import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.repositories.AuthRepository
+import com.project.loveis.repositories.LoveIsEventIsRepository
 import com.project.loveis.repositories.MainRepository
+import com.project.loveis.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(app: Application): AndroidViewModel(app) {
+class ProfileViewModel(app: Application) : AndroidViewModel(app) {
     private val stateLiveData = MutableLiveData<State>().apply { value = State.StartState }
     private val mainRepository = MainRepository(app)
     private val authRepository = AuthRepository(app)
+    private val loveIsRepository = LoveIsEventIsRepository()
     private var images = mutableListOf<Image>()
     private var photoNumber = 1
 
     val state: LiveData<State>
-    get() = stateLiveData
+        get() = stateLiveData
 
 
-
-
-
-    fun getUserInfo(){
+    fun getUserInfo() {
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             val response = mainRepository.getCurrentUserInfo()
-            when(response?.code()) {
+            when (response?.code()) {
                 200 -> {
                     val user = response.body()!!
                     mainRepository.setUpCurrentUser(user)
                     Log.d("Debug", user.images.toString())
-                    user.images = user.images.mapIndexed{index, image ->
+                    user.images = user.images.mapIndexed { index, image ->
                         Image(
                             index + 1,
                             image.uuid,
@@ -53,49 +56,56 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
 
     }
 
-    fun updateUserPhoto(fileUri: Uri){
+    fun updateUserPhoto(fileUri: Uri) {
         viewModelScope.launch {
-        stateLiveData.postValue(State.LoadingState)
+            stateLiveData.postValue(State.LoadingState)
             val response = mainRepository.updateUserPhoto(fileUri)
-            when(response?.code()){
-                200 -> {stateLiveData.postValue(State.LoadedSingleState(response.body()!!))}
+            when (response?.code()) {
+                200 -> {
+                    stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
+                }
                 400 -> stateLiveData.postValue(State.ErrorState(400))
-                null -> {stateLiveData.postValue(State.ErrorState(0))}
+                null -> {
+                    stateLiveData.postValue(State.ErrorState(0))
+                }
                 else -> stateLiveData.postValue(State.ErrorState(2))
             }
         }
     }
 
-    private fun addAdditionalPhoto(uri: Uri){
+    private fun addAdditionalPhoto(uri: Uri) {
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             val response = mainRepository.updateAdditionalPhoto(uri)
-            when(response?.code()){
+            when (response?.code()) {
                 200 -> {
                     getUserInfo()
                 }
                 400 -> stateLiveData.postValue(State.ErrorState(400))
-                null -> {stateLiveData.postValue(State.ErrorState(0))}
+                null -> {
+                    stateLiveData.postValue(State.ErrorState(0))
+                }
                 else -> stateLiveData.postValue(State.ErrorState(2))
             }
         }
     }
 
-    fun updateAdditionalPhoto(newPhotoUri: Uri){
+    fun updateAdditionalPhoto(newPhotoUri: Uri) {
         viewModelScope.launch {
-            val image = images.firstOrNull{it.number == photoNumber}
-            if(image == null) {
+            val image = images.firstOrNull { it.number == photoNumber }
+            if (image == null) {
                 Log.d("mylog", "image null")
                 addAdditionalPhoto(newPhotoUri)
-            }
-            else {
-               val response = mainRepository.deleteAdditionalPhoto(image.uuid)
-                when(response?.code()){
+            } else {
+                val response = mainRepository.deleteAdditionalPhoto(image.uuid)
+                when (response?.code()) {
                     200 -> {
                         addAdditionalPhoto(newPhotoUri)
                     }
                     400 -> stateLiveData.postValue(State.ErrorState(400))
-                    null -> {stateLiveData.postValue(State.ErrorState(0))}
+                    null -> {
+                        stateLiveData.postValue(State.ErrorState(0))
+                    }
                     else -> stateLiveData.postValue(State.ErrorState(2))
                 }
             }
@@ -103,12 +113,11 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
     }
 
 
-
-    fun updateUserInfo(name: String, about: String){
+    fun updateUserInfo(name: String, about: String) {
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             val response = mainRepository.updateUserInfo(name, about)
-            when(response?.code()){
+            when (response?.code()) {
                 200 -> stateLiveData.postValue(State.SuccessState)
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> stateLiveData.postValue(State.ErrorState(0))
@@ -117,22 +126,21 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
         }
 
 
-
     }
 
-    fun performAuth(){
-        if(authRepository.isLogined()){
+    fun performAuth() {
+        if (authRepository.isLogined()) {
             stateLiveData.postValue(State.SuccessState)
             return
         }
         stateLiveData.postValue(State.LoadingState)
         viewModelScope.launch {
             val tokenData = authRepository.getTokenDataFromDisk()
-            if(tokenData == null){
+            if (tokenData == null) {
                 stateLiveData.postValue(State.ErrorState(1))
                 return@launch
             }
-            when(authRepository.getToken(tokenData)?.code()){
+            when (authRepository.getToken(tokenData)?.code()) {
                 200 -> stateLiveData.postValue(State.SuccessState)
                 401 -> stateLiveData.postValue(State.ErrorState(401))
                 null -> stateLiveData.postValue(State.ErrorState(0))
@@ -142,14 +150,54 @@ class ProfileViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
-    fun savePhotoNumber(number: Int){
+    fun savePhotoNumber(number: Int) {
         photoNumber = number
     }
 
+    fun getLoveIsMeetings(page: Int = 1, size: Int = 25, type: MeetingFilterType) {
+        viewModelScope.launch {
+            stateLiveData.postValue(State.LoadingState)
+            val response = loveIsRepository.getLoveIsMeetings(page, size, type)
+            when (response?.code()) {
+                200 -> {
+                    val loveIsList = when (type) {
+                        MeetingFilterType.ACTIVE -> response.body()!!.list.filter { it.status != "create" }
+                        MeetingFilterType.INCOMING -> response.body()!!.list.filter { it.status == "create" }
+                        else -> response.body()!!.list
+                    }
+                    stateLiveData.postValue(State.LoveIsMeetingsLoadedState(loveIsList, type))
+                }
+                400 -> stateLiveData.postValue(State.ErrorState(400))
+                null -> stateLiveData.postValue(State.ErrorState(0))
+                else -> stateLiveData.postValue(State.ErrorState(2))
+            }
 
 
+        }
+
+    }
+
+    fun updateCoordinates(latitude: Long, longitude: Long) {
+        viewModelScope.launch {
+            //stateLiveData.postValue(State.LoadingState)
+            val response = mainRepository.updateCoordinates(
+                Coordinates(
+                    latitude = latitude.toString(),
+                    longitude = longitude.toString(),
+                    null
+                )
+            )
+            when (response?.code()) {
+                200 -> {}
+                400 -> stateLiveData.postValue(State.ErrorState(400))
+                null -> stateLiveData.postValue(State.ErrorState(0))
+                else -> stateLiveData.postValue(State.ErrorState(2))
+            }
 
 
+        }
+
+    }
 
 
 }

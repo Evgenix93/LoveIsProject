@@ -1,6 +1,7 @@
 package com.project.loveis
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.ActivityMainBinding
@@ -26,21 +28,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
     }
 
     override fun onStart() {
         super.onStart()
-       // findNavController(R.id.navHostFragment).navigate(R.id.registration1Fragment)
+        // findNavController(R.id.navHostFragment).navigate(R.id.registration1Fragment)
         initBottomNavBar()
         initNavController()
+        //handleIntent(intent)
+
 
     }
 
 
-
-
-    private fun initBottomNavBar(){
+    private fun initBottomNavBar() {
         showEnabledBtn(binding.bottomNavBar.navProfile)
 
         binding.bottomNavBar.navDialog.setOnClickListener {
@@ -69,11 +70,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun hideBottomNavigationBar(hide: Boolean){
+    fun hideBottomNavigationBar(hide: Boolean) {
         binding.bottomNavBar.root.isVisible = !hide
     }
 
-    fun showErrorNotification(){
+    fun showErrorNotification() {
         CoroutineScope(Dispatchers.Main).launch {
             with(binding.notification) {
                 notificationIcon.setImageResource(R.drawable.cross)
@@ -87,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showSuccessNotification(){
+    fun showSuccessNotification() {
         CoroutineScope(Dispatchers.Main).launch {
             binding.notification.root.isVisible = true
             delay(2000)
@@ -95,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showEnabledBtn(button: AppCompatButton){
+    private fun showEnabledBtn(button: AppCompatButton) {
         with(binding.bottomNavBar.navProfile) {
             compoundDrawables[1].alpha = 100
             setTextColor(resources.getColor(R.color.blue2))
@@ -117,14 +118,14 @@ class MainActivity : AppCompatActivity() {
             setTextColor(resources.getColor(R.color.blue2))
         }
 
-        with(button){
+        with(button) {
             compoundDrawables[1].alpha = 255
             setTextColor(resources.getColor(R.color.blue))
         }
 
     }
 
-    private fun changeStatusBarColor(colorRes: Int){
+    private fun changeStatusBarColor(colorRes: Int) {
         window?.apply {
             clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
@@ -136,33 +137,55 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initNavController(){
+    private fun initNavController() {
         findNavController(R.id.navHostFragment).addOnDestinationChangedListener { controller, destination, arguments ->
-            if(destination.id != R.id.splashScreenFragment){
+            if (destination.id != R.id.splashScreenFragment) {
                 changeStatusBarColor(R.color.white)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     window.insetsController?.setSystemBarsAppearance(
                         WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                    )
                 } else {
                     @Suppress("DEPRECATION")
-                    window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                    } else {
-                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    }
+                    window.decorView.systemUiVisibility =
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                        } else {
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                        }
 
                 }
-                    //window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-            }else{
+                //window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+            } else {
                 changeStatusBarColor(R.color.blue)
                 window.decorView.systemUiVisibility = 0
             }
         }
     }
 
-    fun hideKeyboard(){
+    fun hideKeyboard() {
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+     fun onLogined() {
+        intent?.data ?: return
+         if(intent.data.toString().contains("event"))
+        findNavController(R.id.navHostFragment).navigate(
+            ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(
+                eventId = intent.data?.lastPathSegment!!.toLong()
+            ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
+        )
+         else
+             findNavController(R.id.navHostFragment).navigate(
+                 ProfileFragmentDirections.actionProfileFragmentToLoveIsDetailsFragment(
+                     loveIsId = intent.data?.lastPathSegment!!.toLong(),
+                     filterType = ""
+                 ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
+             )
+
+
+         intent = null
     }
 }

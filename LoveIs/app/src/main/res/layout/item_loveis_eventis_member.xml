@@ -31,6 +31,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"/>
 
+    <TextView
+        android:id="@+id/emptySlotTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="22dp"
+        android:textAppearance="@style/loveIsUsersText"
+        android:textColor="@color/gray9"
+        android:text="Свободное место"
+        app:layout_constraintStart_toEndOf="@id/materialCardView5"
+        app:layout_constraintTop_toTopOf="@id/materialCardView5"
+        app:layout_constraintBottom_toBottomOf="@id/materialCardView5"/>
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView5"
@@ -66,7 +79,7 @@
         android:textColor="@color/remove_person"
 
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@+id/personAgeTextView"
+        app:layout_constraintBottom_toBottomOf="@id/materialCardView5"
         app:layout_constraintEnd_toEndOf="parent" />
 
 

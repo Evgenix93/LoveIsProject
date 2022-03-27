@@ -6,8 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class Coordinates(
-    val latitude: String,
-    val longitude: String,
-    val city: String?
+data class Subsription(
+    val value: Int,
+    val until: String
 ): Parcelable

@@ -3,6 +3,7 @@ package com.project.loveis
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class CreateLoveIsFragment3 : Fragment(R.layout.fragment_create_loveis_eventis_5
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initContinueButton()
+        initEditText()
     }
 
 
@@ -69,5 +71,26 @@ class CreateLoveIsFragment3 : Fragment(R.layout.fragment_create_loveis_eventis_5
             )
         }
     }
+
+    private fun initEditText(){
+        binding.dateEditText.setOnEditorActionListener { textView, i, keyEvent ->
+            if(i == EditorInfo.IME_ACTION_DONE){
+                (requireActivity() as MainActivity).hideKeyboard()
+            }
+            false
+
+        }
+
+        binding.timeEditText.setOnEditorActionListener { textView, i, keyEvent ->
+            if(i == EditorInfo.IME_ACTION_DONE){
+                (requireActivity() as MainActivity).hideKeyboard()
+            }
+            false
+
+        }
+
+
+    }
+
 
 }

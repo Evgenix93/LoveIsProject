@@ -21,6 +21,12 @@ interface LoveIsEventIsApi {
         @Query("type") type: String
     ): Response<LoveIsListResult>
 
+    @GET("meeting/")
+    suspend fun getAllLoveIsMeetingsForCurrentUser(
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Response<LoveIsListResult>
+
     @PATCH("meeting/status/complete/{meeting_id}")
     suspend fun completeLoveIs(@Path("meeting_id") id: Long): Response<LoveIs>
 
@@ -42,4 +48,27 @@ interface LoveIsEventIsApi {
         @Query("size") size: Int,
         @Query("type") type: String
     ): Response<EventIsListResult>
+
+    @GET("event/participants/{event_id}")
+    suspend fun getEventMembers(
+        @Path("event_id") eventId: Long,
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+    ): Response<EventMembersListResult>
+
+    @PATCH("event/complete/{event_id}")
+    suspend fun completeEventIs(@Path("event_id") id: Long): Response<EventIs>
+
+    @POST("event/{event_id}")
+    suspend fun joinEventIs(@Path("event_id") id: Long): Response<EventIs>
+
+    @DELETE("event/{event_id}/participants/{user_id}/")
+    suspend fun removeParticipantFromEventIs(@Path("event_id") eventId: Long, @Path("user_id") userId: Long): Response<Unit>
+
+    @GET("event/{event_id}")
+    suspend fun getEventIsById(@Path("event_id") id: Long): Response<EventIs>
+
+    @GET("meeting/{meeting_id}")
+    suspend fun getLoveIsById(@Path("meeting_id") id: Long): Response<LoveIs>
+
 }

@@ -1,8 +1,10 @@
 package com.project.loveis
 
+import android.Manifest
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -12,7 +14,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.project.loveis.databinding.FragmentProfileBinding
+import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.models.User
 import com.project.loveis.singletones.Tokens
 import com.project.loveis.viewmodels.ProfileViewModel
@@ -23,6 +30,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private val viewModel: ProfileViewModel by viewModels()
     private lateinit var filePickerLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var filePickerLauncher2: ActivityResultLauncher<Array<String>>
+    private lateinit var locationPermissionLauncher: ActivityResultLauncher<String>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,6 +38,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         showBottomNavigation()
         setClickListeners()
         initFilePickerLaunchers()
+        initPermissionLauncher()
+        requestLocationPermission()
         bindViewModel()
     }
 
@@ -131,6 +141,15 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
     }
 
+    private fun initPermissionLauncher(){
+        locationPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){ granted ->
+            if(granted)
+                updateCoordinates()
+
+
+        }
+    }
+
     private fun bindViewModel(){
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when(state){
@@ -143,10 +162,16 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 is State.LoadedSingleState -> {
                     showLoading(false)
                     if(state.result is User) {
+                        (activity as MainActivity).onLogined()
+                        getActiveLoveIs()
                         val user = state.result as User
                         showProfileInfo(user)
                     }else
                         filePickerLauncher2.launch(arrayOf("image/*"))
+                }
+                is State.LoveIsMeetingsLoadedState -> {
+                    showLoading(false)
+                    binding.loveIsTextView.text = state.meetings.size.toString()
                 }
                 is State.ErrorState -> {
                     showLoading(false)
@@ -164,4 +189,52 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private fun showLoading(loading: Boolean) {
         binding.progressBar.isVisible = loading
     }
+
+    private fun getActiveLoveIs(){
+        viewModel.getLoveIsMeetings(type = MeetingFilterType.ACTIVE)
+    }
+
+    private fun updateCoordinates(){
+        try {
+            showLoading(true)
+            val locationProvider = LocationServices.getFusedLocationProviderClient(requireActivity())
+            val cancelToken = object : CancellationToken() {
+                override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken {
+                    return this
+
+                }
+
+                override fun isCancellationRequested(): Boolean {
+                    return false
+
+                }
+            }
+            locationProvider.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, cancelToken ).addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    Log.d("mylog", task.result.longitude.toString())
+                    task.result?.let {
+                        viewModel.updateCoordinates(latitude = it.latitude.toLong(), longitude = it.longitude.toLong())
+                    }
+                    task.result ?: run {
+                        showLoading(false)
+                        Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
+
+                    }
+                }else{
+                    showLoading(false)
+                    Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
+
+        }catch (e: SecurityException){
+
+        }
+    }
+
+    private fun requestLocationPermission(){
+        locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+    }
+
 }

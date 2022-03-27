@@ -7,17 +7,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.ItemFinishedLoveisBinding
+import com.project.loveis.models.EventIs
 import com.project.loveis.models.LoveIs
 
 class FinishedLoveIsAdapter :
     RecyclerView.Adapter<FinishedLoveIsAdapter.FinishedLoveIsViewHolder>() {
     private var items = listOf<LoveIs>()
+    private var eventItems = listOf<EventIs>()
+    private var eventItemsNotFiltered = listOf<EventIs>()
+    private var currentEventTypeId = 0L
 
     class FinishedLoveIsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding: ItemFinishedLoveisBinding by viewBinding()
 
-        fun bind(loveIs: LoveIs){
-            when(loveIs.status){
+        fun bind(loveIs: LoveIs? = null, eventIs: EventIs? = null){
+            when(loveIs?.status ?: eventIs?.status){
                 "complete" -> {
                     binding.loveIsStatusImageView.setImageResource(R.drawable.ic_check)
                     binding.loveIsStatusImageView.imageTintList = ColorStateList.valueOf(itemView.context.resources.getColor(R.color.green))
@@ -43,8 +47,21 @@ class FinishedLoveIsAdapter :
 
             }
 
-            binding.placeAddressTextView.text = loveIs.place.address
-            binding.dateTextView.text = loveIs.date
+            binding.placeNameTextView.text = loveIs?.place?.name ?: eventIs?.place?.name
+
+            binding.placeAddressTextView.text = loveIs?.place?.address ?: eventIs?.place?.address
+            val dateString = loveIs?.date ?: eventIs?.date.orEmpty()
+            val dateStringList = dateString.split("-")
+            binding.dateTextView.text =
+                "${dateStringList[2].substringBefore("T")}.${dateStringList[1]}.${dateStringList[0]}"
+
+            val timeString = dateString.substringAfter("T").removeSuffix("+").split(":").subList(0, 2)
+                .joinToString(":")
+
+            binding.timeTextView.text = timeString
+
+
+
         }
 
     }
@@ -57,16 +74,37 @@ class FinishedLoveIsAdapter :
     }
 
     override fun onBindViewHolder(holder: FinishedLoveIsViewHolder, position: Int) {
-        holder.bind(items[position])
+        if(items.isNotEmpty())
+        holder.bind(loveIs = items[position])
+        else
+            holder.bind(eventIs = eventItems[position])
 
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return if(items.isNotEmpty())
+            items.size
+        else
+            eventItems.size
     }
 
     fun updateList(newList: List<LoveIs>){
         items = newList
         notifyDataSetChanged()
+    }
+
+    fun updateEventIsList(newList: List<EventIs>){
+        eventItemsNotFiltered = newList
+        eventItems = newList.filter { if(currentEventTypeId != 0L) it.type.id == currentEventTypeId
+        else true}
+        notifyDataSetChanged()
+    }
+
+    fun setEventTypeId(id: Long){
+        currentEventTypeId = id
+        eventItems = eventItemsNotFiltered.filter { if(currentEventTypeId != 0L) it.type.id == currentEventTypeId
+        else true}
+        notifyDataSetChanged()
+
     }
 }

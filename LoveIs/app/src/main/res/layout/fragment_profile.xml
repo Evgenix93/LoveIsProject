@@ -224,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="5"
+                        tools:text="5"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 

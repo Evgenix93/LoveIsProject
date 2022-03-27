@@ -37,3 +37,9 @@ fun EditText.textChangedFlow(): Flow<Int> {
     }
 }
 
+fun String.toPhotoUrl(): String{
+    val prefix = "https://loveis.scratch.studio"
+    return prefix + this
+
+}
+

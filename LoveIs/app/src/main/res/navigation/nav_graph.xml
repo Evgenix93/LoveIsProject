@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loveIsFragment_to_loveIsDetailsFragment"
             app:destination="@id/loveIsDetailsFragment" />
+        <action
+            android:id="@+id/action_loveIsFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -36,6 +39,12 @@
         <action
             android:id="@+id/action_profileFragment_to_loveIsFragment"
             app:destination="@id/loveIsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loveIsDetailsFragment"
+            app:destination="@id/loveIsDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/dialogsFragment"
@@ -82,10 +91,19 @@
         android:label="LoveIsDetailsFragment" >
         <argument
             android:name="loveIs"
-            app:argType="com.project.loveis.models.LoveIs" />
+            app:argType="com.project.loveis.models.LoveIs"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="filterType"
             app:argType="string" />
+        <argument
+            android:name="loveIsId"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_loveIsDetailsFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -94,7 +112,20 @@
     <fragment
         android:id="@+id/eventDetailsFragment"
         android:name="com.project.loveis.EventDetailsFragment"
-        android:label="EventDetailsFragment" />
+        android:label="EventDetailsFragment" >
+        <argument
+            android:name="eventIs"
+            app:argType="com.project.loveis.models.EventIs"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="eventId"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_eventDetailsFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment" />
+    </fragment>
     <fragment
         android:id="@+id/createEventIsFragment1"
         android:name="com.project.loveis.CreateEventIsFragment1"
@@ -548,6 +579,9 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
     </fragment>
     >>>>>>> origin/main
 </navigation>

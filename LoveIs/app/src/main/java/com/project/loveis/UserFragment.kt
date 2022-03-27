@@ -53,15 +53,15 @@ class UserFragment(private val onClick: () -> Unit): Fragment(R.layout.item_user
         }
         val photoUrls = user.images.map {"https://loveis.scratch.studio" + it.url}
         photoAdapter.updateList(listOf("https://loveis.scratch.studio${user.photo}") + photoUrls)
-        val startLatitude = Location.convert(currentUser?.coordinates?.latitude)
-        val startLongitude = Location.convert(currentUser?.coordinates?.longitude)
+        val startLatitude = Location.convert(currentUser.coordinates.latitude)
+        val startLongitude = Location.convert(currentUser.coordinates.longitude)
         val endLatitude = Location.convert(user.coordinates.latitude)
         val endLongitude = Location.convert(user.coordinates.longitude)
         val results = floatArrayOf(0.0f)
         try{
             Location.distanceBetween(
-            61.0,
-            32.0,
+            startLatitude,
+            startLongitude,
             endLatitude,
             endLongitude,
             results

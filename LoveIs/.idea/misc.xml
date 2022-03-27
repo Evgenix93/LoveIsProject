@@ -144,7 +144,7 @@
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_create_loveis_man_7.xml" value="0.25673652694610777" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_create_loveis_woman_7.xml" value="0.25673652694610777" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_edit.xml" value="0.25673652694610777" />
-        <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_events.xml" value="0.25673652694610777" />
+        <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_events.xml" value="0.5" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_get_money.xml" value="0.25673652694610777" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_logo.xml" value="0.48703703703703705" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_love_is.xml" value="0.33" />
@@ -170,6 +170,7 @@
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_loveis_eventis_member.xml" value="0.4361111111111111" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_message.xml" value="0.5" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_user.xml" value="0.49029982363315694" />
+        <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/window_event_filter.xml" value="0.4272681196147998" />
         <entry key="..\:/freelance/Projects/LoveIs/app/src/main/res/drawable/ic_coffee.xml" value="0.45565129244804864" />
         <entry key="..\:/freelance/Projects/LoveIs/app/src/main/res/drawable/ic_relaxing_walk.xml" value="0.45565129244804864" />
         <entry key="..\:/freelance/Projects/LoveIs/app/src/main/res/drawable/ic_skiing_man.xml" value="0.45565129244804864" />

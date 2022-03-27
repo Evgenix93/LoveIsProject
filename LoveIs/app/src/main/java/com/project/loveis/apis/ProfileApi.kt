@@ -1,6 +1,7 @@
 package com.project.loveis.apis
 
 
+import com.project.loveis.models.Coordinates
 import com.project.loveis.models.User
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -32,5 +33,8 @@ interface ProfileApi {
     @Multipart
     @POST("user/verification/")
     suspend fun verify(@Part photoPart: MultipartBody.Part): Response<Unit>
+
+    @POST("user/location/")
+    suspend fun updateCoordinates(@Body coordinates: Coordinates): Response<Coordinates>
 
 }

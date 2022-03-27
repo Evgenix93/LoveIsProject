@@ -24,11 +24,12 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
     private val loveIsAdapter = LoveIsEventIsAdapter(onClick = { loveIs ->
         findNavController().navigate(
             LoveIsFragmentDirections.actionLoveIsFragmentToLoveIsDetailsFragment(
-                loveIs,
-                currentFilterType.value
+                loveIs = loveIs,
+                filterType = currentFilterType.value
             )
         )
     },
+        onEventClick = {},
         onAccept = { loveIsId ->
             viewModel.acceptLoveIs(loveIsId)
         },
@@ -101,7 +102,8 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
                 }
                 R.id.historyChip -> {
                     binding.list.adapter = finishedLoveIsAdapter
-                    viewModel.getLoveIsMeetings(type = MeetingFilterType.HISTORY)
+                    //viewModel.getHistoryLoveIsMeetings()
+                    viewModel.getLoveIsMeetings(type = MeetingFilterType.ALL)
                 }
 
             }
@@ -115,7 +117,7 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
                 is State.LoadingState -> {}
                 is State.LoveIsMeetingsLoadedState -> {
                     currentFilterType = state.type
-                    if (state.type != MeetingFilterType.HISTORY)
+                    if (state.type != MeetingFilterType.ALL)
                         loveIsAdapter.updateLoveIsList(state.meetings, state.type)
                     else
                         finishedLoveIsAdapter.updateList(state.meetings)
@@ -123,6 +125,7 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
                 is State.SuccessState -> {
                     viewModel.getLoveIsMeetings(type = MeetingFilterType.INCOMING)
                 }
+                is State.SubsriptionNeededState -> findNavController().navigate(LoveIsFragmentDirections.actionLoveIsFragmentToPremiumFragment())
                 is State.ErrorState -> {
                     when (state.code) {
                         400 -> showToast("Ошибка")

@@ -82,4 +82,8 @@ dependencies {
 
     //editCodeView
     implementation 'com.bigbangbutton:editcodeview:1.0.6'
+
+    //location
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+
 }
