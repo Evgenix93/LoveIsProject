@@ -20,7 +20,7 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
     fun sendMessage(message: String, userId: Long){
         stateLiveData.postValue(State.LoadingState)
       viewModelScope.launch{
-          val response = repository.sendMessage(message, attachmentUri, userId)
+          val response = repository.sendMessage(message.ifEmpty { " " }, attachmentUri, userId)
           when(response?.code()){
               204 -> stateLiveData.postValue(State.SuccessState)
               400 -> stateLiveData.postValue(State.ErrorState(400))

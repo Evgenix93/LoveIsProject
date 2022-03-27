@@ -89,6 +89,7 @@
         style="@style/InputStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:drawableBottom="@drawable/ic_line_1"

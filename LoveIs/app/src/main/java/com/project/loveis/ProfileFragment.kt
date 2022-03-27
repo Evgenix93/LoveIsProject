@@ -39,7 +39,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         setClickListeners()
         initFilePickerLaunchers()
         initPermissionLauncher()
-        requestLocationPermission()
         bindViewModel()
     }
 
@@ -173,6 +172,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                     if(state.result is User) {
                         (activity as MainActivity).onLogined()
                         getActiveLoveIs()
+                        requestLocationPermission()
                         val user = state.result as User
                         showProfileInfo(user)
                     }else

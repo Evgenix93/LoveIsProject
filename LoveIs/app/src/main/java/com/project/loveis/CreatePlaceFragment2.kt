@@ -17,6 +17,7 @@ class CreatePlaceFragment2: Fragment(R.layout.fragment_add_place1) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initContinueButton()
+        initViews()
 
     }
 
@@ -38,5 +39,9 @@ class CreatePlaceFragment2: Fragment(R.layout.fragment_add_place1) {
                binding.nameEditText.text.toString()
             ))
         }
+    }
+
+    private fun initViews(){
+        binding.enterPlaceNameTextView.text = "Укажите адрес"
     }
 }

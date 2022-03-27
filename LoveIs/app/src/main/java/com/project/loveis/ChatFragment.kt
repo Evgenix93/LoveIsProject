@@ -78,6 +78,7 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
                     binding.loadingProgressBar.isVisible = false
                     val dialog = state.result as Dialog
                     messageAdapter.updateList(dialog.list!!.reversed())
+                    if(dialog.list.isNotEmpty())
                     binding.messageList.smoothScrollToPosition(dialog.list.lastIndex)
                 }
                 is State.LoadingState -> {
