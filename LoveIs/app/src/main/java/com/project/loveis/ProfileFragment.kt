@@ -40,10 +40,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         initFilePickerLaunchers()
         initPermissionLauncher()
         bindViewModel()
-    }
-
-    override fun onResume() {
-        super.onResume()
         performAuth()
     }
 
@@ -136,7 +132,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
         binding.nameTextView.text = "${user.name}, $age"
         binding.coinsTextView.text = user.wallet?.value?.toString() ?: "0"
-
     }
 
     private fun initFilePickerLaunchers(){
@@ -162,7 +157,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when(state){
                 is State.StartState -> {
-                    viewModel.performAuth()
                 }
                 is State.SuccessState -> {
                     viewModel.getUserInfo()}
