@@ -15,8 +15,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 import java.io.File
+import java.io.IOException
 import java.util.*
 
 class AuthRepository(val context: Context) {
@@ -76,7 +78,16 @@ class AuthRepository(val context: Context) {
             }
         } catch (e: Throwable) {
             Log.d("debug", e.message.toString())
-            null
+            if(e is IOException) null
+            else{
+                try {
+                    val response = authApi.getTokenGetError(tokenData)
+                    Response.error(-1, response.body()?.detail?.toResponseBody(null)!!)
+                }catch (e: Throwable){
+                    val response = authApi.getTokenGetErrors(tokenData)
+                    Response.error(-1, response.body()?.errors?.keys?.joinToString(",")?.toResponseBody(null)!!)
+                }
+            }
         }
     }
 

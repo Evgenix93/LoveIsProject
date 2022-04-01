@@ -1,9 +1,6 @@
 package com.project.loveis.apis
 
-import com.project.loveis.models.Phone
-import com.project.loveis.models.PhoneWithCode
-import com.project.loveis.models.TokenData
-import com.project.loveis.models.TokenResponse
+import com.project.loveis.models.*
 import okhttp3.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -18,6 +15,14 @@ interface AuthApi {
 
     @POST("token/")
     suspend fun getToken(@Body tokenData: TokenData): retrofit2.Response<TokenResponse>
+
+    @POST("token/")
+    suspend fun getTokenGetError(@Body tokenData: TokenData): retrofit2.Response<ResponseError>
+
+    @POST("token/")
+    suspend fun getTokenGetErrors(@Body tokenData: TokenData): retrofit2.Response<ResponseErrorsMap>
+
+
 
     @POST("user/signup/")
     @Multipart

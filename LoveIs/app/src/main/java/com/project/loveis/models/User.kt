@@ -23,5 +23,5 @@ data class User(
     val gender: Gender,
     val photo: String,
     var images: List<Image>,
-    val subsription: Subsription?
+    val subscription: Subsription?
 ): Parcelable

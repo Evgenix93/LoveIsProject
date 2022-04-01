@@ -7,6 +7,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toFile
+import com.project.loveis.apis.ProfileApi
 import com.project.loveis.models.*
 import com.project.loveis.singletones.Network
 import com.project.loveis.singletones.ProfileId
@@ -20,6 +21,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 import java.io.File
 import java.io.IOException
@@ -34,7 +36,16 @@ class MainRepository(val context: Context) {
             profileApi.getUserInfoById(ProfileId.id)
         }catch (e: Throwable){
             Log.d("debug", e.message.toString())
-            null
+            if(e is IOException) null
+            else{
+                try {
+                    val response = profileApi.getUserInfoByIdGetError(ProfileId.id)
+                    Response.error(-1, response.body()?.detail?.toResponseBody(null)!!)
+                }catch (e: Throwable){
+                    val response = profileApi.getUserInfoByIdGetErrors(ProfileId.id)
+                    Response.error(-1, response.body()?.errors?.keys?.joinToString(",")?.toResponseBody(null)!!)
+                }
+            }
         }
     }
 
@@ -43,7 +54,16 @@ class MainRepository(val context: Context) {
             profileApi.getUserInfoById(id)
         }catch (e: Throwable){
             Log.d("debug", e.message.toString())
-            null
+            if(e is IOException) null
+            else{
+                try {
+                    val response = profileApi.getUserInfoByIdGetError(id)
+                    Response.error(-1, response.body()?.detail?.toResponseBody(null)!!)
+                }catch (e: Throwable){
+                    val response = profileApi.getUserInfoByIdGetErrors(id)
+                    Response.error(-1, response.body()?.errors?.keys?.joinToString(",")?.toResponseBody(null)!!)
+                }
+            }
         }
     }
 
@@ -156,7 +176,16 @@ class MainRepository(val context: Context) {
             profileApi.updateCoordinates(coordinates)
         } catch (e: Exception){
             Log.d("debug", e.message.toString())
-            null
+            if(e is IOException) null
+            else{
+                try {
+                    val response = profileApi.updateCoordinatesGetError(coordinates)
+                    Response.error(-1, response.body()?.detail?.toResponseBody(null)!!)
+                }catch (e: Throwable){
+                    val response = profileApi.updateCoordinatesGetErrors(coordinates)
+                    Response.error(-1, response.body()?.errors?.keys?.joinToString(",")?.toResponseBody(null)!!)
+                }
+            }
         }
     }
 

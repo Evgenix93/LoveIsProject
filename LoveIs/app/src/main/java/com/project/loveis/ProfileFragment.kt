@@ -191,12 +191,17 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                         2 -> findNavController().navigate(R.id.serverErrorFragment)
                     }
                 }
+                is State.ErrorMessageState -> showMessage(state.message)
             }
         })
     }
 
     private fun showLoading(loading: Boolean) {
         binding.progressBar.isVisible = loading
+    }
+
+    private fun showMessage(message: String){
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun getActiveLoveIs(){

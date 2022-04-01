@@ -13,7 +13,10 @@ import com.project.loveis.repositories.AuthRepository
 import com.project.loveis.repositories.LoveIsEventIsRepository
 import com.project.loveis.repositories.MainRepository
 import com.project.loveis.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 
 class ProfileViewModel(app: Application) : AndroidViewModel(app) {
     private val stateLiveData = MutableLiveData<State>().apply { value = State.StartState }
@@ -49,7 +52,8 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 }
                 404 -> stateLiveData.postValue(State.ErrorState(404))
                 null -> stateLiveData.postValue(State.ErrorState(0))
-                else -> stateLiveData.postValue(State.ErrorState(2))
+                -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                else -> stateLiveData.postValue(State.ErrorMessageState("getUserInfo: код ошибки ${response.code()}"))
             }
 
         }
@@ -68,7 +72,10 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 null -> {
                     stateLiveData.postValue(State.ErrorState(0))
                 }
-                else -> stateLiveData.postValue(State.ErrorState(2))
+                -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                else -> stateLiveData.postValue(State.ErrorMessageState("updateUserPhoto: код ошибки ${response.code()}"))
+
+
             }
         }
     }
@@ -85,7 +92,9 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 null -> {
                     stateLiveData.postValue(State.ErrorState(0))
                 }
-                else -> stateLiveData.postValue(State.ErrorState(2))
+                -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                else -> stateLiveData.postValue(State.ErrorMessageState("addAdditionalPhoto: код ошибки ${response.code()}"))
+
             }
         }
     }
@@ -106,7 +115,9 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                     null -> {
                         stateLiveData.postValue(State.ErrorState(0))
                     }
-                    else -> stateLiveData.postValue(State.ErrorState(2))
+                    -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                    else -> stateLiveData.postValue(State.ErrorMessageState("updateAdditionalPhoto: код ошибки ${response.code()}"))
+
                 }
             }
         }
@@ -121,7 +132,9 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 200 -> stateLiveData.postValue(State.SuccessState)
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> stateLiveData.postValue(State.ErrorState(0))
-                else -> stateLiveData.postValue(State.ErrorState(2))
+                -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                else -> stateLiveData.postValue(State.ErrorMessageState("updateUserInfo: код ошибки ${response.code()}"))
+
             }
         }
 
@@ -140,11 +153,14 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 stateLiveData.postValue(State.ErrorState(1))
                 return@launch
             }
-            when (authRepository.getToken(tokenData)?.code()) {
+            val response = authRepository.getToken(tokenData)
+            when (response?.code()) {
                 200 -> stateLiveData.postValue(State.SuccessState)
                 401 -> stateLiveData.postValue(State.ErrorState(401))
                 null -> stateLiveData.postValue(State.ErrorState(0))
-                else -> stateLiveData.postValue(State.ErrorState(2))
+                -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                else -> stateLiveData.postValue(State.ErrorMessageState("performAuth: код ошибки ${response.code()}"))
+
 
             }
         }
@@ -169,7 +185,9 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 }
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> stateLiveData.postValue(State.ErrorState(0))
-                else -> stateLiveData.postValue(State.ErrorState(2))
+                -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                else -> stateLiveData.postValue(State.ErrorMessageState("getLoveIsMeetings: код ошибки ${response.code()}"))
+
             }
 
 
@@ -191,12 +209,20 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 200 -> {}
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> stateLiveData.postValue(State.ErrorState(0))
-                else -> stateLiveData.postValue(State.ErrorState(2))
+                -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                else -> stateLiveData.postValue(State.ErrorMessageState("updateCoordinates: код ошибки ${response.code()}"))
+
             }
 
 
         }
 
+    }
+
+    private suspend fun getErrorFromResponse(response: ResponseBody): String{
+        return withContext(Dispatchers.IO) {
+            response.string()
+        }
     }
 
 

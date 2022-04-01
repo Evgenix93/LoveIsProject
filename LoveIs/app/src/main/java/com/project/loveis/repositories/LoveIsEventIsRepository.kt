@@ -5,8 +5,11 @@ import android.util.Log
 import androidx.core.net.toUri
 import com.project.loveis.models.*
 import com.project.loveis.singletones.Network
+import com.project.loveis.singletones.ProfileId
 import com.project.loveis.util.MeetingStatus
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
+import java.io.IOException
 
 class LoveIsEventIsRepository {
     private val loveIsApi = Network.loveIsEventIsApi
@@ -16,7 +19,16 @@ class LoveIsEventIsRepository {
             loveIsApi.getLoveIsMeetings(page, size, type.value)
         }catch (e: Throwable){
             Log.d("debug", e.message.toString())
-            null
+            if(e is IOException) null
+            else{
+                try {
+                    val response = loveIsApi.getLoveIsMeetingsGetError(page, size, type.value)
+                    Response.error(-1, response.body()?.detail?.toResponseBody(null)!!)
+                }catch (e: Throwable){
+                    val response = loveIsApi.getLoveIsMeetingsGetErrors(page, size, type.value)
+                    Response.error(-1, response.body()?.errors?.keys?.joinToString(",")?.toResponseBody(null)!!)
+                }
+            }
         }
     }
 

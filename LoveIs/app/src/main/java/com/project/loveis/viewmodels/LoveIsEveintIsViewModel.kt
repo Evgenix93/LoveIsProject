@@ -139,7 +139,7 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             val currentUser = mainRepository.getCurrentUser()
-            if(currentUser?.subsription == null){
+            if(currentUser?.subscription == null){
                 stateLiveData.postValue(State.SubsriptionNeededState)
                 return@launch
             }
@@ -162,7 +162,7 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             val currentUser = mainRepository.getCurrentUser()
-            if(currentUser?.subsription == null){
+            if(currentUser?.subscription == null){
                 stateLiveData.postValue(State.SubsriptionNeededState)
                 return@launch
             }
@@ -205,7 +205,7 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             val currentUser = mainRepository.getCurrentUser()
-            if(currentUser?.subsription == null){
+            if(currentUser?.subscription == null){
                 stateLiveData.postValue(State.SubsriptionNeededState)
                 return@launch
             }

@@ -21,6 +21,22 @@ interface LoveIsEventIsApi {
         @Query("type") type: String
     ): Response<LoveIsListResult>
 
+    @GET("invitations/meetings")
+    suspend fun getLoveIsMeetingsGetError(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("type") type: String
+    ): Response<ResponseError>
+
+    @GET("invitations/meetings")
+    suspend fun getLoveIsMeetingsGetErrors(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("type") type: String
+    ): Response<ResponseErrorsMap>
+
+
+
     @GET("meeting/")
     suspend fun getAllLoveIsMeetingsForCurrentUser(
         @Query("page") page: Int,

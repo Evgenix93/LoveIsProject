@@ -54,7 +54,7 @@ class UserFragment(private val onClick: () -> Unit) : Fragment(R.layout.item_use
 
         binding.chatButton.setOnClickListener {
             findNavController().navigate(
-                SearchFragmentDirections.actionSearchFragmentToChatFragment(user.id!!, user.username)
+                SearchFragmentDirections.actionSearchFragmentToChatFragment(user.id!!, user.name)
             )
         }
         if (user.verified.not()) {

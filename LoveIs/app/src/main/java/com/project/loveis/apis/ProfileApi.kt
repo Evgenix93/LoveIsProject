@@ -2,6 +2,8 @@ package com.project.loveis.apis
 
 
 import com.project.loveis.models.Coordinates
+import com.project.loveis.models.ResponseError
+import com.project.loveis.models.ResponseErrorsMap
 import com.project.loveis.models.User
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -11,6 +13,14 @@ interface ProfileApi {
 
     @GET("user/{user_id}/")
     suspend fun getUserInfoById(@Path("user_id") id: Long): Response<User>
+
+    @GET("user/{user_id}/")
+    suspend fun getUserInfoByIdGetError(@Path("user_id") id: Long): Response<ResponseError>
+
+    @GET("user/{user_id}/")
+    suspend fun getUserInfoByIdGetErrors(@Path("user_id") id: Long): Response<ResponseErrorsMap>
+
+
 
     @POST("user/")
     @Multipart
@@ -36,5 +46,13 @@ interface ProfileApi {
 
     @POST("user/location/")
     suspend fun updateCoordinates(@Body coordinates: Coordinates): Response<Coordinates>
+
+    @POST("user/location/")
+    suspend fun updateCoordinatesGetError(@Body coordinates: Coordinates): Response<ResponseError>
+
+    @POST("user/location/")
+    suspend fun updateCoordinatesGetErrors(@Body coordinates: Coordinates): Response<ResponseErrorsMap>
+
+
 
 }

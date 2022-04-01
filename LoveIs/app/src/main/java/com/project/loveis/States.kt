@@ -11,6 +11,7 @@ sealed class State {
     object StartState: State()
     object SuccessState: State()
     class ErrorState(val code: Int): State()
+    class ErrorMessageState(val message: String): State()
     class LoadedSingleState(val result: Any): State()
     class LoveIsSingleMeetingLoadedState(val meeting: LoveIs): State()
     class LoveIsMeetingsLoadedState(val meetings: List<LoveIs>, val type: MeetingFilterType): State()
