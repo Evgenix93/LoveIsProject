@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 
 class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
     private val loveIsEventIsRepository = LoveIsEventIsRepository()
@@ -45,9 +46,11 @@ class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
             else
                 when(response.code()){
                     200 -> stateLiveData.postValue(State.SuccessState)
-                    400 -> stateLiveData.postValue(State.ErrorState(400))
-                    404 -> stateLiveData.postValue(State.ErrorState(404))
-                    409 -> stateLiveData.postValue(State.ErrorState(409))
+                    400 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody() ?: "ошибка".toResponseBody(null))))
+                    404 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody() ?: "ошибка".toResponseBody(null))))
+
+                    409 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody() ?: "ошибка".toResponseBody(null))))
+
                     500 -> stateLiveData.postValue(State.ErrorState(500))
                     -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
 
@@ -77,9 +80,12 @@ class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
           )
             when(response?.code()){
                 200 -> stateLiveData.postValue(State.SuccessState)
-                400 -> stateLiveData.postValue(State.ErrorState(400))
-                404 -> stateLiveData.postValue(State.ErrorState(404))
-                409 -> stateLiveData.postValue(State.ErrorState(409))
+                400 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody() ?: "ошибка".toResponseBody(null))))
+
+                404 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody() ?: "ошибка".toResponseBody(null))))
+
+                409 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody() ?: "ошибка".toResponseBody(null))))
+
                 500 -> stateLiveData.postValue(State.ErrorState(500))
                 null -> stateLiveData.postValue(State.ErrorState(0))
             }

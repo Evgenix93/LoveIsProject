@@ -46,8 +46,9 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
             when (state) {
                 is State.LoadingState -> {showLoading(true)}
                 is State.LoadedCurrentUser -> {
+                    showLoading(false)
                     user = state.user
-                    if(state.user.gender.name == "female")
+                    if(state.user.gender.name == Gender.Female.name)
                         setViewFemale()
                 }
                 is State.SuccessState -> {
@@ -87,7 +88,7 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
     }
 
     private fun createLoveIs(){
-       if (user!!.wallet?.value ?:0  < 300 && user!!.gender.name == "female") {
+       if (user!!.wallet?.value ?:0  < 300 && user!!.gender.name == Gender.Male.name) {
             Toast.makeText(requireContext(), "Недостаточно средств", Toast.LENGTH_LONG)
                 .show()
             findNavController().navigate(CreateLoveIsManFragment5Directions.actionCreateLoveIsManFragment5ToAddMoneyFragment())
@@ -105,6 +106,7 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
     private fun setViewFemale(){
        binding.infoTextView.text = getString(R.string.get_loveis_cashback)
        binding.infoWithdrawalToCard.isVisible = true
+        binding.continueBtn.text = getString(R.string.create)
     }
 
     override fun onDestroyView() {

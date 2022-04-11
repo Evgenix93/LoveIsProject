@@ -73,6 +73,7 @@ class CreateEventIsFragment6 : Fragment(R.layout.fragment_create_loveis_eventis_
                             findNavController().navigate(R.id.errorFragment)}
                     }
                 }
+                is State.ErrorMessageState -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
                 else -> {}
             }
         }
