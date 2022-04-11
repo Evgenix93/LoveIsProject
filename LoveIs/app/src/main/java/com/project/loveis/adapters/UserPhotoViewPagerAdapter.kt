@@ -13,7 +13,7 @@ class UserPhotoViewPagerAdapter(fragment: Fragment, private val onClick:() -> Un
     }
 
     override fun createFragment(position: Int): Fragment {
-        return UserPhotoFragment{onClick()}.apply {
+        return UserPhotoFragment.newInstance(onClick).apply {
             arguments = Bundle().apply {
                 putString(UserPhotoFragment.PHOTO_KEY, photoList[position])
             }

@@ -20,7 +20,7 @@ class UsersViewPagerAdapter(fragment: Fragment, private val onClick: () -> Unit)
 
     override fun createFragment(position: Int): Fragment {
         Log.d("MyDebug", "createFragment position = $position")
-       return UserFragment(){onClick()}.apply { arguments = Bundle().apply {
+       return UserFragment.newInstance(onClick).apply { arguments = Bundle().apply {
            putParcelable(USER, currentUser)
            putParcelable(USERS, users[position])
        } }
@@ -30,7 +30,7 @@ class UsersViewPagerAdapter(fragment: Fragment, private val onClick: () -> Unit)
         Log.d("MyDebug", "updateList")
         users = newList
         notifyDataSetChanged()
-        notifyDataSetChanged()
+
     }
 
 

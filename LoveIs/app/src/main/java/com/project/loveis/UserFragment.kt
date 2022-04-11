@@ -17,9 +17,10 @@ import com.project.loveis.models.User
 import com.project.loveis.util.autoCleared
 import java.util.*
 
-class UserFragment(private val onClick: () -> Unit) : Fragment(R.layout.item_user) {
+class UserFragment : Fragment(R.layout.item_user) {
     private val binding: ItemUserBinding by viewBinding()
     private var photoAdapter: UserPhotoViewPagerAdapter by autoCleared()
+    private var onClick: () -> Unit = {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,6 +90,12 @@ class UserFragment(private val onClick: () -> Unit) : Fragment(R.layout.item_use
     private fun initViewPager() {
         photoAdapter = UserPhotoViewPagerAdapter(this) { onClick() }
         binding.photoImageView.adapter = photoAdapter
+    }
+
+    companion object{
+        fun newInstance(onClick: () -> Unit): UserFragment{
+            return UserFragment().apply { this.onClick = onClick }
+        }
     }
 
 }

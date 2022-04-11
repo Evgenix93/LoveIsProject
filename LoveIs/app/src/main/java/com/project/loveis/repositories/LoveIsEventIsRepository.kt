@@ -107,7 +107,33 @@ class LoveIsEventIsRepository {
             )
         }catch (e: Exception){
             Log.e("Debug", "error ${e.message}")
-            null
+            if(e is IOException) {
+                null
+            }else{
+                try {
+                    val response = loveIsApi.createLoveIsGetError(CreateLoveIsRequest(
+                        date,
+                        telegramUrl.ifEmpty { null },
+                        whatsAppUrl.ifEmpty { null },
+                        type,
+                        place,
+                        userId
+                    )
+                    )
+                    Response.error(-1, response.body()?.detail?.toResponseBody(null)!!)
+                }catch (e: Throwable){
+                    val response = loveIsApi.createLoveIsGetErrors(CreateLoveIsRequest(
+                        date,
+                        telegramUrl.ifEmpty { null },
+                        whatsAppUrl.ifEmpty { null },
+                        type,
+                        place,
+                        userId
+                    )
+                    )
+                    Response.error(-1, response.body()?.errors?.keys?.joinToString(",")?.toResponseBody(null)!!)
+                }
+            }
         }
     }
 

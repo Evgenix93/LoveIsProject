@@ -8,7 +8,10 @@ import com.project.loveis.models.Image
 import com.project.loveis.repositories.LoveIsEventIsRepository
 import com.project.loveis.repositories.MainRepository
 import com.project.loveis.repositories.PlaceRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 
 class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
     private val loveIsEventIsRepository = LoveIsEventIsRepository()
@@ -46,6 +49,8 @@ class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
                     404 -> stateLiveData.postValue(State.ErrorState(404))
                     409 -> stateLiveData.postValue(State.ErrorState(409))
                     500 -> stateLiveData.postValue(State.ErrorState(500))
+                    -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+
                 }
         }
     }
@@ -126,4 +131,11 @@ class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
 
 
     }
+
+    private suspend fun getErrorFromResponse(response: ResponseBody): String{
+        return withContext(Dispatchers.IO) {
+            response.string()
+        }
+    }
+
 }

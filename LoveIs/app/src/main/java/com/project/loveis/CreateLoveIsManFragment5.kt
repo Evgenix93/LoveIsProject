@@ -70,8 +70,10 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
                         409 -> (requireActivity() as MainActivity).showErrorNotification()
                         500 -> Toast.makeText(requireContext(), "error 500", Toast.LENGTH_LONG).show()
                         0 -> findNavController().navigate(R.id.errorFragment)
+
                     }
                 }
+                is State.ErrorMessageState -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
                 else -> {}
             }
         }

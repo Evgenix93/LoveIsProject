@@ -11,6 +11,15 @@ interface LoveIsEventIsApi {
     @POST("meeting/")
     suspend fun createLoveIs(@Body loveIs: CreateLoveIsRequest): Response<LoveIs>
 
+    @POST("meeting/")
+    suspend fun createLoveIsGetError(@Body loveIs: CreateLoveIsRequest): Response<ResponseError>
+
+    @POST("meeting/")
+    suspend fun createLoveIsGetErrors(@Body loveIs: CreateLoveIsRequest): Response<ResponseErrorsMap>
+
+
+
+
     @GET("meetings/types")
     suspend fun getTypes()
 

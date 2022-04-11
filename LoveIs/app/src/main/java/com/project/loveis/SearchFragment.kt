@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.adapters.UsersViewPagerAdapter
 import com.project.loveis.databinding.FragmentSearchBinding
@@ -49,19 +50,27 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun initList() {
 
         with(binding.usersList) {
-            usersViewPagerAdapter = UsersViewPagerAdapter(this@SearchFragment){binding.filterCardView.isVisible = false}
+            usersViewPagerAdapter = UsersViewPagerAdapter(this@SearchFragment){}
           //  usersViewPagerAdapter.updateList(users)
             adapter = usersViewPagerAdapter
           //  layoutManager = LinearLayoutManager(requireContext())
            // setHasFixedSize(true)
             setOnClickListener{
-                Log.d("MyDebug", "onClick viewPager")
+                Log.d("MyDebug", "onClick user viewPager")
                 binding.filterCardView.isVisible = false
             }
+
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageScrollStateChanged(state: Int) {
+                    binding.filterCardView.isVisible = false
+                }
+            })
         }
         binding.root.setOnClickListener{
             binding.filterCardView.isVisible = false
         }
+
+
     }
 
     private fun bindViewModel(){

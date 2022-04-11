@@ -44,7 +44,7 @@ class PhoneNumber1Fragment : Fragment(R.layout.fragment_phone_number1) {
     private fun setOnClickListener() {
         binding.continueBtn.setOnClickListener {
             Log.d("debug", binding.phoneNumberEditText.text.toString())
-            viewModel.getPhoneCode(binding.phoneNumberEditText.text.toString())
+            viewModel.getPhoneCode(binding.phoneNumberEditText.rawText.prependIndent("+7"))
         }
     }
 
