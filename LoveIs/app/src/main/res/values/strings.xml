@@ -70,6 +70,7 @@
     <string name="whatsapp_ref">или\nWhatsApp</string>
     <string name="pay_and_send">Оплатить и отправить</string>
     <string name="pay_loveis_info">Для создания Love is\nвам необходимо оплатить\nвзнос в размере</string>
+    <string name="get_loveis_cashback">Если ваш Love is\nсостоится, вы получите\nкэшбек в размере</string>
     <string name="refund_info">В случае если ваше Love is не состоится\nвам вернут ваши монеты</string>
     <string name="loveis_cashback_info">Если ваш Love is\nсостоится, вы получите\nкэшбек в размере</string>
     <string name="loveis_cashback_info2">С возможностью дальнейшего вывода на карту</string>
@@ -180,5 +181,7 @@
     <string name="server_error">Технические неполадки\nпожалуйста попробуйте\nпозже</string>
     <string name="defense">   и защищаем</string>
     <string name="apply">Принять</string>
+    <string name="verified_user">Проверенный пользователь</string>
+    <string name="info_withdrawal_to_card">С возможностью дальнейшего вывода на карту</string>
 
 </resources>

@@ -132,14 +132,20 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
         binding.nameTextView.text = "${user.name}, $age"
         binding.coinsTextView.text = user.wallet?.value?.toString() ?: "0"
+        if(user.verified){
+            binding.verifyBtn.isVisible = false
+            binding.verifiedUserTextView.isVisible = true
+        }
     }
 
     private fun initFilePickerLaunchers(){
         filePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
+            if(uri != null)
             viewModel.updateUserPhoto(uri)
         }
         filePickerLauncher2 = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
             //viewModel.updateAdditionalPhoto(uri)
+            if(uri != null)
             viewModel.updateAdditionalPhoto(uri)
         }
     }
@@ -148,8 +154,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         locationPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){ granted ->
             if(granted)
                 updateCoordinates()
-
-
         }
     }
 

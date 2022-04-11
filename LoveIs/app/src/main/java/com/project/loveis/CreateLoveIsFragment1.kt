@@ -7,26 +7,34 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.card.MaterialCardView
+import com.project.loveis.adapters.TypesAdapter
 import com.project.loveis.databinding.FragmentCreateLoveis1Binding
+import com.project.loveis.models.Type
+import com.project.loveis.util.autoCleared
+import com.project.loveis.viewmodels.CreateLoveIsEventIsViewModel
 
 class CreateLoveIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
     private val binding: FragmentCreateLoveis1Binding by viewBinding()
-    private var type = 1
+    private var type = 1L
     private val args: CreateLoveIsFragment1Args by navArgs()
+    private val viewModel: CreateLoveIsEventIsViewModel by viewModels()
+    private var typesAdapter: TypesAdapter by autoCleared()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         hideBottomNavBar()
-        initTypeCardViews()
         initContinueButton()
+        initTypesRecyclerView()
+        observeState()
+        getTypes()
     }
-
-
 
     private fun initToolbar(){
         with(binding.toolbar){
@@ -45,7 +53,7 @@ class CreateLoveIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
 
     private fun initContinueButton(){
         binding.continueBtn.setOnClickListener {
-            findNavController().navigate(CreateLoveIsFragment1Directions.actionCreateLoveIsFragment1ToCreateLoveIsFragment2(type, args.userId))
+            findNavController().navigate(CreateLoveIsFragment1Directions.actionCreateLoveIsFragment1ToCreateLoveIsFragment2(type.toInt(), args.userId))
         }
     }
 
@@ -113,4 +121,21 @@ class CreateLoveIsFragment1: Fragment(R.layout.fragment_create_loveis_1) {
         descriptionTextView.setTextColor(getColor(requireContext(), R.color.gray))
     }
 
+    private fun getTypes(){
+       viewModel.getTypes()
+    }
+
+    private fun initTypesRecyclerView(){
+        binding.typesRecyclerView.adapter = TypesAdapter{type = it}.also{typesAdapter = it}
+        binding.typesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun observeState(){
+        viewModel.state.observe(viewLifecycleOwner){state ->
+            when(state){
+                is State.LoadedSingleState -> typesAdapter.updateList(state.result as List<Type>)
+                is State.ErrorState -> {}
+            }
+        }
+    }
 }

@@ -274,6 +274,9 @@
         <argument
             android:name="userId"
             app:argType="long" />
+        <argument
+            android:name="isMan"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/createLoveIsFragment2"
@@ -356,6 +359,9 @@
         <action
             android:id="@+id/action_createLoveIsManFragment5_to_addMoneyFragment"
             app:destination="@id/addMoneyFragment" />
+        <argument
+            android:name="isMan"
+            app:argType="boolean" />
     </fragment>
 =======
     app:startDestination="@id/phoneNumber1Fragment">

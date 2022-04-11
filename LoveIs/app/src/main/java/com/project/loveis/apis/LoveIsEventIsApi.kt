@@ -12,7 +12,7 @@ interface LoveIsEventIsApi {
     suspend fun createLoveIs(@Body loveIs: CreateLoveIsRequest): Response<LoveIs>
 
     @GET("meetings/types")
-    suspend fun getTypes()
+    suspend fun getTypes(): Response<TypesWrapper>
 
     @GET("invitations/meetings")
     suspend fun getLoveIsMeetings(
