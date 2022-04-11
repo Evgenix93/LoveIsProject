@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -82,6 +83,11 @@ class PhoneNumber1Fragment : Fragment(R.layout.fragment_phone_number1) {
                         0 -> findNavController().navigate(R.id.errorFragment)
                         2 -> findNavController().navigate(R.id.serverErrorFragment)
                     }
+                }
+                is State.ErrorMessageState -> {
+                    showLoading(false)
+                    (requireActivity() as MainActivity).showErrorNotification()
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
                 }
             }
 

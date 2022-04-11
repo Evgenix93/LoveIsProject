@@ -22,13 +22,17 @@ class PhoneNumberViewModel(app: Application): AndroidViewModel(app) {
     fun getPhoneCode(phone: String){
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
-            when (authRepository.getPhoneCode(phone, true)?.code()){
+            val response = authRepository.getPhoneCode(phone, true)
+            when (response?.code()){
                200 -> stateLiveData.postValue(State.SuccessState)
                404 -> stateLiveData.postValue(State.ErrorState(404))
-                408 -> stateLiveData.postValue(State.ErrorState(408))
-                409 -> stateLiveData.postValue(State.ErrorState(409))
-                400 -> stateLiveData.postValue(State.ErrorState(400))
-               null -> stateLiveData.postValue(State.ErrorState(0))
+                408 ->stateLiveData.postValue(State.ErrorMessageState(response.errorBody()?.string().orEmpty()))
+
+                409 ->stateLiveData.postValue(State.ErrorMessageState(response.errorBody()?.string().orEmpty()))
+
+                400 ->stateLiveData.postValue(State.ErrorMessageState(response.errorBody()?.string().orEmpty()))
+
+                null -> stateLiveData.postValue(State.ErrorState(0))
                 else -> stateLiveData.postValue(State.ErrorState(2))
            }
 
