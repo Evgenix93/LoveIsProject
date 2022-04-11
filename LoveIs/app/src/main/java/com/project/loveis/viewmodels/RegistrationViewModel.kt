@@ -1,10 +1,21 @@
 package com.project.loveis.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
+import com.project.loveis.models.ResponseErrorsMap
+import com.project.loveis.models.ResponseErrorsMapJsonAdapter
 import com.project.loveis.repositories.AuthRepository
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapter
+import com.squareup.moshi.addAdapter
 import kotlinx.coroutines.launch
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.lang.reflect.Type
+import kotlin.reflect.javaType
+import kotlin.reflect.typeOf
 
 class RegistrationViewModel(app: Application) : AndroidViewModel(app) {
     private val authRepository = AuthRepository(app)
@@ -23,18 +34,21 @@ class RegistrationViewModel(app: Application) : AndroidViewModel(app) {
     ) {
         stateLiveData.postValue(State.LoadingState)
         viewModelScope.launch {
-            when (authRepository.registerNewUser(
+            val response = authRepository.registerNewUser(
                 phone = phone,
                 gender = gender,
                 photo = photo,
                 name = name,
                 birthDate = birthDate,
                 about = about
-            )?.code()) {
+            )
+            when (response?.code()) {
                 200 -> getPhoneCode(phone)
                 null -> stateLiveData.postValue(State.ErrorState(0))
                 400 -> {
-                    stateLiveData.postValue(State.ErrorState(400))
+                    val errorMessage = response.errorBody()?.string()
+                    Log.e("MyDebug", "error = $errorMessage")
+                    stateLiveData.postValue(State.ErrorMessageState(errorMessage ?: "ошибка регистрации"))
                 }
                 409 -> stateLiveData.postValue(State.ErrorState(409))
                 else -> stateLiveData.postValue(State.ErrorState(2))
@@ -43,7 +57,7 @@ class RegistrationViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
-    fun getPhoneCode(phone: String){
+    private fun getPhoneCode(phone: String){
         viewModelScope.launch {
             stateLiveData.postValue(State.LoadingState)
             when (authRepository.getPhoneCode(phone, true)?.code()){

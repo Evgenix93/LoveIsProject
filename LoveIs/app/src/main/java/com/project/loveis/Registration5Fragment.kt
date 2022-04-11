@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.webkit.PermissionRequest
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -62,8 +63,11 @@ class Registration5Fragment : Fragment(R.layout.fragment_registration5) {
                         2 -> findNavController().navigate(R.id.serverErrorFragment)
                     }
                 }
+                is State.ErrorMessageState -> {
+                    showLoading(false)
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                }
             }
-
         })
     }
 
@@ -79,7 +83,6 @@ class Registration5Fragment : Fragment(R.layout.fragment_registration5) {
                     about = binding.bioEditText.text.toString()
                 )
             }
-
         }
     }
 

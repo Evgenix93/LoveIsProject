@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.FragmentCreateLoveisEventis5Binding
+import com.project.loveis.dialogs.MenuBottomDialogDateFragment
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,11 +40,11 @@ class CreateEventIsFragment5 : Fragment(R.layout.fragment_create_loveis_eventis_
 
     private fun initContinueButton(){
         binding.continueBtn.setOnClickListener {
-            val dateString = binding.dateEditText.text.toString()
+            val dateString = binding.dateTextView.text.toString()
             val year = dateString.substringAfterLast('.').toInt()
             val month = dateString.substringAfter('.').substringBefore('.').toInt()
             val day = dateString.substringBefore('.').toInt()
-            val timeString = binding.timeEditText.text.toString()
+            val timeString = binding.timeTextView.text.toString()
             val hours = timeString.substringBefore(':').toInt()
             val minutes = timeString.substringAfter(':').toInt()
             val date = Date(
@@ -69,23 +70,19 @@ class CreateEventIsFragment5 : Fragment(R.layout.fragment_create_loveis_eventis_
 
 
     private fun initEditText(){
-        binding.dateEditText.setOnEditorActionListener { textView, i, keyEvent ->
-            if(i == EditorInfo.IME_ACTION_DONE){
-                (requireActivity() as MainActivity).hideKeyboard()
-            }
-            false
-
+        binding.dateTextView.setOnClickListener{
+            MenuBottomDialogDateFragment(false, {day, month, year ->
+                val dayStr = if(day < 10) "0$day" else day.toString()
+                val monthStr = if(month < 10) "0$month" else month.toString()
+                val yearStr = year.toString().takeLast(2)
+                binding.dateTextView.text = "$dayStr.$monthStr.$yearStr"
+            }, {_,_-> }).show(childFragmentManager, null)
         }
 
-        binding.timeEditText.setOnEditorActionListener { textView, i, keyEvent ->
-            if(i == EditorInfo.IME_ACTION_DONE){
-                (requireActivity() as MainActivity).hideKeyboard()
-            }
-            false
-
+        binding.timeTextView.setOnClickListener{
+            MenuBottomDialogDateFragment(true, {_,_,_->}, {hour, minute ->
+                binding.timeTextView.text = "$hour:$minute"
+            }).show(childFragmentManager, null)
         }
-
-
     }
-
 }

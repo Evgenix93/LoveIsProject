@@ -21,7 +21,7 @@ interface LoveIsEventIsApi {
 
 
     @GET("meetings/types")
-    suspend fun getTypes()
+    suspend fun getTypes(): Response<TypesWrapper>
 
     @GET("invitations/meetings")
     suspend fun getLoveIsMeetings(

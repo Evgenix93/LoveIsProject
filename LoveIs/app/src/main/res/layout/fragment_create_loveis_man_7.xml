@@ -62,6 +62,19 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/coinCountTextView" />
 
+     <TextView
+         android:id="@+id/infoWithdrawalToCard"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/info_withdrawal_to_card"
+         android:fontFamily="@font/roboto_regular"
+         android:textSize="14sp"
+         app:layout_constraintTop_toBottomOf="@id/coinCountTextView"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         android:layout_marginTop="5dp"
+         android:visibility="gone"/>
+
 
     <TextView
         android:id="@+id/refundInfo"

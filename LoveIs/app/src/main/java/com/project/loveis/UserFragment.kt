@@ -1,10 +1,12 @@
 package com.project.loveis
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -48,7 +50,8 @@ class UserFragment : Fragment(R.layout.item_user) {
         binding.loveIsButton.setOnClickListener {
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(
-                    user.id!!
+                    user.id!!,
+                    true
                 )
             )
         }
@@ -60,8 +63,9 @@ class UserFragment : Fragment(R.layout.item_user) {
         }
         if (user.verified.not()) {
             binding.checkImageView.setImageResource(R.drawable.ic_fail)
+            binding.checkImageView.imageTintList = ColorStateList.valueOf(ResourcesCompat.getColor(resources, R.color.pink, null))
             binding.notVerifiedCardView.isVisible = true
-            binding.nameTextView.setTextColor(requireContext().resources.getColor(R.color.pink))
+            binding.nameTextView.setTextColor(ResourcesCompat.getColor(resources, R.color.pink, null))
         }
         val photoUrls = user.images.map { "https://loveis.scratch.studio" + it.url }
         photoAdapter.updateList(listOf("https://loveis.scratch.studio${user.photo}") + photoUrls)

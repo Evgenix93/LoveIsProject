@@ -227,7 +227,12 @@ class LoveIsEventIsRepository {
         }
     }
 
-
-
-
+    suspend fun getTypes(): Response<TypesWrapper>?{
+        return try {
+            loveIsApi.getTypes()
+        }catch(e: Throwable){
+            Log.e("MyDebug", e.message.orEmpty())
+            null
+        }
+    }
 }

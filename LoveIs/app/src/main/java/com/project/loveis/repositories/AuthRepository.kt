@@ -34,7 +34,6 @@ class AuthRepository(val context: Context) {
             null
         }
 
-
     }
 
     suspend fun performPhoneCheck(phoneWithCode: PhoneWithCode): Response<Unit>? {
@@ -168,10 +167,6 @@ class AuthRepository(val context: Context) {
                 null
             }
         }
-
-
-
-
     }
 
     fun getUserId(): Long{

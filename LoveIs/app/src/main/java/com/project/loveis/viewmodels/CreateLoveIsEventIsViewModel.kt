@@ -126,10 +126,17 @@ class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
                     null -> stateLiveData.postValue(State.ErrorState(0))
                     else -> stateLiveData.postValue(State.ErrorState(2))
                 }
-
             }
+    }
 
-
+     fun getTypes(){
+        viewModelScope.launch{
+          val response = loveIsEventIsRepository.getTypes()
+           when(response?.code()){
+               200 -> stateLiveData.postValue(State.LoadedSingleState(response.body()!!.list))
+               else -> stateLiveData.postValue(State.ErrorState(0))
+           }
+        }
     }
 
     private suspend fun getErrorFromResponse(response: ResponseBody): String{

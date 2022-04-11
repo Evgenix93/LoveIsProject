@@ -11,18 +11,22 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.FragmentCreateLoveisMan7Binding
+import com.project.loveis.models.User
+import com.project.loveis.util.Gender
 import com.project.loveis.viewmodels.CreateLoveIsEventIsViewModel
 
 class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7) {
     private val binding: FragmentCreateLoveisMan7Binding by viewBinding()
     private val args: CreateLoveIsManFragment5Args by navArgs()
     private val viewModel: CreateLoveIsEventIsViewModel by viewModels()
+    private var user: User? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initContinueButton()
         bindViewModel()
+        getCurrentUser()
     }
 
 
@@ -42,21 +46,9 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
             when (state) {
                 is State.LoadingState -> {showLoading(true)}
                 is State.LoadedCurrentUser -> {
-
-                    if (state.user.wallet?.value ?:0 < 300 ) {
-                        Toast.makeText(requireContext(), "Недостаточно средств", Toast.LENGTH_LONG)
-                            .show()
-                        findNavController().navigate(CreateLoveIsManFragment5Directions.actionCreateLoveIsManFragment5ToAddMoneyFragment())
-                    }else
-                        viewModel.createLoveIs(
-                            args.type,
-                            args.place,
-                            args.date,
-                            args.telegramUrl,
-                            args.whatsappUrl,
-                            args.userId
-                        )
-
+                    user = state.user
+                    if(state.user.gender.name == "female")
+                        setViewFemale()
                 }
                 is State.SuccessState -> {
                     (requireActivity() as MainActivity).showSuccessNotification()
@@ -81,13 +73,38 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
 
     private fun initContinueButton() {
         binding.continueBtn.setOnClickListener {
-            viewModel.getCurrentUser()
+            createLoveIs()
         }
     }
 
     private fun showLoading(loading: Boolean){
         binding.continueBtn.isEnabled = !loading
         binding.progressBar.isVisible = loading
+    }
+
+    private fun getCurrentUser(){
+        viewModel.getCurrentUser()
+    }
+
+    private fun createLoveIs(){
+       if (user!!.wallet?.value ?:0  < 300 && user!!.gender.name == "female") {
+            Toast.makeText(requireContext(), "Недостаточно средств", Toast.LENGTH_LONG)
+                .show()
+            findNavController().navigate(CreateLoveIsManFragment5Directions.actionCreateLoveIsManFragment5ToAddMoneyFragment())
+        }else
+        viewModel.createLoveIs(
+            args.type,
+            args.place,
+            args.date,
+            args.telegramUrl,
+            args.whatsappUrl,
+            args.userId
+        )
+    }
+
+    private fun setViewFemale(){
+       binding.infoTextView.text = getString(R.string.get_loveis_cashback)
+       binding.infoWithdrawalToCard.isVisible = true
     }
 
     override fun onDestroyView() {
