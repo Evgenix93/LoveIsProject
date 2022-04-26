@@ -28,6 +28,8 @@ class SearchViewModel(app: Application): AndroidViewModel(app) {
                 when (response.code()){
                     200 -> stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
                     400 -> stateLiveData.postValue(State.ErrorState(400))
+                    401 -> stateLiveData.postValue(State.ErrorMessageState("Учетные данные не были предоставлены"))
+                    else -> stateLiveData.postValue(State.ErrorMessageState("searchUsers код ошибки: ${response.code()}"))
                 }
             }
         }
@@ -59,5 +61,26 @@ class SearchViewModel(app: Application): AndroidViewModel(app) {
     }
     fun clearState(){
         stateLiveData.postValue(State.StartState)
+    }
+
+    fun shareUser(userId: Long){
+        stateLiveData.postValue(State.LoadedIntent(repository.getShareUserIntent(userId)))
+    }
+
+    fun getUserById(id: Long){
+        viewModelScope.launch {
+            Log.d("mylog", "getUserById id: $id")
+            stateLiveData.postValue(State.LoadingState)
+            val response = repository.getUserById(id)
+            when(response?.code()){
+                200 -> stateLiveData.postValue(State.SharedUserLoaded(response.body()!!))
+                null -> stateLiveData.postValue(State.ErrorState(0))
+                500 -> stateLiveData.postValue(State.ErrorState(2))
+                404 -> stateLiveData.postValue(State.ErrorMessageState("Пользователь не найден"))
+                else -> stateLiveData.postValue(State.ErrorMessageState("getUserById код ошибки: ${response.code()}"))
+
+            }
+
+        }
     }
 }

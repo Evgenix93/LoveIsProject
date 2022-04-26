@@ -4,6 +4,7 @@ package com.project.loveis.repositories
 import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toFile
@@ -195,6 +196,17 @@ class MainRepository(val context: Context) {
 
     fun getCurrentUser(): User?{
         return ProfileInfo.currentUser
+    }
+
+    fun getShareUserIntent(userId: Long): Intent{
+        val uri = Uri.withAppendedPath(Uri.parse("https://loveis/user/"), userId.toString())
+        return Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, uri.toString())
+            type = "text/plain"
+
+
+        }
     }
 
 }

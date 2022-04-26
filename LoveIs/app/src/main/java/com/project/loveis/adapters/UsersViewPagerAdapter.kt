@@ -9,7 +9,7 @@ import com.project.loveis.models.User
 import okhttp3.internal.notify
 import okhttp3.internal.notifyAll
 
-class UsersViewPagerAdapter(fragment: Fragment, private val onClick: () -> Unit): FragmentStateAdapter(fragment) {
+class UsersViewPagerAdapter(fragment: Fragment, private val onClick: () -> Unit, private val onShare: (Long) -> Unit): FragmentStateAdapter(fragment) {
     private var users = listOf<User>()
     private lateinit var currentUser: User
 
@@ -20,7 +20,7 @@ class UsersViewPagerAdapter(fragment: Fragment, private val onClick: () -> Unit)
 
     override fun createFragment(position: Int): Fragment {
         Log.d("MyDebug", "createFragment position = $position")
-       return UserFragment.newInstance(onClick).apply { arguments = Bundle().apply {
+       return UserFragment.newInstance(onClick, onShare).apply { arguments = Bundle().apply {
            putParcelable(USER, currentUser)
            putParcelable(USERS, users[position])
        } }

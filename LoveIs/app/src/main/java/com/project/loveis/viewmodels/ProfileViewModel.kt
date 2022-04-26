@@ -143,6 +143,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
 
     fun performAuth() {
         if (authRepository.isLogined()) {
+            Log.d("mylog", "isLogined")
             stateLiveData.postValue(State.SuccessState)
             return
         }

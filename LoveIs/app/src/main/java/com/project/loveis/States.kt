@@ -22,5 +22,6 @@ sealed class State {
     class LoadedEventMembers(val members: List<User>): State()
     class LoadedIntent(val intent: Intent): State()
     object SubsriptionNeededState: State()
+    class SharedUserLoaded(val user: User): State()
 
 }

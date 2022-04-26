@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d("mylog", "onCreate")
+
 
 
     }
@@ -176,7 +180,8 @@ class MainActivity : AppCompatActivity() {
             ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(
                 eventId = intent.data?.lastPathSegment!!.toLong()
             ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
-        )
+        ) else if(intent.data.toString().contains("user"))
+            handleShareUserIntent(intent)
          else
              findNavController(R.id.navHostFragment).navigate(
                  ProfileFragmentDirections.actionProfileFragmentToLoveIsDetailsFragment(
@@ -187,5 +192,18 @@ class MainActivity : AppCompatActivity() {
 
 
          intent = null
+    }
+
+    private fun handleShareUserIntent(intent: Intent?){
+        Log.d("mylog", "handle intent")
+        intent ?: return
+        if(intent.data.toString().contains("user").not())
+            return
+        val userId = intent.data?.lastPathSegment
+        Log.d("mylog", intent.data?.lastPathSegment.toString())
+        userId?.let {
+        Log.d("mylog", "userId $it")
+            findNavController(R.id.navHostFragment)
+            .navigate(R.id.searchFragment, bundleOf(  SearchFragment.USER_ID to it.toLong()) )  }
     }
 }

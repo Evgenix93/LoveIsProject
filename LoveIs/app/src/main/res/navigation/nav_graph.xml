@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_profileFragment_to_loveIsDetailsFragment"
             app:destination="@id/loveIsDetailsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/dialogsFragment"
@@ -75,6 +78,9 @@
         <action
             android:id="@+id/action_searchFragment_to_createLoveIsFragment1"
             app:destination="@id/createLoveIsFragment1" />
+        <argument
+            android:name="userId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -598,6 +604,9 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     >>>>>>> origin/main
 </navigation>

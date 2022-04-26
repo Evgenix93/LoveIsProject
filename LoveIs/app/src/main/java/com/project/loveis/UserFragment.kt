@@ -23,6 +23,7 @@ class UserFragment : Fragment(R.layout.item_user) {
     private val binding: ItemUserBinding by viewBinding()
     private var photoAdapter: UserPhotoViewPagerAdapter by autoCleared()
     private var onClick: () -> Unit = {}
+    private var onShare: (Long) -> Unit = {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,6 +90,10 @@ class UserFragment : Fragment(R.layout.item_user) {
             binding.distanceTextView.text = "-"
         }
 
+        binding.shareBtn.setOnClickListener {
+            onShare(user.id!!)
+        }
+
     }
 
     private fun initViewPager() {
@@ -97,8 +102,9 @@ class UserFragment : Fragment(R.layout.item_user) {
     }
 
     companion object{
-        fun newInstance(onClick: () -> Unit): UserFragment{
-            return UserFragment().apply { this.onClick = onClick }
+        fun newInstance(onClick: () -> Unit, onShare: (Long) -> Unit): UserFragment{
+            return UserFragment().apply { this.onClick = onClick
+            this.onShare = onShare}
         }
     }
 
