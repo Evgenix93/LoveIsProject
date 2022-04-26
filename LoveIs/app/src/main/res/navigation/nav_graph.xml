@@ -365,9 +365,6 @@
         <action
             android:id="@+id/action_createLoveIsManFragment5_to_addMoneyFragment"
             app:destination="@id/addMoneyFragment" />
-        <argument
-            android:name="isMan"
-            app:argType="boolean" />
     </fragment>
 =======
     app:startDestination="@id/phoneNumber1Fragment">
@@ -607,6 +604,17 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.project.loveis.UserFragment"
+        android:label="UserFragment" >
+        <action
+            android:id="@+id/action_userFragment_to_createLoveIsFragment1"
+            app:destination="@id/createLoveIsFragment1" />
+        <action
+            android:id="@+id/action_userFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
     >>>>>>> origin/main
 </navigation>

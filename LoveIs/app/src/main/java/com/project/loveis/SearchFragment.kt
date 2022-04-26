@@ -74,8 +74,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         binding.root.setOnClickListener{
             binding.filterCardView.isVisible = false
         }
-
-
     }
 
     private fun bindViewModel(){
@@ -135,7 +133,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             binding.maleImageView.drawable.setTint(resources.getColor(R.color.gray))
             viewModel.searchUsers(gender = "female")
         }
-     viewModel.collectFlow(binding.yearEditText1.textChangedFlow())
+     viewModel.collectFlowAgeFrom(binding.yearEditText1.textChangedFlow())
+        viewModel.collectFlowAgeTo(binding.yearEditText2.textChangedFlow())
     }
 
     private fun showBottomNavBar(){

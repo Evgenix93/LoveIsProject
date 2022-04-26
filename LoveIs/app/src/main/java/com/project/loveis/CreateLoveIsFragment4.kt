@@ -43,7 +43,6 @@ class CreateLoveIsFragment4 : Fragment(R.layout.fragment_create_loveis_eventis_6
               telegramUrl,
               whatsappUrl,
                 args.userId,
-                true
             ))
         }
     }

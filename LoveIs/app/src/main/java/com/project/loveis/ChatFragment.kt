@@ -98,6 +98,7 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
 
     private fun initFilePickerLauncher(){
         filePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
+            if(uri != null)
             viewModel.setAttachmentUri(uri)
         }
     }
