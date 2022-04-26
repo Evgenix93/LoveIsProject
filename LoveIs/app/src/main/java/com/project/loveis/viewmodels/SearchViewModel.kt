@@ -11,17 +11,19 @@ import kotlinx.coroutines.launch
 class SearchViewModel(app: Application): AndroidViewModel(app) {
     private val repository = MainRepository(app)
     private val stateLiveData = MutableLiveData<State>(State.StartState)
-    private var _age = 18
+    private var _ageFrom = 18
+    private var _ageTo = 30
     private var _gender = "female"
     val state: LiveData<State>
     get() = stateLiveData
 
-    fun searchUsers(age: Int = _age, gender: String = _gender){
+    fun searchUsers(ageFrom: Int = _ageFrom, ageTo: Int = _ageTo,  gender: String = _gender){
         stateLiveData.postValue(State.LoadingState)
-        _age = age
+        _ageFrom = ageFrom
+        _ageTo = ageTo
         _gender = gender
         viewModelScope.launch {
-            val response = repository.searchUsers(age, gender)
+            val response = repository.searchUsers(ageFrom, ageTo, gender)
             if (response == null)
                 stateLiveData.postValue(State.ErrorState(0))
             else {
@@ -33,11 +35,20 @@ class SearchViewModel(app: Application): AndroidViewModel(app) {
         }
     }
 
-    fun collectFlow(flow: Flow<Int>){
+    fun collectFlowAgeFrom(flow: Flow<Int>){
         flow.debounce(1000)
             .mapLatest {
                 Log.d("Debug", "mapLatest = $it")
-                searchUsers(it)
+                searchUsers(ageFrom = it)
+            }
+            .launchIn(viewModelScope)
+    }
+
+    fun collectFlowAgeTo(flow: Flow<Int>){
+        flow.debounce(1000)
+            .mapLatest {
+                Log.d("Debug", "mapLatest = $it")
+                searchUsers(ageTo = it)
             }
             .launchIn(viewModelScope)
     }

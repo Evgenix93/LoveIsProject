@@ -12,10 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.loveis.adapters.UserPhotoViewPagerAdapter
 import com.project.loveis.adapters.UsersViewPagerAdapter
 import com.project.loveis.databinding.ItemUserBinding
 import com.project.loveis.models.User
+import com.project.loveis.util.Gender
 import com.project.loveis.util.autoCleared
 import java.util.*
 
@@ -39,8 +41,6 @@ class UserFragment : Fragment(R.layout.item_user) {
 
         val strings = user.birthday.split('-')
         val birthDate = Calendar.getInstance().apply {
-            //set(Calendar.DAY_OF_MONTH, strings[2].toInt() )
-            //set(Calendar.MONTH, strings[1].toInt())
             set(strings[0].toInt(), strings[1].toInt(), strings[2].toInt())
         }
         val age = Calendar.getInstance().get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
@@ -48,18 +48,24 @@ class UserFragment : Fragment(R.layout.item_user) {
         binding.descriptionTextView.text = user.about
 
         binding.loveIsButton.setOnClickListener {
+            if(findNavController().currentDestination?.id == R.id.searchFragment)
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(
                     user.id!!,
-                    true
+                    user.gender == Gender.Male
                 )
-            )
+            )else
+                findNavController().navigate(UserFragmentDirections.actionUserFragmentToCreateLoveIsFragment1(user.id!!, user.gender == Gender.Male))
         }
 
         binding.chatButton.setOnClickListener {
+            if(findNavController().currentDestination?.id == R.id.searchFragment)
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToChatFragment(user.id!!, user.name)
-            )
+            )else
+                findNavController().navigate(
+                   UserFragmentDirections.actionUserFragmentToChatFragment(user.id!!, user.name)
+                )
         }
         if (user.verified.not()) {
             binding.checkImageView.setImageResource(R.drawable.ic_fail)

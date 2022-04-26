@@ -7,7 +7,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.adapters.UsersViewPagerAdapter
@@ -22,7 +21,6 @@ import com.project.loveis.viewmodels.SearchViewModel
 class SearchFragment : Fragment(R.layout.fragment_search) {
     private val binding: FragmentSearchBinding by viewBinding()
     private val viewModel: SearchViewModel by viewModels()
-    private var userAdapter by autoCleared<UserAdapter>()
     private var usersViewPagerAdapter by autoCleared<UsersViewPagerAdapter>()
     private var currentUser: User? = null
 
@@ -51,10 +49,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         with(binding.usersList) {
             usersViewPagerAdapter = UsersViewPagerAdapter(this@SearchFragment){}
-          //  usersViewPagerAdapter.updateList(users)
             adapter = usersViewPagerAdapter
-          //  layoutManager = LinearLayoutManager(requireContext())
-           // setHasFixedSize(true)
             setOnClickListener{
                 Log.d("MyDebug", "onClick user viewPager")
                 binding.filterCardView.isVisible = false
@@ -69,8 +64,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         binding.root.setOnClickListener{
             binding.filterCardView.isVisible = false
         }
-
-
     }
 
     private fun bindViewModel(){
@@ -83,8 +76,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     when(state.result){
                         is User -> {
                             currentUser = state.result
-//                            userAdapter.updateCurrentUser(state.result)
-                           // usersViewPagerAdapter.setCurrentUser(state.result)
                             viewModel.searchUsers()
                         }
                         is SearchResult -> {
@@ -119,7 +110,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             binding.maleImageView.drawable.setTint(resources.getColor(R.color.gray))
             viewModel.searchUsers(gender = "female")
         }
-     viewModel.collectFlow(binding.yearEditText1.textChangedFlow())
+     viewModel.collectFlowAgeFrom(binding.yearEditText1.textChangedFlow())
+        viewModel.collectFlowAgeTo(binding.yearEditText2.textChangedFlow())
     }
 
     private fun showBottomNavBar(){
@@ -141,9 +133,5 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun showLoading(loading: Boolean) {
         binding.progressBar.isVisible = loading
-    }
-
-    private fun setOnClickLister(){
-
     }
 }

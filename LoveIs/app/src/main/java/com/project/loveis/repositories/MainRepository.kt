@@ -163,9 +163,9 @@ class MainRepository(val context: Context) {
         }
     }
 
-    suspend fun searchUsers(age: Int, gender: String): Response<SearchResult>? {
+    suspend fun searchUsers(ageFrom: Int, ageTo: Int, gender: String): Response<SearchResult>? {
       return  try {
-            Network.searchApi.searchUsers(age, gender)
+            Network.searchApi.searchUsers(ageFrom, ageTo, gender)
         } catch (e: Exception){
             null
         }
