@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1074930014898",
+    "project_id": "loveis-72338",
+    "storage_bucket": "loveis-72338.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074930014898:android:ddebd719457c9e7d7507ab",
+        "android_client_info": {
+          "package_name": "com.project.loveis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074930014898-elme3d06kkn97mq114otk8t09ogru4u2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKqs_ZsnEESpFeQ6lVlPXOxxMaZo18BWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074930014898-elme3d06kkn97mq114otk8t09ogru4u2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

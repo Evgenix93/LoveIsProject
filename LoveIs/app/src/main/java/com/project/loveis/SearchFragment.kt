@@ -86,7 +86,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     when(state.result){
                         is User -> {
                             currentUser = state.result
-                            if(arguments?.getLong(USER_ID, 0) == 0L)
+                            if(arguments?.getLong(USER_ID, -1) == null)
                             viewModel.searchUsers()
                             else viewModel.getUserById(arguments?.getLong(USER_ID)!!)
                         }
@@ -114,6 +114,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         startActivity(state.intent)
                 }
                 is State.SharedUserLoaded -> {
+                    usersViewPagerAdapter.setCurrentUser(currentUser!!)
                     usersViewPagerAdapter.updateList(listOf(state.user))
                 }
                 is State.ErrorMessageState -> showMessage(state.message)

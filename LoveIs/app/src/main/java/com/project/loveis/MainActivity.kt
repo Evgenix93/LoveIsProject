@@ -200,7 +200,7 @@ class MainActivity : AppCompatActivity() {
         if(intent.data.toString().contains("user").not())
             return
         val userId = intent.data?.lastPathSegment
-        Log.d("mylog", intent.data?.lastPathSegment.toString())
+        Log.d("mylog", intent.data?.lastPathSegment.toString().toLong().toString())
         userId?.let {
         Log.d("mylog", "userId $it")
             findNavController(R.id.navHostFragment)

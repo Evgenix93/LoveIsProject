@@ -78,9 +78,6 @@
         <action
             android:id="@+id/action_searchFragment_to_createLoveIsFragment1"
             app:destination="@id/createLoveIsFragment1" />
-        <argument
-            android:name="userId"
-            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

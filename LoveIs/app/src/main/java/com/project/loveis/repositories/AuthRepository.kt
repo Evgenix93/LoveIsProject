@@ -120,6 +120,7 @@ class AuthRepository(val context: Context) {
     }
 
     fun isLogined(): Boolean{
+        Log.d("mylog", Tokens.token)
         return Tokens.token.isNotEmpty()
     }
 
