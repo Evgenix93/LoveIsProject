@@ -1,5 +1,9 @@
 package com.project.loveis
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +21,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.adapters.MessageAdapter
 import com.project.loveis.databinding.FragmentChatBinding
 import com.project.loveis.models.Dialog
+import com.project.loveis.models.PushModel
+import com.project.loveis.util.MessagingService
 import com.project.loveis.util.autoCleared
 import com.project.loveis.viewmodels.ChatViewModel
 
@@ -25,6 +32,18 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
     private val args: ChatFragmentArgs by navArgs()
     private val viewModel: ChatViewModel by viewModels()
     private lateinit var filePickerLauncher: ActivityResultLauncher<Array<String>>
+    private val messageReceiver = object : BroadcastReceiver(){
+        override fun onReceive(p0: Context?, intent: Intent?) {
+            intent?.let {
+                val push = it.getParcelableExtra<PushModel>(MessagingService.PUSH_DATA)
+                if(args.userId == push?.from ){
+                    getMessages()
+                }
+            }
+
+        }
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,6 +54,22 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
         observeState()
         initFilePickerLauncher()
         getMessages()
+        registerReceiver()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        unregisterReceiver()
+    }
+
+    private fun registerReceiver(){
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(messageReceiver,
+        IntentFilter(MessagingService.PUSH_INTENT)
+        )
+    }
+
+    private fun unregisterReceiver(){
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(messageReceiver)
     }
 
     private fun initList(){

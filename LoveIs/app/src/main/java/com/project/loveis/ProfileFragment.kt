@@ -41,6 +41,11 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         initPermissionLauncher()
         bindViewModel()
         performAuth()
+
+    }
+
+    private fun sendFcmToken(){
+        viewModel.sendFcmToken()
     }
 
     private fun performAuth(){
@@ -173,6 +178,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                         requestLocationPermission()
                         val user = state.result as User
                         showProfileInfo(user)
+                        sendFcmToken()
+                        (activity as MainActivity).getAllgcmDevices()
                     }else
                         filePickerLauncher2.launch(arrayOf("image/*"))
                 }

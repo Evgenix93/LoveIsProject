@@ -5,18 +5,23 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
+import com.google.firebase.messaging.FirebaseMessaging
 import com.project.loveis.State
 import com.project.loveis.models.Coordinates
+import com.project.loveis.models.GcmDevice
 import com.project.loveis.models.Image
 import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.repositories.AuthRepository
 import com.project.loveis.repositories.LoveIsEventIsRepository
 import com.project.loveis.repositories.MainRepository
+import com.project.loveis.util.CloudMessageType
 import com.project.loveis.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class ProfileViewModel(app: Application) : AndroidViewModel(app) {
     private val stateLiveData = MutableLiveData<State>().apply { value = State.StartState }
@@ -218,6 +223,50 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
 
         }
 
+    }
+
+    fun sendFcmToken(){
+        viewModelScope.launch {
+            if(authRepository.getLocalFcmToken().isNotEmpty())
+                return@launch
+            val token = getFcmToken()
+            token ?: return@launch
+            authRepository.setupFcmToken(token)
+            if(checkFcmToken(token) == false){
+                authRepository.createGcmDevice(GcmDevice(token, CloudMessageType.FCM.name))
+            }
+        }
+
+    }
+
+    private suspend fun getFcmToken(): String? {
+        return suspendCoroutine {
+            FirebaseMessaging.getInstance().token
+                .addOnSuccessListener { token ->
+                    it.resume(token)
+
+                }
+                .addOnFailureListener { _ ->
+                    it.resume(null)
+
+                }
+        }
+    }
+
+    private suspend fun checkFcmToken(token: String): Boolean?{
+        val response = authRepository.getGcmDevice(token)
+        return when(response?.code()){
+            200 -> true
+            500 -> {
+                stateLiveData.postValue(State.ErrorMessageState("500 Internal Server Error"))
+                null
+            }
+            else -> {
+                stateLiveData.postValue(State.ErrorMessageState("checkToken error code: ${response?.code()}"))
+                false
+
+            }
+        }
     }
 
     private suspend fun getErrorFromResponse(response: ResponseBody): String{

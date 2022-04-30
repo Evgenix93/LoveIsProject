@@ -1,5 +1,6 @@
 package com.project.loveis
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -11,12 +12,17 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.ActivityMainBinding
+import com.project.loveis.models.PushModel
+import com.project.loveis.singletones.Network
+import com.project.loveis.util.MessagingService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -25,6 +31,19 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by viewBinding()
+    private val pushMessageReceiver = object : BroadcastReceiver(){
+        override fun onReceive(p0: Context?, intent: Intent?) {
+            val message = intent?.getParcelableExtra<PushModel>(MessagingService.PUSH_DATA)
+            message?.let {
+                //if(it.type == "PushMessage")
+                    //if(findNavController(R.id.navHostFragment).currentDestination?.id != R.id.chatFragment)
+                      //  NotificationManagerCompat()
+            }
+
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -205,5 +224,13 @@ class MainActivity : AppCompatActivity() {
         Log.d("mylog", "userId $it")
             findNavController(R.id.navHostFragment)
             .navigate(R.id.searchFragment, bundleOf(  SearchFragment.USER_ID to it.toLong()) )  }
+    }
+
+
+     fun getAllgcmDevices(){
+        lifecycleScope.launch {
+            Network.authApi.getGcmDevices()
+        }
+
     }
 }

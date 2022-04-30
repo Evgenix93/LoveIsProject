@@ -31,5 +31,14 @@ interface AuthApi {
     @PATCH("user/")
     suspend fun changePhone(@Body newPhone: Phone): Response<Unit>
 
+    @GET("api/device/gcm/{registration_id}/")
+    suspend fun getGcmDevice(@Path("registration_id") token: String): Response<GcmDevice>
+
+    @POST("api/device/gcm/")
+    suspend fun createGcmDevice(@Body device: GcmDevice): Response<GcmDevice>
+
+    @GET("api/device/gcm/")
+    suspend fun getGcmDevices(): Response<Unit>
+
 
 }

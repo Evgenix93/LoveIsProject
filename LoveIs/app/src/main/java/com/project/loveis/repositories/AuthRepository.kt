@@ -8,6 +8,7 @@ import com.project.loveis.singletones.Network
 import com.project.loveis.singletones.ProfileId
 import com.project.loveis.singletones.ProfileInfo
 import com.project.loveis.singletones.Tokens
+import com.project.loveis.util.CloudMessageType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -172,6 +173,30 @@ class AuthRepository(val context: Context) {
 
     fun getUserId(): Long{
         return ProfileId.id
+    }
+
+    suspend fun getGcmDevice(token: String): Response<GcmDevice>?{
+        return try {
+            authApi.getGcmDevice(token)
+        }catch (e: Throwable){
+            null
+        }
+    }
+
+    suspend fun createGcmDevice(device: GcmDevice): Response<GcmDevice>?{
+        return try {
+            authApi.createGcmDevice(device)
+        }catch (e: Throwable){
+            null
+        }
+    }
+
+    fun getLocalFcmToken(): String{
+        return Tokens.fireBaseToken
+    }
+
+    fun setupFcmToken(token: String){
+        Tokens.fireBaseToken = token
     }
 
 
