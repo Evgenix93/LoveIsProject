@@ -61,6 +61,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             }
             logOut.setOnClickListener {
                 Tokens.token = ""
+                Tokens.fireBaseToken = ""
                 findNavController().navigate(R.id.phoneNumber1Fragment)
             }
 
@@ -179,7 +180,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                         val user = state.result as User
                         showProfileInfo(user)
                         sendFcmToken()
-                        (activity as MainActivity).getAllgcmDevices()
                     }else
                         filePickerLauncher2.launch(arrayOf("image/*"))
                 }

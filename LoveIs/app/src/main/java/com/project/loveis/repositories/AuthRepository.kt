@@ -1,6 +1,7 @@
 package com.project.loveis.repositories
 
 import android.content.Context
+import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.net.toUri
 import com.project.loveis.models.*
@@ -58,9 +59,6 @@ class AuthRepository(val context: Context) {
     }
 
     suspend fun getToken(tokenData: TokenData): Response<TokenResponse>? {
-        //if(Tokens.token.isNotEmpty()){
-          //  return 200
-        //}
         return try {
             //val prefs = context.getSharedPreferences(USER_PHONE_CODE, Context.MODE_PRIVATE)
             //val phone = prefs.getString(PHONE_KEY, null)
@@ -186,6 +184,14 @@ class AuthRepository(val context: Context) {
     suspend fun createGcmDevice(device: GcmDevice): Response<GcmDevice>?{
         return try {
             authApi.createGcmDevice(device)
+        }catch (e: Throwable){
+            null
+        }
+    }
+
+    suspend fun updateGcmDevice(token: String, device: GcmDevice): Response<GcmDevice>?{
+        return try {
+            authApi.updateGcmDevice(token, device)
         }catch (e: Throwable){
             null
         }

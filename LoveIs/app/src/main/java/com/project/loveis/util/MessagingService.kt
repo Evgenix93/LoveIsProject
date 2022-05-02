@@ -38,5 +38,8 @@ class MessagingService: FirebaseMessagingService() {
     companion object{
         const val PUSH_INTENT = "push_intent"
         const val PUSH_DATA = "push_data"
+        const val LOVE_IS_RECEIVE = "push_loveis_recieve"
+        const val LOVE_IS_ACCEPT = "push_loveis_accept"
+        const val LOVE_IS_CANCEL = "push_loveis_cancel"
     }
 }
