@@ -15,8 +15,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.adapters.UsersViewPagerAdapter
-import com.project.loveis.databinding.FragmentSearchBinding
-
 import com.project.loveis.models.SearchResult
 import com.project.loveis.models.User
 import com.project.loveis.util.autoCleared
@@ -24,7 +22,7 @@ import com.project.loveis.util.textChangedFlow
 import com.project.loveis.viewmodels.SearchViewModel
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
-    private val binding: FragmentSearchBinding by viewBinding()
+    private val binding: com.project.loveis.databinding.FragmentSearchBinding by viewBinding()
     private val viewModel: SearchViewModel by viewModels()
     private var usersViewPagerAdapter by autoCleared<UsersViewPagerAdapter>()
     private var currentUser: User? = null

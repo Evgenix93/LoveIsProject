@@ -40,5 +40,6 @@ interface AuthApi {
     @GET("api/device/gcm/")
     suspend fun getGcmDevices(): Response<Unit>
 
-
+    @PUT("api/device/gcm/{registration_id}/")
+    suspend fun updateGcmDevice(@Path("registration_id") token: String, @Body device: GcmDevice): Response<GcmDevice>
 }

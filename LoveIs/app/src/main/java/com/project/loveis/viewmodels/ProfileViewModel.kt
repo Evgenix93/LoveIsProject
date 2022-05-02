@@ -234,6 +234,8 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
             authRepository.setupFcmToken(token)
             if(checkFcmToken(token) == false){
                 authRepository.createGcmDevice(GcmDevice(token, CloudMessageType.FCM.name))
+            }else{
+                authRepository.updateGcmDevice(token, GcmDevice(token, CloudMessageType.FCM.name))
             }
         }
 
@@ -268,6 +270,8 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
     }
+
+
 
     private suspend fun getErrorFromResponse(response: ResponseBody): String{
         return withContext(Dispatchers.IO) {

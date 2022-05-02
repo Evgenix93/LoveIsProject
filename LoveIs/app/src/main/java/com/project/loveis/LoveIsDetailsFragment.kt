@@ -1,6 +1,7 @@
 package com.project.loveis
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -42,13 +43,13 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
         bindViewModel()
         getLoveIsById(args.loveIsId)
 
-
     }
 
 
     private fun bind(loveIs: LoveIs?) {
         if (loveIs == null)
             return
+        Log.d("MyDebug", "loveisId = ${loveIs.id}")
         currentLoveIs = loveIs
         getCurrentUserInfo()
 
@@ -194,11 +195,15 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
     }
 
     private fun getLoveIsById(id: Long){
+        Log.d("MyDebug", "getLoveIs Id = $id")
         if(id == 0L)
             return
         viewModel.getLoveIsById(id)
     }
 
 
-
+    companion object{
+        const val LOVE = "love is id"
+        const val LOVE_IS_STATUS = "love is status"
+    }
 }

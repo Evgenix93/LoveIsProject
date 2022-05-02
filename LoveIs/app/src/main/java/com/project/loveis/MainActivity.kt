@@ -1,6 +1,8 @@
 package com.project.loveis
 
 import android.app.PendingIntent
+import android.app.Notification
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -17,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -27,6 +30,8 @@ import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.ActivityMainBinding
 import com.project.loveis.models.Dialog
+import com.project.loveis.models.LoveIs
+import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.models.PushModel
 import com.project.loveis.singletones.Network
 import com.project.loveis.singletones.NotificationChannels
@@ -36,6 +41,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,10 +55,18 @@ class MainActivity : AppCompatActivity() {
                     if(findNavController(R.id.navHostFragment).currentDestination?.id != R.id.chatFragment)
                         onMessageReceived(it.from)
 
+            intent?.let {
+                val push = it.getParcelableExtra<PushModel>(MessagingService.PUSH_DATA)
+               if(push?.type?.contains("loveis") == true)
+                   viewModel.getLoveIsById(push.meetingId!!)
             }
+        }
+    }
 
         }
 
+    private fun unregisterReceiver(){
+        LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(messageReceiver)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,8 +86,21 @@ class MainActivity : AppCompatActivity() {
         initBottomNavBar()
         initNavController()
         //handleIntent(intent)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver()
+    }
 
+    private fun bindViewModel(){
+        viewModel.state.observe(this){state ->
+            when(state){
+                is State.LoveIsSingleMeetingLoadedState -> {
+                  createLoveIsNotification(state.meeting)
+                }
+            }
+        }
     }
 
     fun onMessageReceived(from: Long){
@@ -86,6 +113,37 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun createLoveIsNotification(loveIs: LoveIs){
+        Log.d("MyDebug", "createLoveIS Notification loveIs id = ${loveIs.id}")
+        val intent = Intent(this, this::class.java).putExtra(LoveIsDetailsFragment.LOVE, loveIs.id)
+            .putExtra(LoveIsDetailsFragment.LOVE_IS_STATUS, loveIs.status)
+        Log.d("MyDebug", "getLong extra = ${intent.getLongExtra(LoveIsDetailsFragment.LOVE, 0)}")
+        val pendingIntent = PendingIntent.getActivity(this, 123, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT)
+        val status = loveIs.status
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        NotificationManagerCompat.from(this).notify(1, Notification.Builder(this, NotificationChannels.IMPORTANT_CHANNEL)
+            .setContentTitle("Love Is")
+            .setContentText(
+                when(status){
+                    "create" -> "Пользователь ${loveIs.invitingUser.name} прислал вам Love Is"
+                    "accept" -> "Пользователь ${loveIs.invitingUser.name} принял ваш Love Is"
+                    "cancel" -> "Пользователь ${loveIs.invitingUser.name} отменил ваш Love Is"
+                    else -> "Пользователь ${loveIs.invitingUser.name} прислал вам Love Is"
+                }
+                )
+            .setSmallIcon(R.drawable.love_is)
+            .setContentIntent(pendingIntent)
+            .build())
+        else{
+            NotificationManagerCompat.from(this).notify(1, Notification.Builder(this)
+                .setContentTitle("Love Is")
+                .setContentText("Вам прислал Love Is ${loveIs.invitingUser.name}")
+                .setSmallIcon(R.drawable.love_is)
+                .setContentIntent(pendingIntent)
+                .build())
+        }
+    }
 
     private fun initBottomNavBar() {
         showEnabledBtn(binding.bottomNavBar.navProfile)
@@ -216,8 +274,8 @@ class MainActivity : AppCompatActivity() {
     }
 
      fun onLogined() {
-         intent ?: return
-        //intent?.data ?: return
+        if(intent == null) return
+         else if(intent.data != null)
          if(intent.data.toString().contains("event"))
         findNavController(R.id.navHostFragment).navigate(
             ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(
@@ -232,6 +290,11 @@ class MainActivity : AppCompatActivity() {
                      filterType = ""
                  ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
              )
+         else {
+             Log.d("MyDebug", "onLoveIs Intent")
+            if (intent.hasExtra(LoveIsDetailsFragment.LOVE))
+                handleLoveIsIntent(intent)
+        }
 
          val userId = intent.getLongExtra(MESSAGE_FROM, -1)
          val userName = intent.getStringExtra(DIALOG_NAME)
@@ -298,5 +361,16 @@ class MainActivity : AppCompatActivity() {
     companion object{
         const val MESSAGE_FROM = "message_from"
         const val DIALOG_NAME = "dialog_name"
+    }
+
+   private fun handleLoveIsIntent(intent: Intent){
+       Log.d("MyDebug", "handleLoveIsIntent long extra =  ${intent.getLongExtra(LoveIsDetailsFragment.LOVE, 0)}")
+       val type = when(intent.getStringExtra(LoveIsDetailsFragment.LOVE_IS_STATUS)) {
+           "create" -> MeetingFilterType.INCOMING
+           else -> MeetingFilterType.ACTIVE
+       }
+        findNavController(R.id.navHostFragment).navigate(R.id.loveIsDetailsFragment, bundleOf("loveIsId" to
+              intent.getLongExtra(LoveIsDetailsFragment.LOVE, 0),
+        "filterType" to type.value))
     }
 }
