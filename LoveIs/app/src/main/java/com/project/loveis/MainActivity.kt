@@ -279,7 +279,8 @@ class MainActivity : AppCompatActivity() {
                      filterType = ""
                  ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
              )
-         else {
+
+         if(intent.data == null) {
              Log.d("MyDebug", "onLoveIs Intent")
             if (intent.hasExtra(LoveIsDetailsFragment.LOVE))
                 handleLoveIsIntent(intent)
@@ -323,7 +324,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(MESSAGE_FROM, dialog.chatWith.id)
         intent.putExtra(DIALOG_NAME, dialog.chatWith.name)
 
-        val pendingIntent = PendingIntent.getActivity(this, 123, intent, PendingIntent.FLAG_MUTABLE)
+        val pendingIntent = PendingIntent.getActivity(this, 123, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val notification = NotificationCompat.Builder(this, NotificationChannels.IMPORTANT_CHANNEL_ID)
             .setContentTitle("Пользователь ${dialog.chatWith.name} оставил вам новое текстовое сообщение")
             //.setContentText(dialog.list?.first()?.content)
