@@ -1,9 +1,11 @@
 package com.project.loveis.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
 import com.project.loveis.repositories.ChatRepository
+import com.project.loveis.repositories.LoveIsEventIsRepository
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(app: Application): AndroidViewModel(app) {
@@ -13,30 +15,25 @@ class MainActivityViewModel(app: Application): AndroidViewModel(app) {
     val state: LiveData<State>
     get() = stateLiveData
 
-    fun getMessages(userId: Long){
+    fun getMessages(userId: Long) {
         stateLiveData.postValue(State.LoadingState)
         viewModelScope.launch {
             val response = chatRepository.getMessages(userId)
-            when(response?.code()){
+            when (response?.code()) {
                 200 -> stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 404 -> stateLiveData.postValue(State.ErrorState(404))
             }
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.project.loveis.State
-import com.project.loveis.repositories.LoveIsEventIsRepository
-import kotlinx.coroutines.launch
 
-class MainActivityViewModel: ViewModel() {
-    private val stateLiveData = MutableLiveData<State>(State.StartState)
+        }
+    }
+
+
+
+
     private val loveIsRepository = LoveIsEventIsRepository()
 
-    val state: LiveData<State>
-        get() = stateLiveData
+
 
     fun getLoveIsById(id: Long) {
         Log.d("MyDebug", "getLoveIs id = $id")

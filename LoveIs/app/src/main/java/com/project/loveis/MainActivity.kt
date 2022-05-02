@@ -2,7 +2,7 @@ package com.project.loveis
 
 import android.app.PendingIntent
 import android.app.Notification
-import android.app.PendingIntent
+
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -53,20 +53,18 @@ class MainActivity : AppCompatActivity() {
             message?.let {
                 if(it.type == "push_chat")
                     if(findNavController(R.id.navHostFragment).currentDestination?.id != R.id.chatFragment)
-                        onMessageReceived(it.from)
+                        onMessageReceived(it.from!!)
 
-            intent?.let {
-                val push = it.getParcelableExtra<PushModel>(MessagingService.PUSH_DATA)
-               if(push?.type?.contains("loveis") == true)
-                   viewModel.getLoveIsById(push.meetingId!!)
-            }
+                if(it.type.contains("loveis") == true)
+                   viewModel.getLoveIsById(it.meetingId!!)
+
         }
     }
 
         }
 
     private fun unregisterReceiver(){
-        LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(messageReceiver)
+        LocalBroadcastManager.getInstance(applicationContext).unregisterReceiver(pushMessageReceiver)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,15 +91,6 @@ class MainActivity : AppCompatActivity() {
         unregisterReceiver()
     }
 
-    private fun bindViewModel(){
-        viewModel.state.observe(this){state ->
-            when(state){
-                is State.LoveIsSingleMeetingLoadedState -> {
-                  createLoveIsNotification(state.meeting)
-                }
-            }
-        }
-    }
 
     fun onMessageReceived(from: Long){
         viewModel.getMessages(from)
@@ -122,7 +111,7 @@ class MainActivity : AppCompatActivity() {
             PendingIntent.FLAG_UPDATE_CURRENT)
         val status = loveIs.status
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        NotificationManagerCompat.from(this).notify(1, Notification.Builder(this, NotificationChannels.IMPORTANT_CHANNEL)
+        NotificationManagerCompat.from(this).notify(1, Notification.Builder(this, NotificationChannels.IMPORTANT_CHANNEL_ID)
             .setContentTitle("Love Is")
             .setContentText(
                 when(status){
@@ -352,6 +341,10 @@ class MainActivity : AppCompatActivity() {
                     if(state.result is Dialog)
                         createMessageNotification(state.result)
                 }
+                is State.LoveIsSingleMeetingLoadedState -> {
+                    createLoveIsNotification(state.meeting)
+                }
+
             }
 
 
