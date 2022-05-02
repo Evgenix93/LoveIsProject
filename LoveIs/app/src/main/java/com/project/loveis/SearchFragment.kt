@@ -114,6 +114,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         startActivity(state.intent)
                 }
                 is State.SharedUserLoaded -> {
+                    showLoading(false)
                     usersViewPagerAdapter.setCurrentUser(currentUser!!)
                     usersViewPagerAdapter.updateList(listOf(state.user))
                 }

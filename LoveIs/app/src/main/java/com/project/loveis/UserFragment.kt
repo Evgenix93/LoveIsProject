@@ -53,10 +53,10 @@ class UserFragment : Fragment(R.layout.item_user) {
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToCreateLoveIsFragment1(
                     user.id!!,
-                    user.gender == Gender.Male
+                    user.gender == Gender.male
                 )
             )else
-                findNavController().navigate(UserFragmentDirections.actionUserFragmentToCreateLoveIsFragment1(user.id!!, user.gender == Gender.Male))
+                findNavController().navigate(UserFragmentDirections.actionUserFragmentToCreateLoveIsFragment1(user.id!!, user.gender == Gender.male))
         }
 
         binding.chatButton.setOnClickListener {

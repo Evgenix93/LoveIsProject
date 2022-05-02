@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_profileFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
     <fragment
         android:id="@+id/dialogsFragment"

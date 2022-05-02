@@ -36,8 +36,12 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
         override fun onReceive(p0: Context?, intent: Intent?) {
             intent?.let {
                 val push = it.getParcelableExtra<PushModel>(MessagingService.PUSH_DATA)
-                if(args.userId == push?.from ){
+                push?.from ?: return
+                if(args.userId == push.from ){
                     getMessages()
+                }
+                else{
+                    (activity as MainActivity).onMessageReceived(push.from)
                 }
             }
 

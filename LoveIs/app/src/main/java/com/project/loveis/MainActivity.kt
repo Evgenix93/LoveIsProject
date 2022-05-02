@@ -1,8 +1,10 @@
 package com.project.loveis
 
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,19 +12,26 @@ import android.view.View
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.ActivityMainBinding
+import com.project.loveis.models.Dialog
 import com.project.loveis.models.PushModel
 import com.project.loveis.singletones.Network
+import com.project.loveis.singletones.NotificationChannels
 import com.project.loveis.util.MessagingService
+import com.project.loveis.viewmodels.MainActivityViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -31,13 +40,15 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by viewBinding()
+    private val viewModel: MainActivityViewModel by viewModels()
     private val pushMessageReceiver = object : BroadcastReceiver(){
         override fun onReceive(p0: Context?, intent: Intent?) {
             val message = intent?.getParcelableExtra<PushModel>(MessagingService.PUSH_DATA)
             message?.let {
-                //if(it.type == "PushMessage")
-                    //if(findNavController(R.id.navHostFragment).currentDestination?.id != R.id.chatFragment)
-                      //  NotificationManagerCompat()
+                if(it.type == "push_chat")
+                    if(findNavController(R.id.navHostFragment).currentDestination?.id != R.id.chatFragment)
+                        onMessageReceived(it.from)
+
             }
 
         }
@@ -48,6 +59,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d("mylog", "onCreate")
+        bindViewModel()
+        registerReceiver()
 
 
 
@@ -61,6 +74,16 @@ class MainActivity : AppCompatActivity() {
         //handleIntent(intent)
 
 
+    }
+
+    fun onMessageReceived(from: Long){
+        viewModel.getMessages(from)
+    }
+
+    private fun registerReceiver(){
+        LocalBroadcastManager.getInstance(this).registerReceiver(pushMessageReceiver,
+        IntentFilter(MessagingService.PUSH_INTENT)
+        )
     }
 
 
@@ -193,7 +216,8 @@ class MainActivity : AppCompatActivity() {
     }
 
      fun onLogined() {
-        intent?.data ?: return
+         intent ?: return
+        //intent?.data ?: return
          if(intent.data.toString().contains("event"))
         findNavController(R.id.navHostFragment).navigate(
             ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(
@@ -201,13 +225,21 @@ class MainActivity : AppCompatActivity() {
             ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
         ) else if(intent.data.toString().contains("user"))
             handleShareUserIntent(intent)
-         else
+         else if(intent.data.toString().contains("meeting"))
              findNavController(R.id.navHostFragment).navigate(
                  ProfileFragmentDirections.actionProfileFragmentToLoveIsDetailsFragment(
                      loveIsId = intent.data?.lastPathSegment!!.toLong(),
                      filterType = ""
                  ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
              )
+
+         val userId = intent.getLongExtra(MESSAGE_FROM, -1)
+         val userName = intent.getStringExtra(DIALOG_NAME)
+         Log.d("mylog", userName.toString())
+         if(userId != -1L){
+             findNavController(R.id.navHostFragment).navigate(ProfileFragmentDirections.actionProfileFragmentToChatFragment(userId, userName.orEmpty()),
+             NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build())
+         }
 
 
          intent = null
@@ -232,5 +264,39 @@ class MainActivity : AppCompatActivity() {
             Network.authApi.getGcmDevices()
         }
 
+    }
+
+     private fun createMessageNotification(dialog: Dialog){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(MESSAGE_FROM, dialog.chatWith.id)
+        intent.putExtra(DIALOG_NAME, dialog.chatWith.name)
+
+        val pendingIntent = PendingIntent.getActivity(this, 123, intent, PendingIntent.FLAG_MUTABLE)
+        val notification = NotificationCompat.Builder(this, NotificationChannels.IMPORTANT_CHANNEL_ID)
+            .setContentTitle("Пользователь ${dialog.chatWith.name} оставил вам новое текстовое сообщение")
+            //.setContentText(dialog.list?.first()?.content)
+            .setSmallIcon(R.drawable.ic_baseline_notifications)
+            .setContentIntent(pendingIntent)
+            .build()
+
+        NotificationManagerCompat.from(this).notify(dialog.chatWith.id?.toInt()!!, notification)
+    }
+
+    private fun bindViewModel(){
+        viewModel.state.observe(this, Observer { state ->
+            when(state){
+                is State.LoadedSingleState -> {
+                    if(state.result is Dialog)
+                        createMessageNotification(state.result)
+                }
+            }
+
+
+        })
+    }
+
+    companion object{
+        const val MESSAGE_FROM = "message_from"
+        const val DIALOG_NAME = "dialog_name"
     }
 }

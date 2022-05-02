@@ -48,7 +48,7 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
                 is State.LoadedCurrentUser -> {
                     showLoading(false)
                     user = state.user
-                    if(state.user.gender.name == Gender.Female.name)
+                    if(state.user.gender.name == Gender.female.name)
                         setViewFemale()
                 }
                 is State.SuccessState -> {
@@ -88,7 +88,7 @@ class CreateLoveIsManFragment5 : Fragment(R.layout.fragment_create_loveis_man_7)
     }
 
     private fun createLoveIs(){
-       if (user!!.wallet?.value ?:0  < 300 && user!!.gender.name == Gender.Male.name) {
+       if (user!!.wallet?.value ?:0  < 300 && user!!.gender.name == Gender.male.name) {
             Toast.makeText(requireContext(), "Недостаточно средств", Toast.LENGTH_LONG)
                 .show()
             findNavController().navigate(CreateLoveIsManFragment5Directions.actionCreateLoveIsManFragment5ToAddMoneyFragment())

@@ -1,6 +1,7 @@
 package com.project.loveis.viewmodels
 
 import android.app.Application
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
@@ -69,6 +70,18 @@ class RegistrationViewModel(app: Application) : AndroidViewModel(app) {
                 null -> stateLiveData.postValue(State.ErrorState(0))
                 else -> stateLiveData.postValue(State.ErrorState(2))
             }
+
+        }
+    }
+
+     fun checkFileSize(uri: Uri){
+        viewModelScope.launch {
+            stateLiveData.postValue(State.LoadingState)
+            val isFileOk = authRepository.checkFileSize(uri)
+            if(isFileOk)
+                stateLiveData.postValue(State.SuccessState)
+            else
+                stateLiveData.postValue(State.ErrorMessageState("файл больше допустимого размера: 1 мб"))
 
         }
     }

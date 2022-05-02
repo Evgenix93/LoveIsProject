@@ -13,7 +13,7 @@ import com.project.loveis.util.Gender
 class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
     private val binding: FragmentRegistration1Binding by viewBinding()
     private val args: Registration1FragmentArgs by navArgs()
-    private var gender = Gender.Male
+    private var gender = Gender.male
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,12 +32,12 @@ class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
         }
 
         binding.maleImage.setOnClickListener {
-            gender = Gender.Male
+            gender = Gender.male
             showEnabledGender(gender)
         }
 
         binding.femaleImage.setOnClickListener {
-            gender = Gender.Female
+            gender = Gender.female
             showEnabledGender(gender)
         }
     }
@@ -46,7 +46,7 @@ class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
     private fun showEnabledGender(gender: Gender) {
         binding.maleImage.drawable.setTint(
             resources.getColor(
-                if (gender == Gender.Male) {
+                if (gender == Gender.male) {
                     R.color.blue
                 } else {
                     R.color.gray
@@ -56,7 +56,7 @@ class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
 
         binding.femaleImage.drawable.setTint(
             resources.getColor(
-                if (gender == Gender.Male) {
+                if (gender == Gender.male) {
                     R.color.gray
                 } else {
                     R.color.pink
@@ -66,7 +66,7 @@ class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
 
         binding.maleTextView.setTextColor(
             resources.getColor(
-                if (gender == Gender.Male) {
+                if (gender == Gender.male) {
                     R.color.blue
                 } else {
                     R.color.gray
@@ -76,7 +76,7 @@ class Registration1Fragment : Fragment(R.layout.fragment_registration1) {
 
         binding.femaleTextView.setTextColor(
             resources.getColor(
-                if (gender == Gender.Male) {
+                if (gender == Gender.male) {
                     R.color.gray
                 } else {
                     R.color.pink

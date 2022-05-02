@@ -1,6 +1,7 @@
 package com.project.loveis.repositories
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
 import com.project.loveis.models.*
@@ -197,6 +198,20 @@ class AuthRepository(val context: Context) {
 
     fun setupFcmToken(token: String){
         Tokens.fireBaseToken = token
+    }
+
+    suspend fun checkFileSize(uri: Uri): Boolean{
+        return withContext(Dispatchers.IO){
+            val file = File(context.cacheDir, "photofile.jpg")
+            context.contentResolver.openInputStream(uri).use { input ->
+                file.outputStream().use { output ->
+                    input?.copyTo(output)
+                }
+            }
+
+            val fileSize =  file.length()/(1024*1024)
+            fileSize < 1
+        }
     }
 
 
