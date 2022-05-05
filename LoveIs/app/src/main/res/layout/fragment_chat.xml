@@ -55,8 +55,9 @@
         android:id="@+id/photoCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="5dp"
         android:visibility="gone"
-        android:background="@drawable/bg_photocount"
+
         tools:text="3"
         android:textColor="@color/white"
         android:textSize="10sp"
@@ -66,6 +67,17 @@
         android:layout_marginStart="19dp"
         android:layout_marginBottom="19dp"
         />
+
+    <ImageView
+        android:id="@+id/photoCountImageView"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:visibility="gone"
+        android:src="@drawable/bg_photocount"
+        app:layout_constraintStart_toStartOf="@id/photoCountTextView"
+        app:layout_constraintEnd_toEndOf="@id/photoCountTextView"
+        app:layout_constraintTop_toTopOf="@id/photoCountTextView"
+        app:layout_constraintBottom_toBottomOf="@id/photoCountTextView"/>
 
     <ProgressBar
         android:id="@+id/loadingProgressBar"

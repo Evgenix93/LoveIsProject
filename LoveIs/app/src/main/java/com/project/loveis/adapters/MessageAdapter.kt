@@ -15,10 +15,10 @@ import com.project.loveis.models.ChatMessage
 import com.project.loveis.models.Message
 import com.project.loveis.util.toPhotoUrl
 
-class MessageAdapter(val context: Context, private val userId: Long): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
+class MessageAdapter(val context: Context, private val userId: Long, val onPhotoClick: (String) -> Unit): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
     private var messages = listOf<Message>()
 
-    class MessageViewHolder(view: View, val context: Context): RecyclerView.ViewHolder(view){
+    class MessageViewHolder(view: View, val context: Context, val onPhotoClick: (String) -> Unit): RecyclerView.ViewHolder(view){
         private val binding: ItemMessageBinding by viewBinding()
 
         fun bind(message: Message){
@@ -122,60 +122,70 @@ class MessageAdapter(val context: Context, private val userId: Long): RecyclerVi
                 when(index){
                     0 -> {
                         binding.photoCard.isVisible = true
+                        binding.photoCard.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView)
                     }
                     1 -> {
                         binding.photoCard2.isVisible = true
+                        binding.photoCard2.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView2)
                     }
                     2 -> {
                         binding.photoCard3.isVisible = true
+                        binding.photoCard3.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView3)
                     }
                     3 -> {
                         binding.photoCard4.isVisible = true
+                        binding.photoCard4.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView4)
                     }
                     4 -> {
                         binding.photoCard5.isVisible = true
+                        binding.photoCard5.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView5)
                     }
                     5 -> {
                         binding.photoCard6.isVisible = true
+                        binding.photoCard6.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView6)
                     }
                     6 -> {
                         binding.photoCard7.isVisible = true
+                        binding.photoCard7.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView7)
                     }
                     7 -> {
                         binding.photoCard8.isVisible = true
+                        binding.photoCard8.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView8)
                     }
                     8 -> {
                         binding.photoCard9.isVisible = true
+                        binding.photoCard9.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView9)
                     }
                     9 -> {
                         binding.photoCard10.isVisible = true
+                        binding.photoCard10.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                         Glide.with(binding.root)
                             .load(url.toPhotoUrl())
                             .into(binding.photoImageView10)
@@ -257,60 +267,70 @@ class MessageAdapter(val context: Context, private val userId: Long): RecyclerVi
                when(index){
                    0 -> {
                        binding.photoLeftCard.isVisible = true
+                       binding.photoLeftCard.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView)
                    }
                    1 -> {
                        binding.photoLeftCard2.isVisible = true
+                       binding.photoLeftCard2.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView2)
                    }
                    2 -> {
                        binding.photoLeftCard3.isVisible = true
+                       binding.photoLeftCard3.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView3)
                    }
                    3 -> {
                        binding.photoLeftCard4.isVisible = true
+                       binding.photoLeftCard4.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView4)
                    }
                    4 -> {
                        binding.photoLeftCard5.isVisible = true
+                       binding.photoLeftCard5.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView5)
                    }
                    5 -> {
                        binding.photoLeftCard6.isVisible = true
+                       binding.photoLeftCard6.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView6)
                    }
                    6 -> {
                        binding.photoLeftCard7.isVisible = true
+                       binding.photoLeftCard7.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView7)
                    }
                    7 -> {
                        binding.photoLeftCard8.isVisible = true
+                       binding.photoLeftCard8.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView8)
                    }
                    8 -> {
                        binding.photoLeftCard9.isVisible = true
+                       binding.photoLeftCard9.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView9)
                    }
                    9 -> {
                        binding.photoLeftCard10.isVisible = true
+                       binding.photoLeftCard10.setOnClickListener { onPhotoClick(url.toPhotoUrl()) }
                        Glide.with(binding.root)
                            .load(url.toPhotoUrl())
                            .into(binding.photoLeftImageView10)
@@ -352,7 +372,10 @@ class MessageAdapter(val context: Context, private val userId: Long): RecyclerVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-        return MessageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_message, parent, false), context)
+        return MessageViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_message, parent, false), context){ uri ->
+            onPhotoClick(uri)
+
+        }
 
     }
 

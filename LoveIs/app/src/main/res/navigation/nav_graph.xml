@@ -619,5 +619,9 @@
             android:id="@+id/action_userFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/userPhotoFragment"
+        android:name="com.project.loveis.UserPhotoFragment"
+        android:label="UserPhotoFragment" />
     >>>>>>> origin/main
 </navigation>

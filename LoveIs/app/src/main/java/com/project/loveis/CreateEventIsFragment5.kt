@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -40,6 +41,10 @@ class CreateEventIsFragment5 : Fragment(R.layout.fragment_create_loveis_eventis_
 
     private fun initContinueButton(){
         binding.continueBtn.setOnClickListener {
+            if(binding.dateTextView.text.isBlank() || binding.timeTextView.text.isBlank()){
+                Toast.makeText(requireContext(), "Введите дату", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val dateString = binding.dateTextView.text.toString()
             val year = dateString.substringAfterLast('.').toInt()
             val month = dateString.substringAfter('.').substringBefore('.').toInt()
@@ -72,7 +77,7 @@ class CreateEventIsFragment5 : Fragment(R.layout.fragment_create_loveis_eventis_
         binding.dateTextView.setOnClickListener{
             MenuBottomDialogDateFragment(false, {day, month, year ->
                 val currentCalendar = Calendar.getInstance()
-                val choiceCalendar = Calendar.getInstance().apply { set(year, month, day) }
+                val choiceCalendar = Calendar.getInstance().apply { set(year, month - 1, day) }
                 val timeDiff = choiceCalendar.timeInMillis - currentCalendar.timeInMillis
                 val currDay = currentCalendar.get(Calendar.DAY_OF_MONTH)
                 val currMonth = currentCalendar.get(Calendar.MONTH) + 1
@@ -80,11 +85,11 @@ class CreateEventIsFragment5 : Fragment(R.layout.fragment_create_loveis_eventis_
                 val dayStr = if(day < 10) "0$day" else day.toString()
                 val monthStr = if(month < 10) "0$month" else month.toString()
                 val yearStr = year.toString().takeLast(2)
-                if(timeDiff >= 0)
+                if(timeDiff > 0)
                     binding.dateTextView.text = "$dayStr.$monthStr.$yearStr"
                 else{
-                    val currDayStr = if(day < 10) "0$currDay" else currDay.toString()
-                    val currMonthStr = if(month < 10) "0$currMonth" else currMonth.toString()
+                    val currDayStr = if(currDay < 10) "0$currDay" else currDay.toString()
+                    val currMonthStr = if(currMonth < 10) "0$currMonth" else currMonth.toString()
                     val currYearStr = currYear.toString().takeLast(2)
                     binding.dateTextView.text = "$currDayStr.$currMonthStr.$currYearStr"
                 }
@@ -95,17 +100,17 @@ class CreateEventIsFragment5 : Fragment(R.layout.fragment_create_loveis_eventis_
             MenuBottomDialogDateFragment(true, {_,_,_->}, {hour, minute ->
                 val chosenDate = binding.dateTextView.text.split(".")
                 val currentCalendar = Calendar.getInstance()
-                val choiceCalendar = if(chosenDate.isNotEmpty()) Calendar.getInstance()
+                val choiceCalendar = if(binding.dateTextView.text.isNotEmpty()) Calendar.getInstance()
                     .apply { set(chosenDate[2].prependIndent("20").toInt(), chosenDate[1].toInt() - 1, chosenDate[0].toInt(),
                         hour, minute)}
                 else null
                 if(choiceCalendar != null) {
                     val timeDiff = choiceCalendar.timeInMillis - currentCalendar.timeInMillis
-                    if(timeDiff >= 0)
+                    if(timeDiff > 0)
                         binding.timeTextView.text = "$hour:$minute"
                     else
                         binding.timeTextView.text =
-                            "${currentCalendar.get(Calendar.HOUR_OF_DAY)}:${currentCalendar.get(Calendar.MINUTE)}"
+                            "${currentCalendar.get(Calendar.HOUR_OF_DAY) + 1}:${currentCalendar.get(Calendar.MINUTE)}"
 
                 }else
                     binding.timeTextView.text = "$hour:$minute"

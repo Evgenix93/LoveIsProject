@@ -53,7 +53,7 @@ class Registration2Fragment : Fragment(R.layout.fragment_registration2) {
         filePickerLauncher =
             registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
                 viewModel.checkFileSize(uri)
-                photoUri = uri
+
 
 
             }
@@ -62,8 +62,9 @@ class Registration2Fragment : Fragment(R.layout.fragment_registration2) {
     private fun bindViewModel(){
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when(state){
-                is State.SuccessState -> {
+                is State.LoadedSingleState -> {
                     binding.loader.isVisible = false
+                    photoUri = state.result as Uri
                     Glide.with(this)
                         .load(photoUri)
                         .into(binding.photoImageView)

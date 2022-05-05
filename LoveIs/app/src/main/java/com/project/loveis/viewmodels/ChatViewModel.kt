@@ -39,6 +39,8 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
               400 -> stateLiveData.postValue(State.ErrorState(400))
               404 -> stateLiveData.postValue(State.ErrorState(404))
           }
+          attachmentUris = null
+
       }
     }
 

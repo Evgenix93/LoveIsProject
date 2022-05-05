@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -83,7 +84,10 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
     }
 
     private fun initList(){
-        messageAdapter = MessageAdapter(requireContext(), args.userId)
+        messageAdapter = MessageAdapter(requireContext(), args.userId){ uri ->
+            findNavController().navigate(R.id.userPhotoFragment, bundleOf(UserPhotoFragment.PHOTO_KEY to uri))
+
+        }
         with(binding.messageList){
             adapter = messageAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -106,6 +110,8 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
         binding.sendImageView.setOnClickListener {
           viewModel.sendMessage(binding.messageEditText.text.toString(), args.userId)
           binding.messageEditText.text.clear()
+            binding.photoCountTextView.isVisible = false
+            binding.photoCountImageView.isVisible = false
         }
         binding.attachFileImageView.setOnClickListener {
             filePickerLauncher.launch(arrayOf("image/*"))
@@ -148,8 +154,11 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
                 viewModel.setAttachmentUri(uris)
                 binding.photoCountTextView.text = uris.size.toString()
                 binding.photoCountTextView.isVisible = uris.size != 0
-            }else
+                binding.photoCountImageView.isVisible = uris.size != 0
+            }else {
                 binding.photoCountTextView.isVisible = false
+                binding.photoCountImageView.isVisible = false
+            }
 
         }
     }

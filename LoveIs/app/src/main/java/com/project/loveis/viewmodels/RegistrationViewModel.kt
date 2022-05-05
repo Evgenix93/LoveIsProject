@@ -79,7 +79,7 @@ class RegistrationViewModel(app: Application) : AndroidViewModel(app) {
             stateLiveData.postValue(State.LoadingState)
             val isFileOk = authRepository.checkFileSize(uri)
             if(isFileOk)
-                stateLiveData.postValue(State.SuccessState)
+                stateLiveData.postValue(State.LoadedSingleState(uri))
             else
                 stateLiveData.postValue(State.ErrorMessageState("файл больше допустимого размера: 1 мб"))
 
