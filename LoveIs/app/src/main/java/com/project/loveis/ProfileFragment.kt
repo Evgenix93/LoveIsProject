@@ -215,7 +215,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     private fun updateCoordinates(){
         try {
-            showLoading(true)
+            //showLoading(true)
             val locationProvider = LocationServices.getFusedLocationProviderClient(requireActivity())
             val cancelToken = object : CancellationToken() {
                 override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken {
@@ -232,15 +232,16 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 if(task.isSuccessful){
                     Log.d("mylog", task.result.longitude.toString())
                     task.result?.let {
+                        //showLoading(false)
                         viewModel.updateCoordinates(latitude = it.latitude.toLong(), longitude = it.longitude.toLong())
                     }
                     task.result ?: run {
-                        showLoading(false)
+                        //showLoading(false)
                         Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
 
                     }
                 }else{
-                    showLoading(false)
+                    //showLoading(false)
                     Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
 
                 }

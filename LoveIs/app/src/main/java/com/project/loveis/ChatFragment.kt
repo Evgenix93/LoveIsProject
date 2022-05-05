@@ -127,6 +127,7 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
                     Toast.makeText(requireContext(), "error ${state.code}", Toast.LENGTH_LONG).show()
                     binding.loadingProgressBar.isVisible = false
                 }
+                is State.ErrorMessageState -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -136,9 +137,14 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
     }
 
     private fun initFilePickerLauncher(){
-        filePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()){ uri ->
-            if(uri != null)
-            viewModel.setAttachmentUri(uri)
+        filePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()){ uris ->
+            if(uris != null) {
+                viewModel.setAttachmentUri(uris)
+                binding.photoCountTextView.text = uris.size.toString()
+                binding.photoCountTextView.isVisible = uris.size != 0
+            }else
+                binding.photoCountTextView.isVisible = false
+
         }
     }
 }

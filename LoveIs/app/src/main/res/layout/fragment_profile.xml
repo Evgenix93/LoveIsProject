@@ -142,7 +142,7 @@
             android:layout_marginTop="38dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center"
-            android:text="Alex, 24"
+            tools:text="Alex, 24"
             android:textColor="@color/black"
             android:textSize="21sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="2 000"
+                        tools:text="2 000"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 

@@ -17,28 +17,46 @@ import java.io.File
 
 class ChatRepository(private val context: Context) {
 
-   suspend fun sendMessage(message: String, attachment: Uri?, userId: Long): Response<Any>? {
+   suspend fun sendMessage(message: String?, attachments: List<Uri>?, userId: Long): Response<Any>? {
        Log.d("MyDebug", "sendMessage")
        return try {
            withContext(Dispatchers.IO) {
-                   val attachmentPart = if(attachment != null){
-                       val file = File(context.cacheDir, "attachment.${context.contentResolver.getType(attachment)?.substringAfterLast("/")}")
-                       context.contentResolver.openInputStream(attachment).use { inputStream ->
-                           file.outputStream().use {
-                               inputStream?.copyTo(it)
-                           }
+               val attachmentsParts = attachments?.map {
+                   //val attachmentPart = if(attachments != null){
+
+                   val file = File(
+                       context.cacheDir,
+                       "attachment_${it.lastPathSegment}.${
+                           context.contentResolver.getType(it)?.substringAfterLast("/")
+                       }"
+                   )
+                   context.contentResolver.openInputStream(it).use { inputStream ->
+                       file.outputStream().use { outputStream ->
+                           inputStream?.copyTo(outputStream)
                        }
-                       MultipartBody.Part.createFormData(
-                           "attachment",
-                           file.name,
-                           file.asRequestBody()
-                       )
-                   }else null
+                   }
+                   MultipartBody.Part.createFormData(
+                       "attachment",
+                       file.name,
+                       file.asRequestBody()
+                   )
+               //}else null
+           }
 
                Network.chatApi.sendMessage(
                    userId,
-                   MultipartBody.Part.createFormData("content", message),
-                   attachmentPart
+                   if(message == null) null else MultipartBody.Part.createFormData("content", message),
+                   if(attachmentsParts?.size ?: 0 > 0) attachmentsParts!![0] else null,
+                   if(attachmentsParts?.size ?: 0 > 1) attachmentsParts!![1] else null,
+                   if(attachmentsParts?.size ?: 0 > 2) attachmentsParts!![2] else null,
+                   if(attachmentsParts?.size ?: 0 > 3) attachmentsParts!![3] else null,
+                   if(attachmentsParts?.size ?: 0 > 4) attachmentsParts!![4] else null,
+                   if(attachmentsParts?.size ?: 0 > 5) attachmentsParts!![5] else null,
+                   if(attachmentsParts?.size ?: 0 > 6) attachmentsParts!![6] else null,
+                   if(attachmentsParts?.size ?: 0 > 7) attachmentsParts!![7] else null,
+                   if(attachmentsParts?.size ?: 0 > 8) attachmentsParts!![8] else null,
+                   if(attachmentsParts?.size ?: 0 > 9) attachmentsParts!![9] else null
+
                )
            }
            } catch (e: Throwable){

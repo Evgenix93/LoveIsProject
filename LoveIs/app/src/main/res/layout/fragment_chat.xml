@@ -51,6 +51,22 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="12.93dp"/>
 
+    <TextView
+        android:id="@+id/photoCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@drawable/bg_photocount"
+        tools:text="3"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@id/attachFileImageView"
+        app:layout_constraintBottom_toBottomOf="@id/attachFileImageView"
+        android:layout_marginStart="19dp"
+        android:layout_marginBottom="19dp"
+        />
+
     <ProgressBar
         android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"

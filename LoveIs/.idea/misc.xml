@@ -124,6 +124,7 @@
         <entry key="..\:/Projects/LoveIs/app/src/main/res/layout/item_video.xml" value="0.33016304347826086" />
         <entry key="..\:/Projects/LoveIs/app/src/main/res/layout/loading_fragment.xml" value="0.26902173913043476" />
         <entry key="..\:/Projects/LoveIs/app/src/main/res/layout/toolbar.xml" value="0.3654891304347826" />
+        <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/drawable/bg_photocount.xml" value="0.1655" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/drawable/cursor.xml" value="0.45" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/drawable/ic_line_1.xml" value="0.45" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/drawable/ic_line_2.xml" value="0.45" />
@@ -151,7 +152,7 @@
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_loveis_eventis_details.xml" value="0.25673652694610777" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_phone_number1.xml" value="0.5" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_phone_number2.xml" value="0.5" />
-        <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_profile.xml" value="0.5" />
+        <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_profile.xml" value="0.47962962962962963" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_registration1.xml" value="0.48703703703703705" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_registration2.xml" value="0.5" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/fragment_registration3.xml" value="0.33" />
@@ -169,6 +170,7 @@
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_loveis_eventis.xml" value="0.33" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_loveis_eventis_member.xml" value="0.4361111111111111" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_message.xml" value="0.5" />
+        <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_notification.xml" value="0.4272681196147998" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/item_user.xml" value="0.49029982363315694" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/layout/window_event_filter.xml" value="0.4272681196147998" />
         <entry key="..\:/android apps/LoveIsProject/LoveIsProject/LoveIs/app/src/main/res/mipmap-anydpi-v26/ic_launcher_love_is.xml" value="0.1655" />

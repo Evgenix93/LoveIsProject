@@ -43,7 +43,7 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onEventClick: (Eve
             binding.dateTextView.text = "${dateStringList[2].substringBefore("T")}.${dateStringList[1]}.${dateStringList[0]}"
             val timeString = loveIs.date.substringAfter("T").removeSuffix("+").split(":").subList(0,2).joinToString(":")
             binding.timeTextView.text = timeString
-            //binding.personCountTextView.text = "3"
+            //binding.personCountTextView.text = loveIs.participant
             //binding.personQuantityTextView.text = " / 10"
             binding.personCountTextView.isVisible = false
             binding.personQuantityTextView.isVisible = false
@@ -84,7 +84,7 @@ class LoveIsEventIsAdapter(val onClick: (LoveIs) -> Unit, val onEventClick: (Eve
             val timeString = eventIs.date.substringAfter("T").removeSuffix("+").split(":").subList(0,2).joinToString(":")
             binding.timeTextView.text = timeString
             binding.personCountTextView.text = (eventIs.participantsCount.toInt() + 1).toString()
-            binding.personQuantityTextView.text = " / 10"
+            binding.personQuantityTextView.text = " / ${eventIs.personsNumber}"
             binding.personCountTextView.isVisible = true
             binding.personQuantityTextView.isVisible = true
             binding.personIcon.isVisible = true

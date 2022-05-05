@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -68,9 +69,33 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
         binding.loveIsPersonsTextView.text =
             "Участники встречи (${eventIs.participantsCount.toInt() + 1}/${eventIs.personsNumber})"
         binding.personCountTextView.text = (eventIs.participantsCount.toInt() + 1).toString()
-        binding.personQuantityTextView.text = " / 10"
+        binding.personQuantityTextView.text = " / ${eventIs.personsNumber}"
 
         Log.d("debug", "participants ${eventIs.participantsCount}")
+
+        if(eventIs.telegramUrl != null){
+            binding.materialCardView2.isVisible = true
+            binding.materialCardView2.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = eventIs.telegramUrl.toUri()
+                }
+                if(requireContext().packageManager.resolveActivity(intent, 0) != null)
+                    startActivity(intent)
+            }
+        }
+        else binding.materialCardView2.isVisible = false
+
+        if(eventIs.whatsAppUrl != null){
+            binding.materialCardView3.isVisible = true
+            binding.materialCardView3.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = eventIs.whatsAppUrl.toUri()
+                }
+                if(requireContext().packageManager.resolveActivity(intent, 0) != null)
+                    startActivity(intent)
+            }
+        }
+        else binding.materialCardView3.isVisible = false
 
 
     }

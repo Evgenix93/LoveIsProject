@@ -264,7 +264,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 null
             }
             else -> {
-                stateLiveData.postValue(State.ErrorMessageState("checkToken error code: ${response?.code()}"))
+                //stateLiveData.postValue(State.ErrorMessageState("checkToken error code: ${response?.code()}"))
                 false
 
             }

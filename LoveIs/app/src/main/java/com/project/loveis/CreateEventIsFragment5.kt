@@ -68,21 +68,51 @@ class CreateEventIsFragment5 : Fragment(R.layout.fragment_create_loveis_eventis_
         }
     }
 
-
     private fun initEditText(){
         binding.dateTextView.setOnClickListener{
             MenuBottomDialogDateFragment(false, {day, month, year ->
+                val currentCalendar = Calendar.getInstance()
+                val choiceCalendar = Calendar.getInstance().apply { set(year, month, day) }
+                val timeDiff = choiceCalendar.timeInMillis - currentCalendar.timeInMillis
+                val currDay = currentCalendar.get(Calendar.DAY_OF_MONTH)
+                val currMonth = currentCalendar.get(Calendar.MONTH) + 1
+                val currYear = currentCalendar.get(Calendar.YEAR)
                 val dayStr = if(day < 10) "0$day" else day.toString()
                 val monthStr = if(month < 10) "0$month" else month.toString()
                 val yearStr = year.toString().takeLast(2)
-                binding.dateTextView.text = "$dayStr.$monthStr.$yearStr"
+                if(timeDiff >= 0)
+                    binding.dateTextView.text = "$dayStr.$monthStr.$yearStr"
+                else{
+                    val currDayStr = if(day < 10) "0$currDay" else currDay.toString()
+                    val currMonthStr = if(month < 10) "0$currMonth" else currMonth.toString()
+                    val currYearStr = currYear.toString().takeLast(2)
+                    binding.dateTextView.text = "$currDayStr.$currMonthStr.$currYearStr"
+                }
             }, {_,_-> }).show(childFragmentManager, null)
         }
 
         binding.timeTextView.setOnClickListener{
             MenuBottomDialogDateFragment(true, {_,_,_->}, {hour, minute ->
-                binding.timeTextView.text = "$hour:$minute"
+                val chosenDate = binding.dateTextView.text.split(".")
+                val currentCalendar = Calendar.getInstance()
+                val choiceCalendar = if(chosenDate.isNotEmpty()) Calendar.getInstance()
+                    .apply { set(chosenDate[2].prependIndent("20").toInt(), chosenDate[1].toInt() - 1, chosenDate[0].toInt(),
+                        hour, minute)}
+                else null
+                if(choiceCalendar != null) {
+                    val timeDiff = choiceCalendar.timeInMillis - currentCalendar.timeInMillis
+                    if(timeDiff >= 0)
+                        binding.timeTextView.text = "$hour:$minute"
+                    else
+                        binding.timeTextView.text =
+                            "${currentCalendar.get(Calendar.HOUR_OF_DAY)}:${currentCalendar.get(Calendar.MINUTE)}"
+
+                }else
+                    binding.timeTextView.text = "$hour:$minute"
             }).show(childFragmentManager, null)
         }
     }
+
+
+
 }

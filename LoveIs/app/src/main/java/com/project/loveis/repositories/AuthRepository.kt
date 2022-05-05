@@ -206,7 +206,8 @@ class AuthRepository(val context: Context) {
         Tokens.fireBaseToken = token
     }
 
-    suspend fun checkFileSize(uri: Uri): Boolean{
+    suspend fun checkFileSize(uri: Uri?): Boolean{
+        uri ?: return true
         return withContext(Dispatchers.IO){
             val file = File(context.cacheDir, "photofile.jpg")
             context.contentResolver.openInputStream(uri).use { input ->

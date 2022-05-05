@@ -18,6 +18,7 @@
         app:cardElevation="0dp">
 
         <LinearLayout
+            android:id="@+id/contentList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="14dp"
@@ -50,6 +51,168 @@
                     android:src="@drawable/cafe"
                     android:scaleType="centerCrop"/>
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard2"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard3"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard4"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard5"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard6"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard7"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard8"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard9"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoCard10"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoImageView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+
+
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -89,6 +252,159 @@
                 >
                 <ImageView
                     android:id="@+id/photoLeftImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard2"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard3"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard4"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard5"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard6"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard7"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard8"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard9"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cafe"
+                    android:scaleType="centerCrop"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/photoLeftCard10"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="12dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp"
+                >
+                <ImageView
+                    android:id="@+id/photoLeftImageView10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/cafe"

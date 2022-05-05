@@ -13,6 +13,7 @@ import com.project.loveis.R
 import com.project.loveis.databinding.ItemMessageBinding
 import com.project.loveis.models.ChatMessage
 import com.project.loveis.models.Message
+import com.project.loveis.util.toPhotoUrl
 
 class MessageAdapter(val context: Context, private val userId: Long): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
     private var messages = listOf<Message>()
@@ -60,21 +61,132 @@ class MessageAdapter(val context: Context, private val userId: Long): RecyclerVi
             binding.messageLeftCard.isVisible = false
             binding.photoCard.isVisible = false
             binding.messageTextView.text = message.text
+            binding.messageTextView.isVisible = true
+
+            binding.photoCard.isVisible = false
+            binding.photoCard2.isVisible = false
+            binding.photoCard3.isVisible = false
+            binding.photoCard4.isVisible = false
+            binding.photoCard5.isVisible = false
+            binding.photoCard6.isVisible = false
+            binding.photoCard7.isVisible = false
+            binding.photoCard8.isVisible = false
+            binding.photoCard9.isVisible = false
+            binding.photoCard10.isVisible = false
+
+            binding.photoLeftCard.isVisible = false
+            binding.photoLeftCard2.isVisible = false
+            binding.photoLeftCard3.isVisible = false
+            binding.photoLeftCard4.isVisible = false
+            binding.photoLeftCard5.isVisible = false
+            binding.photoLeftCard6.isVisible = false
+            binding.photoLeftCard7.isVisible = false
+            binding.photoLeftCard8.isVisible = false
+            binding.photoLeftCard9.isVisible = false
+            binding.photoLeftCard10.isVisible = false
         }
 
-        private fun bindMyMediaMessage(message: Message.MyMediaMessage){
+        private fun bindMyMediaMessage(message: Message.MyMediaMessage) {
             binding.leftTaleImageView.isVisible = false
             binding.rightTaleImageView.isVisible = true
             binding.messageCard.isVisible = true
             binding.messageLeftCard.isVisible = false
-            binding.photoCard.isVisible = true
+            //binding.photoCard.isVisible = true
             binding.messageTextView.text = message.text
+            binding.messageTextView.isVisible = message.text != null
 
-            val mediaUrl = "https://loveis.scratch.studio" + message.url
-            Log.d("MyDebug", "url = $mediaUrl")
-            Glide.with(binding.root)
-                .load(mediaUrl)
-                .into(binding.photoImageView)
+            binding.photoCard.isVisible = false
+            binding.photoCard2.isVisible = false
+            binding.photoCard3.isVisible = false
+            binding.photoCard4.isVisible = false
+            binding.photoCard5.isVisible = false
+            binding.photoCard6.isVisible = false
+            binding.photoCard7.isVisible = false
+            binding.photoCard8.isVisible = false
+            binding.photoCard9.isVisible = false
+            binding.photoCard10.isVisible = false
+
+            binding.photoLeftCard.isVisible = false
+            binding.photoLeftCard2.isVisible = false
+            binding.photoLeftCard3.isVisible = false
+            binding.photoLeftCard4.isVisible = false
+            binding.photoLeftCard5.isVisible = false
+            binding.photoLeftCard6.isVisible = false
+            binding.photoLeftCard7.isVisible = false
+            binding.photoLeftCard8.isVisible = false
+            binding.photoLeftCard9.isVisible = false
+            binding.photoLeftCard10.isVisible = false
+
+            message.urls.forEachIndexed { index, url ->
+                //binding.contentList.addView(binding.photoCard)
+                when(index){
+                    0 -> {
+                        binding.photoCard.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView)
+                    }
+                    1 -> {
+                        binding.photoCard2.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView2)
+                    }
+                    2 -> {
+                        binding.photoCard3.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView3)
+                    }
+                    3 -> {
+                        binding.photoCard4.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView4)
+                    }
+                    4 -> {
+                        binding.photoCard5.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView5)
+                    }
+                    5 -> {
+                        binding.photoCard6.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView6)
+                    }
+                    6 -> {
+                        binding.photoCard7.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView7)
+                    }
+                    7 -> {
+                        binding.photoCard8.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView8)
+                    }
+                    8 -> {
+                        binding.photoCard9.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView9)
+                    }
+                    9 -> {
+                        binding.photoCard10.isVisible = true
+                        Glide.with(binding.root)
+                            .load(url.toPhotoUrl())
+                            .into(binding.photoImageView10)
+                    }
+                }
+
+                //val mediaUrl = "https://loveis.scratch.studio" + it
+                //Log.d("MyDebug", "url = $mediaUrl")
+
+
+            }
         }
 
         private fun bindCompanionMessage(message: Message.CompanionMessage){
@@ -84,6 +196,29 @@ class MessageAdapter(val context: Context, private val userId: Long): RecyclerVi
             binding.messageLeftCard.isVisible = true
             binding.photoLeftCard.isVisible = false
             binding.messageLeftTextView.text = message.text
+            binding.messageLeftTextView.isVisible = true
+
+            binding.photoCard.isVisible = false
+            binding.photoCard2.isVisible = false
+            binding.photoCard3.isVisible = false
+            binding.photoCard4.isVisible = false
+            binding.photoCard5.isVisible = false
+            binding.photoCard6.isVisible = false
+            binding.photoCard7.isVisible = false
+            binding.photoCard8.isVisible = false
+            binding.photoCard9.isVisible = false
+            binding.photoCard10.isVisible = false
+
+            binding.photoLeftCard.isVisible = false
+            binding.photoLeftCard2.isVisible = false
+            binding.photoLeftCard3.isVisible = false
+            binding.photoLeftCard4.isVisible = false
+            binding.photoLeftCard5.isVisible = false
+            binding.photoLeftCard6.isVisible = false
+            binding.photoLeftCard7.isVisible = false
+            binding.photoLeftCard8.isVisible = false
+            binding.photoLeftCard9.isVisible = false
+            binding.photoLeftCard10.isVisible = false
         }
 
        private fun bindCompanionMediaMessage(message: Message.CompanionMediaMessage){
@@ -91,13 +226,108 @@ class MessageAdapter(val context: Context, private val userId: Long): RecyclerVi
            binding.rightTaleImageView.isVisible = false
            binding.messageCard.isVisible = false
            binding.messageLeftCard.isVisible = true
-           binding.photoLeftCard.isVisible = true
+           //binding.photoLeftCard.isVisible = true
            binding.messageLeftTextView.text = message.text
+           binding.messageLeftTextView.isVisible = message.text != null
 
-           val mediaUrl = "https://loveis.scratch.studio" + message.url
-           Glide.with(binding.root)
-               .load(mediaUrl)
-               .into(binding.photoLeftImageView)
+           binding.photoCard.isVisible = false
+           binding.photoCard2.isVisible = false
+           binding.photoCard3.isVisible = false
+           binding.photoCard4.isVisible = false
+           binding.photoCard5.isVisible = false
+           binding.photoCard6.isVisible = false
+           binding.photoCard7.isVisible = false
+           binding.photoCard8.isVisible = false
+           binding.photoCard9.isVisible = false
+           binding.photoCard10.isVisible = false
+
+           binding.photoLeftCard.isVisible = false
+           binding.photoLeftCard2.isVisible = false
+           binding.photoLeftCard3.isVisible = false
+           binding.photoLeftCard4.isVisible = false
+           binding.photoLeftCard5.isVisible = false
+           binding.photoLeftCard6.isVisible = false
+           binding.photoLeftCard7.isVisible = false
+           binding.photoLeftCard8.isVisible = false
+           binding.photoLeftCard9.isVisible = false
+           binding.photoLeftCard10.isVisible = false
+
+           message.urls.forEachIndexed { index, url ->
+               //binding.contentList.addView(binding.photoCard)
+               when(index){
+                   0 -> {
+                       binding.photoLeftCard.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView)
+                   }
+                   1 -> {
+                       binding.photoLeftCard2.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView2)
+                   }
+                   2 -> {
+                       binding.photoLeftCard3.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView3)
+                   }
+                   3 -> {
+                       binding.photoLeftCard4.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView4)
+                   }
+                   4 -> {
+                       binding.photoLeftCard5.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView5)
+                   }
+                   5 -> {
+                       binding.photoLeftCard6.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView6)
+                   }
+                   6 -> {
+                       binding.photoLeftCard7.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView7)
+                   }
+                   7 -> {
+                       binding.photoLeftCard8.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView8)
+                   }
+                   8 -> {
+                       binding.photoLeftCard9.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView9)
+                   }
+                   9 -> {
+                       binding.photoLeftCard10.isVisible = true
+                       Glide.with(binding.root)
+                           .load(url.toPhotoUrl())
+                           .into(binding.photoLeftImageView10)
+                   }
+               }
+
+               //val mediaUrl = "https://loveis.scratch.studio" + it
+               //Log.d("MyDebug", "url = $mediaUrl")
+
+
+           }
+
+
+           //val mediaUrl = "https://loveis.scratch.studio" + message.urls
+           //Glide.with(binding.root)
+             //  .load(mediaUrl)
+               //.into(binding.photoLeftImageView)
        }
     }
 
@@ -110,14 +340,14 @@ class MessageAdapter(val context: Context, private val userId: Long): RecyclerVi
         return chatMessages.map{
             if(it.user.id != userId)
                 if(it.attachments.isEmpty())
-                    Message.MyMessage(it.content)
+                    Message.MyMessage(it.content!!)
                 else
-                    Message.MyMediaMessage(it.content, it.attachments[0]["url"]!!)
+                    Message.MyMediaMessage(it.content, it.attachments.map { photoMap -> photoMap["url"]!!})
             else
                 if(it.attachments.isEmpty())
-                    Message.CompanionMessage(it.content)
+                    Message.CompanionMessage(it.content!!)
                 else
-                    Message.CompanionMediaMessage(it.content, it.attachments[0]["url"]!!)
+                    Message.CompanionMediaMessage(it.content, it.attachments.map { photoMap -> photoMap["url"]!!})
         }
     }
 

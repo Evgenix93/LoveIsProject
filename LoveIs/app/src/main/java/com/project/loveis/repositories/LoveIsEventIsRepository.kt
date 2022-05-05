@@ -1,6 +1,7 @@
 package com.project.loveis.repositories
 
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
 import com.project.loveis.models.*
@@ -195,7 +196,7 @@ class LoveIsEventIsRepository {
     fun getShareEventIntent(id: Long): Intent{
         return Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "https://loveis/event/$id")
+            putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/event/$id")
             type = "text/plain"
         }
     }
@@ -203,8 +204,9 @@ class LoveIsEventIsRepository {
     fun getShareLoveIsIntent(id: Long): Intent{
         return Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "https://loveis/meeting/$id")
+            putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/meeting/$id")
             type = "text/plain"
+            //data = Uri.parse("https://loveis/meeting/$id")
         }
     }
 

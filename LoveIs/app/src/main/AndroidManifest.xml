@@ -33,7 +33,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="https"/>
-                <data android:host="loveis"/>
+                <data android:host="loveis.ru"/>
             </intent-filter>
         </activity>
 

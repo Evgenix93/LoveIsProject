@@ -183,7 +183,13 @@ class MainActivity : AppCompatActivity() {
 
     fun showSuccessNotification() {
         CoroutineScope(Dispatchers.Main).launch {
-            binding.notification.root.isVisible = true
+            with(binding.notification) {
+                notificationIcon.setImageResource(R.drawable.ic_check)
+                notificationIcon.drawable.setTint(resources.getColor(R.color.green))
+                notificationTextView.setTextColor(resources.getColor(R.color.green))
+                notificationTextView.text = "Успех"
+                root.isVisible = true
+            }
             delay(2000)
             binding.notification.root.isVisible = false
         }

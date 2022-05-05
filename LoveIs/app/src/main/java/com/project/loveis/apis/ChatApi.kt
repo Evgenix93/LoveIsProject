@@ -11,7 +11,16 @@ interface ChatApi {
 
     @Multipart
     @POST("chat/{userId}/")
-   suspend fun sendMessage(@Path("userId") userId: Long, @Part message: MultipartBody.Part, @Part attachment: MultipartBody.Part?): Response<Any>
+   suspend fun sendMessage(@Path("userId") userId: Long, @Part message: MultipartBody.Part?, @Part attachment: MultipartBody.Part?,
+                           @Part attachment2: MultipartBody.Part? = null,
+                           @Part attachment3: MultipartBody.Part? = null,
+                           @Part attachment4: MultipartBody.Part? = null,
+                           @Part attachment5: MultipartBody.Part? = null,
+                           @Part attachment6: MultipartBody.Part? = null,
+                           @Part attachment7: MultipartBody.Part? = null,
+                           @Part attachment8: MultipartBody.Part? = null,
+                           @Part attachment9: MultipartBody.Part? = null,
+                           @Part attachment10: MultipartBody.Part? = null): Response<Any>
 
    @GET("chat/{userId}/")
    suspend fun getMessages(@Path("userId") userId: Long): Response<Dialog>

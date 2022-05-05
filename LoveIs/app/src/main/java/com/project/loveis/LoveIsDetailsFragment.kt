@@ -1,9 +1,11 @@
 package com.project.loveis
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -99,6 +101,33 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
             }
 
         }
+
+        if(loveIs.telegramUrl != null){
+            binding.materialCardView2.isVisible = true
+            binding.materialCardView2.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = loveIs.telegramUrl.toUri()
+                }
+                if(requireContext().packageManager.resolveActivity(intent, 0) != null)
+                    startActivity(intent)
+            }
+        }
+        else binding.materialCardView2.isVisible = false
+
+        if(loveIs.whatsAppUrl != null){
+            binding.materialCardView3.isVisible = true
+            binding.materialCardView3.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = loveIs.whatsAppUrl.toUri()
+                }
+                if(requireContext().packageManager.resolveActivity(intent, 0) != null)
+                    startActivity(intent)
+            }
+        }
+        else binding.materialCardView3.isVisible = false
+
+
+
 
 
 

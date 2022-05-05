@@ -2,6 +2,7 @@ package com.project.loveis
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,6 +21,10 @@ class Registration3Fragment : Fragment(R.layout.fragment_registration3) {
 
     private fun setOnClickListener() {
         binding.continueBtn.setOnClickListener {
+            if(binding.nameEditText.text.isNullOrBlank()){
+                Toast.makeText(requireContext(), "Введите имя", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             findNavController().navigate(
                 Registration3FragmentDirections.actionRegistration3FragmentToRegistration4Fragment(
                     phone = args.phone,
