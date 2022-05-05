@@ -17,6 +17,7 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
     private val authRepository = AuthRepository(app)
     private val mainRepository = MainRepository(app)
     private val stateLiveData = MutableLiveData<State>(State.StartState)
+    private lateinit var currentUser: User
 
     val state: LiveData<State>
         get() = stateLiveData
@@ -46,6 +47,12 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
         }
 
     }
+
+    fun setCurrentUser(user: User){
+        currentUser = user
+    }
+
+    fun getCurrentUser() = currentUser
 
     fun getHistoryLoveIsMeetings(page: Int = 1, size: Int = 25) {
         viewModelScope.launch {

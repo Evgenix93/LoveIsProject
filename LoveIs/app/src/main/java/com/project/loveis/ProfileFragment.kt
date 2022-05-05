@@ -34,14 +34,14 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("MyDebug", "profileFragment onViewCreated")
         initToolbar()
         showBottomNavigation()
         setClickListeners()
         initFilePickerLaunchers()
         initPermissionLauncher()
         bindViewModel()
-        performAuth()
-
+        getUserInfo()
     }
 
     private fun sendFcmToken(){
@@ -66,6 +66,10 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             }
 
         }
+    }
+
+    private fun getUserInfo(){
+        viewModel.getUserInfo()
     }
 
     private fun showBottomNavigation(){
@@ -169,7 +173,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 is State.StartState -> {
                 }
                 is State.SuccessState -> {
-                    viewModel.getUserInfo()}
+                   // viewModel.getUserInfo()
+                }
                 is State.LoadingState -> {showLoading(true)}
                 is State.LoadedSingleState -> {
                     showLoading(false)

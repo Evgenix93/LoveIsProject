@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -51,6 +52,7 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        removeNotification()
         initToolbar()
         (requireActivity() as MainActivity).hideBottomNavigationBar(true)
         initList()
@@ -74,6 +76,10 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
 
     private fun unregisterReceiver(){
         LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(messageReceiver)
+    }
+
+    private fun removeNotification(){
+        NotificationManagerCompat.from(requireContext()).cancel(args.userId.toInt())
     }
 
     private fun initList(){

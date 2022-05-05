@@ -61,12 +61,6 @@ class AuthRepository(val context: Context) {
 
     suspend fun getToken(tokenData: TokenData): Response<TokenResponse>? {
         return try {
-            //val prefs = context.getSharedPreferences(USER_PHONE_CODE, Context.MODE_PRIVATE)
-            //val phone = prefs.getString(PHONE_KEY, null)
-            //val code = prefs.getString(CODE_KEY, null)
-            //if (phone == null || code == null) {
-              //  return 1
-            //}
             val response = authApi.getToken(tokenData)
             if (response.code() == 200) {
                 Tokens.token = "Bearer ${response.body()?.access}"

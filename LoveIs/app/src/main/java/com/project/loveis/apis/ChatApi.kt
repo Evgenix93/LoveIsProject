@@ -11,7 +11,7 @@ interface ChatApi {
 
     @Multipart
     @POST("chat/{userId}/")
-   suspend fun sendMessage(@Path("userId") userId: Long, @Part message: MultipartBody.Part, @Part attachment: MultipartBody.Part?): Response<Any>
+   suspend fun sendMessage(@Path("userId") userId: Long, @Part message: MultipartBody.Part?, @Part attachment: MultipartBody.Part?): Response<Any>
 
    @GET("chat/{userId}/")
    suspend fun getMessages(@Path("userId") userId: Long): Response<Dialog>

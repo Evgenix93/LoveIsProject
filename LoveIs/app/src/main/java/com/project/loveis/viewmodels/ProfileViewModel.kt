@@ -271,13 +271,9 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-
-
     private suspend fun getErrorFromResponse(response: ResponseBody): String{
         return withContext(Dispatchers.IO) {
             response.string()
         }
     }
-
-
 }

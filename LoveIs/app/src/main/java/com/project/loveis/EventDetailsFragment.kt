@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.project.loveis.adapters.MemberAdapter
+import com.project.loveis.adapters.UsersViewPagerAdapter
 import com.project.loveis.databinding.FragmentLoveisEventisDetailsBinding
 import com.project.loveis.models.EventIs
 import com.project.loveis.models.User
@@ -37,6 +40,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        removeNotification()
         initToolbar()
         bind(args.eventIs)
         (requireActivity() as MainActivity).hideBottomNavigationBar(true)
@@ -44,6 +48,9 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
         getEventById()
     }
 
+    private fun removeNotification(){
+        NotificationManagerCompat.from(requireContext()).cancel(args.eventId.toInt())
+    }
 
     private fun bind(eventIs: EventIs?) {
         eventIs ?: return
@@ -88,10 +95,15 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
     }
 
     private fun initList() {
-        memberAdapter = MemberAdapter(false){ member ->
+        memberAdapter = MemberAdapter(false,{ member ->
             viewModel.removeParticipantFromEventIs(currentEventIs.id, member.id!!)
+        },{user, currentUser ->
+            findNavController().navigate(R.id.userFragment, bundleOf(
+                UsersViewPagerAdapter.USER to currentUser,
+                UsersViewPagerAdapter.USERS to user
+            ))
+        })
 
-        }
         with(binding.loveIsMembers) {
             adapter = memberAdapter
             layoutManager = LinearLayoutManager(requireContext())
