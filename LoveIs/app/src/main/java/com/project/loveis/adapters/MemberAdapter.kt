@@ -13,17 +13,14 @@ import com.project.loveis.databinding.ItemLoveisEventisMemberBinding
 import com.project.loveis.models.User
 import java.util.*
 
-class MemberAdapter(val isLoveIs: Boolean, val onRemovePerson: (User) -> Unit): RecyclerView.Adapter<MemberAdapter.MemberViewHolder>() {
+class MemberAdapter(val isLoveIs: Boolean, val onRemovePerson: (User) -> Unit, private val onClick:(User, User) -> Unit): RecyclerView.Adapter<MemberAdapter.MemberViewHolder>() {
     private var items = listOf<User>()
     private lateinit var adminUser: User
     private lateinit var currentUser: User
     private var slotsCount = 0
 
-    class MemberViewHolder(view: View, private val isLoveIs: Boolean, val onRemovePerson: (Int) -> Unit): RecyclerView.ViewHolder(view){
+   inner class MemberViewHolder(view: View, private val isLoveIs: Boolean, val onRemovePerson: (Int) -> Unit): RecyclerView.ViewHolder(view){
         private val binding: ItemLoveisEventisMemberBinding by viewBinding()
-
-
-
 
         fun bind(member: User?, adminUser: User, currentUser: User){
             if(member == null) {
@@ -64,6 +61,7 @@ class MemberAdapter(val isLoveIs: Boolean, val onRemovePerson: (User) -> Unit): 
                 onRemovePerson(adapterPosition)
             }
 
+           binding.root.setOnClickListener {onClick(member, currentUser)}
         }
     }
 

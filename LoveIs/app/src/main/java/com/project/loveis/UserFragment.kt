@@ -1,6 +1,8 @@
 package com.project.loveis
 
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.location.Location
 import android.os.Bundle
@@ -97,9 +99,19 @@ class UserFragment : Fragment(R.layout.item_user) {
         }
 
         binding.shareBtn.setOnClickListener {
-            onShare(user.id!!)
+            shareUser(user)
         }
 
+    }
+
+    private fun shareUser(user: User){
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/user/${user.id}")
+            type = "text/plain"
+        }
+        if(requireContext().packageManager.resolveActivity(shareIntent, PackageManager.MATCH_DEFAULT_ONLY) != null)
+          startActivity(shareIntent)
     }
 
     private fun initViewPager() {

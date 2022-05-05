@@ -604,6 +604,9 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_phoneNumber1Fragment"
+            app:destination="@id/phoneNumber1Fragment" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"

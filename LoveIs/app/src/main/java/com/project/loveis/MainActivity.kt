@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                     if(findNavController(R.id.navHostFragment).currentDestination?.id != R.id.chatFragment)
                         onMessageReceived(it.from!!)
 
-                if(it.type.contains("loveis") == true)
+                if(it.type.contains("loveis"))
                    viewModel.getLoveIsById(it.meetingId!!)
 
         }
@@ -109,29 +109,20 @@ class MainActivity : AppCompatActivity() {
         Log.d("MyDebug", "getLong extra = ${intent.getLongExtra(LoveIsDetailsFragment.LOVE, 0)}")
         val pendingIntent = PendingIntent.getActivity(this, 123, intent,
             PendingIntent.FLAG_UPDATE_CURRENT)
-        val status = loveIs.status
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        NotificationManagerCompat.from(this).notify(1, Notification.Builder(this, NotificationChannels.IMPORTANT_CHANNEL_ID)
+        val notification = NotificationCompat.Builder(this, NotificationChannels.IMPORTANT_CHANNEL_ID)
             .setContentTitle("Love Is")
             .setContentText(
-                when(status){
+                when(loveIs.status){
                     "create" -> "Пользователь ${loveIs.invitingUser.name} прислал вам Love Is"
                     "accept" -> "Пользователь ${loveIs.invitingUser.name} принял ваш Love Is"
                     "cancel" -> "Пользователь ${loveIs.invitingUser.name} отменил ваш Love Is"
                     else -> "Пользователь ${loveIs.invitingUser.name} прислал вам Love Is"
                 }
-                )
+            )
             .setSmallIcon(R.drawable.love_is)
             .setContentIntent(pendingIntent)
-            .build())
-        else{
-            NotificationManagerCompat.from(this).notify(1, Notification.Builder(this)
-                .setContentTitle("Love Is")
-                .setContentText("Вам прислал Love Is ${loveIs.invitingUser.name}")
-                .setSmallIcon(R.drawable.love_is)
-                .setContentIntent(pendingIntent)
-                .build())
-        }
+            .build()
+        NotificationManagerCompat.from(this).notify(loveIs.id.toInt(), notification)
     }
 
     private fun initBottomNavBar() {
