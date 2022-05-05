@@ -90,10 +90,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
                 val diffMillis = System.currentTimeMillis() - calendar.timeInMillis
                 binding.finishBtn.text = "Завершить"
         binding.finishBtn.setOnClickListener { completeMeeting() }
-                if(diffMillis/1000 < 3600){
-                    binding.finishBtn.isVisible = false
-
-                }
+        binding.finishBtn.isVisible = diffMillis/1000 >= 3600
 
         if(args.filterType == MeetingFilterType.INCOMING.value){
             binding.finishBtn.isVisible = true
@@ -157,7 +154,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
     }
 
     private fun initList() {
-        personAdapter = MemberAdapter(isLoveIs = true, {}, {user, currentUser ->
+        personAdapter = MemberAdapter(isLoveIs = true, currentLoveIs.status, {}, {user, currentUser ->
             findNavController().navigate(R.id.userFragment, bundleOf(
                 UsersViewPagerAdapter.USER to currentUser,
                 UsersViewPagerAdapter.USERS to user
