@@ -13,7 +13,7 @@ import com.project.loveis.databinding.ItemLoveisEventisMemberBinding
 import com.project.loveis.models.User
 import java.util.*
 
-class MemberAdapter(val isLoveIs: Boolean, val onRemovePerson: (User) -> Unit, private val onClick:(User, User) -> Unit): RecyclerView.Adapter<MemberAdapter.MemberViewHolder>() {
+class MemberAdapter(private val isLoveIs: Boolean, private val status: String, private val onRemovePerson: (User) -> Unit, private val onClick:(User, User) -> Unit): RecyclerView.Adapter<MemberAdapter.MemberViewHolder>() {
     private var items = listOf<User>()
     private lateinit var adminUser: User
     private lateinit var currentUser: User
@@ -57,6 +57,7 @@ class MemberAdapter(val isLoveIs: Boolean, val onRemovePerson: (User) -> Unit, p
             if(member.phone == adminUser.phone)
                 binding.personAgeTextView.text = "Администратор"
 
+            binding.removePersonBtn.isVisible = status == "completed" || status == "canceled" || status == "not_happen"
             binding.removePersonBtn.setOnClickListener {
                 onRemovePerson(adapterPosition)
             }

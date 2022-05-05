@@ -120,7 +120,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
     }
 
     private fun initList() {
-        memberAdapter = MemberAdapter(false,{ member ->
+        memberAdapter = MemberAdapter(false, currentEventIs.status, { member ->
             viewModel.removeParticipantFromEventIs(currentEventIs.id, member.id!!)
         },{user, currentUser ->
             findNavController().navigate(R.id.userFragment, bundleOf(
@@ -133,13 +133,16 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
             adapter = memberAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-
         }
     }
 
     private fun bindViewModel() {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
+                is State.SuccessState -> {
+                    showToast("Event Is начат успешно")
+                    findNavController().popBackStack()
+                }
                 is State.LoadingState -> {}
                 is State.LoadedEventMembers -> {
                     val members = listOf(currentEventIs.owner) + state.members
@@ -167,8 +170,6 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
 
                 }
             }
-
-
         })
     }
 
@@ -181,10 +182,14 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
     }
 
     private fun initActionButton() {
+        Log.d("MyDebug", "owner phone = ${currentEventIs.owner.phone}, currentUser phone = ${currentUser.phone}")
         if (currentEventIs.owner.phone == currentUser.phone) {
-            binding.finishBtn.text = "Начать"
+           // binding.finishBtn.text = "Начать"
             binding.finishBtn.setOnClickListener {
+                if(currentEventIs.participantsCount.toInt() + 1 >= 3)
                 viewModel.completeEventIs(currentEventIs.id)
+                else
+                    showToast("Количество участников события не может быть меньше трёх человек")
             }
 
             val dateStringList = currentEventIs.date.split("-")
@@ -206,8 +211,8 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
             binding.finishBtn.isVisible =
                 diffMillis / 1000 >= 0 && currentEventIs.status != MeetingStatus.COMPLETE.value
 
-
         } else {
+            binding.finishBtn.isVisible = true
             binding.finishBtn.text = "Присоединиться"
             binding.finishBtn.setOnClickListener {
                 viewModel.joinEventIs(currentEventIs.id)
