@@ -124,6 +124,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
             viewModel.removeParticipantFromEventIs(currentEventIs.id, member.id!!)
         },{user, currentUser ->
             findNavController().navigate(R.id.userFragment, bundleOf(
+                UsersViewPagerAdapter.IS_LIST to false,
                 UsersViewPagerAdapter.USER to currentUser,
                 UsersViewPagerAdapter.USERS to user
             ))

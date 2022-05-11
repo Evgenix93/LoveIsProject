@@ -156,6 +156,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
     private fun initList() {
         personAdapter = MemberAdapter(isLoveIs = true, currentLoveIs.status, {}, {user, currentUser ->
             findNavController().navigate(R.id.userFragment, bundleOf(
+                UsersViewPagerAdapter.IS_LIST to false,
                 UsersViewPagerAdapter.USER to currentUser,
                 UsersViewPagerAdapter.USERS to user
             ))

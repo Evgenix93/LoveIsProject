@@ -74,6 +74,13 @@ interface LoveIsEventIsApi {
         @Query("type") type: String
     ): Response<EventIsListResult>
 
+    @GET("event/")
+    suspend fun getMyEventIsMeetings(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+        @Query("status") type: String
+    ): Response<EventIsListResult>
+
     @GET("event/participants/{event_id}")
     suspend fun getEventMembers(
         @Path("event_id") eventId: Long,

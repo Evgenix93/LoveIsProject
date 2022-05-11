@@ -21,6 +21,7 @@ class UsersViewPagerAdapter(fragment: Fragment, private val onClick: () -> Unit,
     override fun createFragment(position: Int): Fragment {
         Log.d("MyDebug", "createFragment position = $position")
        return UserFragment.newInstance(onClick, onShare).apply { arguments = Bundle().apply {
+           putBoolean(IS_LIST, true)
            putParcelable(USER, currentUser)
            putParcelable(USERS, users[position])
        } }
@@ -41,5 +42,6 @@ class UsersViewPagerAdapter(fragment: Fragment, private val onClick: () -> Unit,
     companion object {
         const val USER = "user"
         const val USERS = "users"
+        const val IS_LIST = "isList"
     }
 }

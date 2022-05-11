@@ -47,6 +47,7 @@ class DialogsFragment: Fragment(R.layout.fragment_dialogs) {
             findNavController().navigate(DialogsFragmentDirections.actionDialogsFragmentToChatFragment(it.id!!, it.name))
         }, {
             findNavController().navigate(R.id.userFragment, Bundle().apply{
+                putBoolean(UsersViewPagerAdapter.IS_LIST, false)
                 putParcelable(UsersViewPagerAdapter.USER, viewModel.getCurrentUser())
                 putParcelable(UsersViewPagerAdapter.USERS, it)
             })

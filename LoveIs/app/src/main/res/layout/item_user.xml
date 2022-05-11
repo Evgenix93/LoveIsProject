@@ -7,6 +7,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/photoCardView"
         android:layout_width="match_parent"
@@ -17,7 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         >
 
         <androidx.viewpager2.widget.ViewPager2
@@ -35,7 +39,7 @@
         android:src="@drawable/share"
         app:tint="@color/white"
         app:backgroundTint="#80000000"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="6dp"
