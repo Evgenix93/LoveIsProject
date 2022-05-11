@@ -59,7 +59,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
         eventIs ?: return
         currentEventIs = eventIs
         getCurrentUser()
-        initList()
+        //initList()
         Log.d("debug", eventIs.toString())
 
         Glide.with(this)
@@ -156,6 +156,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
                     updateMembersCount(members.size)
                 }
                 is State.LoadedCurrentUser -> {
+                    initList()
                     currentUser = state.user
                     viewModel.getEventIsMembers(eventIsId = currentEventIs.id)
 
