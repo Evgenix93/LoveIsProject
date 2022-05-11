@@ -178,6 +178,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is State.LoadedCurrentUser -> {
+                    initList()
 
                     val members = listOf(
                             currentLoveIs.invitingUser,
@@ -195,7 +196,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
                 is State.SuccessState -> findNavController().popBackStack()
                 is State.LoveIsSingleMeetingLoadedState -> {
                     bind(state.meeting)
-                    initList()
+
                 }
                 is State.LoadedIntent -> startActivity(state.intent)
                 is State.SubsriptionNeededState -> findNavController().navigate(LoveIsDetailsFragmentDirections.actionLoveIsDetailsFragmentToPremiumFragment())
