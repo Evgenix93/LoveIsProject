@@ -41,7 +41,7 @@ class OperationAdapter: RecyclerView.Adapter<OperationAdapter.Holder>() {
                     setOperationView(operation.value, "Взнос за участие в EventIs", false)
                 }
                 OperationType.EventIsIncome -> {
-                    setOperationView(operation.value, "Взнос Event is от Username", true)
+                    setOperationView(operation.value, "Взнос Event is от ${operation.extra!!["user"]?.name}", true)
                 }
                 OperationType.Subscription -> {
                     setOperationView(operation.value, "Подписка love is", false)

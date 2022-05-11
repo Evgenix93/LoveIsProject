@@ -139,7 +139,10 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
                     Toast.makeText(requireContext(), "error ${state.code}", Toast.LENGTH_LONG).show()
                     binding.loadingProgressBar.isVisible = false
                 }
-                is State.ErrorMessageState -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                is State.ErrorMessageState -> {
+                    binding.loadingProgressBar.isVisible = false
+                    Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

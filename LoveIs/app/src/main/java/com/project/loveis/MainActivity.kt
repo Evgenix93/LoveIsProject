@@ -279,8 +279,10 @@ class MainActivity : AppCompatActivity() {
 
          if(intent.data == null) {
              Log.d("MyDebug", "onLoveIs Intent")
-            if (intent.hasExtra(LoveIsDetailsFragment.LOVE))
+            if (intent.hasExtra(LoveIsDetailsFragment.LOVE)) {
                 handleLoveIsIntent(intent)
+                return
+            }
         }
 
          val userId = intent.getLongExtra(MESSAGE_FROM, -1)
@@ -360,8 +362,11 @@ class MainActivity : AppCompatActivity() {
            "create" -> MeetingFilterType.INCOMING
            else -> MeetingFilterType.ACTIVE
        }
-        findNavController(R.id.navHostFragment).navigate(R.id.loveIsDetailsFragment, bundleOf("loveIsId" to
-              intent.getLongExtra(LoveIsDetailsFragment.LOVE, 0),
-        "filterType" to type.value))
+       findNavController(R.id.navHostFragment)
+           .navigate(ProfileFragmentDirections
+               .actionProfileFragmentToLoveIsDetailsFragment(
+                   loveIsId = intent.getLongExtra(LoveIsDetailsFragment.LOVE, -1),
+                   filterType = type.value))
+
     }
 }

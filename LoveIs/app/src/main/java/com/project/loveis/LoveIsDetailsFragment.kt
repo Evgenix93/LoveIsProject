@@ -45,7 +45,7 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
         initToolbar()
         bind(args.loveIs)
         (requireActivity() as MainActivity).hideBottomNavigationBar(true)
-        initList()
+
         bindViewModel()
         getLoveIsById(args.loveIsId)
 
@@ -192,7 +192,10 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
 
                 }
                 is State.SuccessState -> findNavController().popBackStack()
-                is State.LoveIsSingleMeetingLoadedState -> bind(state.meeting)
+                is State.LoveIsSingleMeetingLoadedState -> {
+                    bind(state.meeting)
+                    initList()
+                }
                 is State.LoadedIntent -> startActivity(state.intent)
                 is State.SubsriptionNeededState -> findNavController().navigate(LoveIsDetailsFragmentDirections.actionLoveIsDetailsFragmentToPremiumFragment())
                 is State.ErrorState -> {

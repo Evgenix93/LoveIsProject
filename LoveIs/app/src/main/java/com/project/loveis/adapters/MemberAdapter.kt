@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.project.loveis.R
 import com.project.loveis.databinding.ItemLoveisEventisMemberBinding
 import com.project.loveis.models.User
+import com.project.loveis.util.MeetingStatus
 import java.util.*
 
 class MemberAdapter(private val isLoveIs: Boolean, private val status: String, private val onRemovePerson: (User) -> Unit, private val onClick:(User, User) -> Unit): RecyclerView.Adapter<MemberAdapter.MemberViewHolder>() {
@@ -18,6 +19,7 @@ class MemberAdapter(private val isLoveIs: Boolean, private val status: String, p
     private lateinit var adminUser: User
     private lateinit var currentUser: User
     private var slotsCount = 0
+    private var isFree = true
 
    inner class MemberViewHolder(view: View, private val isLoveIs: Boolean, val onRemovePerson: (Int) -> Unit): RecyclerView.ViewHolder(view){
         private val binding: ItemLoveisEventisMemberBinding by viewBinding()
@@ -53,11 +55,12 @@ class MemberAdapter(private val isLoveIs: Boolean, private val status: String, p
 
             }else
                 binding.removePersonBtn.isVisible = isLoveIs.not() && currentUser.phone == adminUser.phone
+                        && status == MeetingStatus.CREATE.value && isFree
 
             if(member.phone == adminUser.phone)
                 binding.personAgeTextView.text = "Администратор"
 
-            binding.removePersonBtn.isVisible = status == "completed" || status == "canceled" || status == "not_happen"
+            //binding.removePersonBtn.isVisible = status == MeetingStatus.CREATE.value //"completed" || status == "canceled" || status == "not_happen"
             binding.removePersonBtn.setOnClickListener {
                 onRemovePerson(adapterPosition)
             }
@@ -85,11 +88,12 @@ class MemberAdapter(private val isLoveIs: Boolean, private val status: String, p
 
     }
 
-    fun updateList(newList: List<User>, userAdmin: User, currentUser: User, slotsCount: Int = 2){
+    fun updateList(newList: List<User>, userAdmin: User, currentUser: User, slotsCount: Int = 2, isFree: Boolean = true){
         items = newList
         adminUser = userAdmin
         this.currentUser = currentUser
         this.slotsCount = slotsCount
+        this.isFree = isFree
         notifyDataSetChanged()
 
     }

@@ -8,5 +8,6 @@ data class Operation(
     val id: Long,
     val value: Int,
     val type: OperationType,
-    val timestamp: String
+    val timestamp: String,
+    val extra: Map<String,User>?
 )

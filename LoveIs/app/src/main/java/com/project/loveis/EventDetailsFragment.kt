@@ -1,12 +1,14 @@
 package com.project.loveis
 
 import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
@@ -140,13 +142,15 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
                 is State.SuccessState -> {
-                    showToast("Event Is начат успешно")
+                    showToast("Event Is завершен успешно")
                     findNavController().popBackStack()
                 }
                 is State.LoadingState -> {}
                 is State.LoadedEventMembers -> {
                     val members = listOf(currentEventIs.owner) + state.members
-                    memberAdapter.updateList(members, currentEventIs.owner, currentUser, slotsCount = currentEventIs.personsNumber)
+                    memberAdapter.updateList(members, currentEventIs.owner, currentUser,
+                        slotsCount = currentEventIs.personsNumber,
+                    isFree = currentEventIs.price == 0)
                     initActionButton()
                     updateMembersCount(members.size)
                 }
@@ -215,10 +219,21 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
             binding.finishBtn.isVisible = true
             binding.finishBtn.text = "Присоединиться"
             binding.finishBtn.setOnClickListener {
+                if(currentUser.wallet?.value ?: 0 < currentEventIs.price){
+                    findNavController().navigate(R.id.addMoneyFragment)
+                    return@setOnClickListener
+                }
                 viewModel.joinEventIs(currentEventIs.id)
             }
             if(memberAdapter.isUserIn(currentUser))
                 binding.finishBtn.isVisible = false
+
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle("Это платное мероприятие, организатор запрашивает бронь в размере ${currentEventIs.price} монет")
+                .create()
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ок"){_,_ -> dialog.dismiss()}
+            if(currentEventIs.price != 0)
+                dialog.show()
 
         }
     }
