@@ -230,10 +230,10 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
                 binding.finishBtn.isVisible = false
 
             val dialog = AlertDialog.Builder(requireContext())
-                .setTitle("Это платное мероприятие, организатор запрашивает бронь в размере ${currentEventIs.price} монет")
+                .setMessage("Это платное мероприятие, организатор запрашивает бронь в размере ${currentEventIs.price} монет")
                 .create()
             dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ок"){_,_ -> dialog.dismiss()}
-            if(currentEventIs.price != 0)
+            if(currentEventIs.price != 0 && memberAdapter.isUserIn(currentUser).not())
                 dialog.show()
 
         }
