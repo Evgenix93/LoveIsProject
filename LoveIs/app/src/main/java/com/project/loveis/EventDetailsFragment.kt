@@ -148,6 +148,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
                 }
                 is State.LoadingState -> {}
                 is State.LoadedEventMembers -> {
+                    initList()
                     val members = listOf(currentEventIs.owner) + state.members
                     memberAdapter.updateList(members, currentEventIs.owner, currentUser,
                         slotsCount = currentEventIs.personsNumber,
@@ -156,7 +157,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
                     updateMembersCount(members.size)
                 }
                 is State.LoadedCurrentUser -> {
-                    initList()
+
                     currentUser = state.user
                     viewModel.getEventIsMembers(eventIsId = currentEventIs.id)
 
