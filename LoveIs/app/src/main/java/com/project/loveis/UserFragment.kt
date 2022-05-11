@@ -31,6 +31,7 @@ class UserFragment : Fragment(R.layout.item_user) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
         initViewPager()
         bind(
             arguments?.getParcelable(UsersViewPagerAdapter.USER),
@@ -41,7 +42,8 @@ class UserFragment : Fragment(R.layout.item_user) {
     private fun bind(currentUser: User?, user: User) {
         if (currentUser == null)
             return
-
+        binding.loveIsButton.isVisible = currentUser.id != user.id
+        binding.chatButton.isVisible = currentUser.id != user.id
         val strings = user.birthday.split('-')
         val birthDate = Calendar.getInstance().apply {
             set(strings[0].toInt(), strings[1].toInt(), strings[2].toInt())
@@ -117,6 +119,15 @@ class UserFragment : Fragment(R.layout.item_user) {
     private fun initViewPager() {
         photoAdapter = UserPhotoViewPagerAdapter(this) { onClick() }
         binding.photoImageView.adapter = photoAdapter
+    }
+
+    private fun initToolbar(){
+        val isList = requireArguments().getBoolean(UsersViewPagerAdapter.IS_LIST, true)
+        binding.toolbar.root.isVisible = isList.not()
+        binding.toolbar.burgerMenu.isVisible = false
+        binding.toolbar.title.text = (arguments?.getParcelable<User>(UsersViewPagerAdapter.USERS)!!).name
+        binding.toolbar.logOut.setImageResource(R.drawable.ic_arrow_back)
+        binding.toolbar.logOut.setOnClickListener { findNavController().popBackStack() }
     }
 
     companion object{

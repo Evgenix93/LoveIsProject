@@ -36,7 +36,7 @@
             android:text="@string/all" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/activeChip"
+            android:id="@+id/myChip"
             style="@style/chipsStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -44,7 +44,7 @@
             app:checkedIconEnabled="false"
             app:chipBackgroundColor="@color/chips_background"
             android:elevation="0dp"
-            android:text="@string/active" />
+            android:text="@string/my" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/historyChip"

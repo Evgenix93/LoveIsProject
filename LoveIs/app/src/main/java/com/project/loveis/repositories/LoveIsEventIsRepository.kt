@@ -44,7 +44,10 @@ class LoveIsEventIsRepository {
 
     suspend fun getEventIsMeetings(page: Int, size: Int, type: MeetingFilterType): Response<EventIsListResult>?{
         return try {
-            loveIsApi.getEventIsMeetings(page, size, type.value)
+            if(type == MeetingFilterType.MY)
+                loveIsApi.getMyEventIsMeetings(page, size, MeetingStatus.CREATE.value)
+            else
+                loveIsApi.getEventIsMeetings(page, size, type.value)
         }catch (e: Throwable){
             Log.d("debug", e.message.toString())
             null
