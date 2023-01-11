@@ -242,12 +242,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                     }
                     task.result ?: run {
                         //showLoading(false)
-                        Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
 
                     }
                 }else{
                     //showLoading(false)
-                    Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(), "ошибка", Toast.LENGTH_SHORT).show()
 
                 }
 

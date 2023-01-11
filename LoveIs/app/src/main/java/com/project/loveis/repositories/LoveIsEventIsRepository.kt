@@ -1,16 +1,21 @@
 package com.project.loveis.repositories
 
+import android.R.attr.label
+import android.content.ClipData
+import android.content.ClipboardManager
+
+import android.content.Context
 import android.content.Intent
-import android.net.Uri
+
 import android.util.Log
-import androidx.core.net.toUri
+import androidx.core.content.ContextCompat.getSystemService
 import com.project.loveis.models.*
 import com.project.loveis.singletones.Network
-import com.project.loveis.singletones.ProfileId
 import com.project.loveis.util.MeetingStatus
 import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 import java.io.IOException
+
 
 class LoveIsEventIsRepository {
     private val loveIsApi = Network.loveIsEventIsApi
@@ -196,7 +201,12 @@ class LoveIsEventIsRepository {
         }
     }
 
-    fun getShareEventIntent(id: Long): Intent{
+    fun getShareEventIntent(id: Long, context: Context): Intent{
+        val url =  "https://loveis.ru/event/$id"
+        val clipboard: ClipboardManager? =
+            getSystemService(context, ClipboardManager::class.java )
+        val clip = ClipData.newPlainText("", url)
+        clipboard?.setPrimaryClip(clip)
         return Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/event/$id")
@@ -204,13 +214,21 @@ class LoveIsEventIsRepository {
         }
     }
 
-    fun getShareLoveIsIntent(id: Long): Intent{
+    fun getShareLoveIsIntent(id: Long, context: Context): Intent{
+        val url =  "https://loveis.ru/meeting/$id"
+        val clipboard: ClipboardManager? =
+            getSystemService(context, ClipboardManager::class.java )
+        val clip = ClipData.newPlainText("", url)
+        clipboard?.setPrimaryClip(clip)
+        //data = Uri.parse("https://loveis/meeting/$id")
         return Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/meeting/$id")
             type = "text/plain"
-            //data = Uri.parse("https://loveis/meeting/$id")
         }
+
+
+
     }
 
 

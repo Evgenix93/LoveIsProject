@@ -1,5 +1,7 @@
 package com.project.loveis
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,6 +10,8 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -107,13 +111,19 @@ class UserFragment : Fragment(R.layout.item_user) {
     }
 
     private fun shareUser(user: User){
+        val url =  "https://loveis.ru/user/${user.id}"
+        val clipboard: ClipboardManager? =
+            ContextCompat.getSystemService(requireContext(), ClipboardManager::class.java)
+        val clip = ClipData.newPlainText("", url)
+        clipboard?.setPrimaryClip(clip)
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/user/${user.id}")
             type = "text/plain"
         }
-        if(requireContext().packageManager.resolveActivity(shareIntent, PackageManager.MATCH_DEFAULT_ONLY) != null)
-          startActivity(shareIntent)
+        //if(requireContext().packageManager.resolveActivity(shareIntent, PackageManager.MATCH_DEFAULT_ONLY) != null)
+          startActivity(Intent.createChooser(shareIntent, null))
+        Toast.makeText(requireContext(), "Ссылка скопирована", Toast.LENGTH_SHORT).show()
     }
 
     private fun initViewPager() {

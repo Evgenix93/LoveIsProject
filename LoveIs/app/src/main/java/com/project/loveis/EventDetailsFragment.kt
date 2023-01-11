@@ -116,7 +116,7 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
             logOut.setOnClickListener { findNavController().popBackStack() }
             burgerMenu.setImageResource(com.project.loveis.R.drawable.ic_share)
             burgerMenu.setOnClickListener {
-                viewModel.shareEventIs(args.eventIs?.id ?: args.eventId)
+                viewModel.shareEventIs(args.eventIs?.id ?: args.eventId, requireContext())
             }
         }
     }
@@ -164,7 +164,9 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
                 }
 
                 is State.LoadedIntent -> {
-                    startIntent(state.intent)
+                    //if(state.intent.resolveActivity(requireContext().packageManager) != null)
+                    startIntent(Intent.createChooser(state.intent, null))
+                    showToast("Ссылка скопирована")
                 }
                 is State.EventIsSingleMeetingLoadedState -> bind(state.meeting)
                 is State.SubsriptionNeededState -> findNavController().navigate(EventDetailsFragmentDirections.actionEventDetailsFragmentToPremiumFragment())

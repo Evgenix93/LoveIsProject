@@ -1,6 +1,7 @@
 package com.project.loveis.viewmodels
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
@@ -250,12 +251,12 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun shareEventIs(id: Long) {
-        stateLiveData.postValue(State.LoadedIntent(loveIsRepository.getShareEventIntent(id)))
+    fun shareEventIs(id: Long, context: Context) {
+        stateLiveData.postValue(State.LoadedIntent(loveIsRepository.getShareEventIntent(id, context)))
     }
 
-    fun shareLoveIs(id: Long) {
-        stateLiveData.postValue(State.LoadedIntent(loveIsRepository.getShareLoveIsIntent(id)))
+    fun shareLoveIs(id: Long, context: Context) {
+        stateLiveData.postValue(State.LoadedIntent(loveIsRepository.getShareLoveIsIntent(id, context)))
     }
 
     fun getEventIsById(id: Long) {
