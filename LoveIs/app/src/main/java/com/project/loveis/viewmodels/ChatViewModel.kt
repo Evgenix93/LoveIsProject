@@ -35,7 +35,7 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
 
           val response = chatRepository.sendMessage(message.ifEmpty { null }, attachmentUris, userId)
           when(response?.code()){
-              204 -> stateLiveData.postValue(State.SuccessState)
+              200 -> stateLiveData.postValue(State.SuccessState)
               400 -> stateLiveData.postValue(State.ErrorState(400))
               404 -> stateLiveData.postValue(State.ErrorState(404))
           }

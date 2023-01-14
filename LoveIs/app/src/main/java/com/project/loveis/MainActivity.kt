@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
             .putExtra(LoveIsDetailsFragment.LOVE_IS_STATUS, loveIs.status)
         Log.d("MyDebug", "getLong extra = ${intent.getLongExtra(LoveIsDetailsFragment.LOVE, 0)}")
         val pendingIntent = PendingIntent.getActivity(this, 123, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.FLAG_IMMUTABLE)
         val notification = NotificationCompat.Builder(this, NotificationChannels.IMPORTANT_CHANNEL_ID)
             .setContentTitle("Love Is")
             .setContentText(
@@ -323,7 +323,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(MESSAGE_FROM, dialog.chatWith.id)
         intent.putExtra(DIALOG_NAME, dialog.chatWith.name)
 
-        val pendingIntent = PendingIntent.getActivity(this, 123, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(this, 123, intent, PendingIntent.FLAG_IMMUTABLE)
         val notification = NotificationCompat.Builder(this, NotificationChannels.IMPORTANT_CHANNEL_ID)
             .setContentTitle("Пользователь ${dialog.chatWith.name} оставил вам новое текстовое сообщение")
             //.setContentText(dialog.list?.first()?.content)
