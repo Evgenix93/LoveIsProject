@@ -55,7 +55,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         with(binding.toolbar){
             title.text = requireContext().resources.getString(R.string.profile)
             burgerMenu.setOnClickListener {
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMenuFragment(viewModel.subscription))
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMenuFragment())
 
             }
             logOut.setOnClickListener {
@@ -185,8 +185,8 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                         showProfileInfo(user)
                         sendFcmToken()
                         Log.d("MyDebug", "user = ${user}")
-                        //if(user.subscription == null)
-                           // viewModel.confirmSubscription(0)
+                        if(user.subscription == null)
+                            viewModel.confirmSubscription(0)
                     }else
                         filePickerLauncher2.launch(arrayOf("image/*"))
                 }

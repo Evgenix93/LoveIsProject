@@ -10,10 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.FragmentMenuBinding
+import com.project.loveis.singletones.ProfileInfo
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MenuFragment: Fragment(R.layout.fragment_menu) {
     private val binding: FragmentMenuBinding by viewBinding()
-    private val arguments: MenuFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,10 +50,30 @@ class MenuFragment: Fragment(R.layout.fragment_menu) {
                 findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToChangePhoneNumber1Fragment())
             }
             moreFuturesTextView.setOnClickListener{
-                if(arguments.subscription.not())
+                if(ProfileInfo.currentUser?.subscription == null)
                    findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToPremiumFragment())
-                else
-                   Toast.makeText(requireContext(),"Вы уже подписаны", Toast.LENGTH_SHORT).show()
+                else {
+                    //Toast.makeText(requireContext(), "Вы уже подписаны", Toast.LENGTH_SHORT).show()
+                    val dateStringList = ProfileInfo.currentUser!!.subscription!!.until.split("-")
+                    val timeString = ProfileInfo.currentUser!!.subscription!!.until
+                        .substringAfter("T").removeSuffix("+").split(":").subList(0, 2)
+                        .joinToString(":")
+                    val calendar = Calendar.getInstance().apply {
+                        set(
+                            dateStringList[0].toInt(),
+                            dateStringList[1].toInt() - 1,
+                            dateStringList[2].substringBefore("T").toInt(),
+                            timeString.split(":")[0].toInt(),
+                            timeString.split(":")[1].toInt()
+                        )
+                    }
+
+                    if(calendar.timeInMillis - System.currentTimeMillis() > 0)
+                        findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToPremiumPurchasedFragment())
+                    else
+                        findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToPremiumFragment())
+
+                }
             }
             aboutAppTextView.setOnClickListener{
                 findNavController().navigate(MenuFragmentDirections.actionMenuFragmentToAboutAppFragment())

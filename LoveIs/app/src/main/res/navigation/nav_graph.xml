@@ -487,9 +487,9 @@
         <action
             android:id="@+id/action_menuFragment_to_walletFragment"
             app:destination="@id/walletFragment" />
-        <argument
-            android:name="subscription"
-            app:argType="boolean" />
+        <action
+            android:id="@+id/action_menuFragment_to_premiumPurchasedFragment"
+            app:destination="@id/premiumPurchasedFragment" />
     </fragment>
     <fragment
         android:id="@+id/addMoneyFragment"
@@ -626,5 +626,9 @@
         android:id="@+id/userPhotoFragment"
         android:name="com.project.loveis.UserPhotoFragment"
         android:label="UserPhotoFragment" />
+    <fragment
+        android:id="@+id/premiumPurchasedFragment"
+        android:name="com.project.loveis.PremiumPurchasedFragment"
+        android:label="PremiumPurchasedFragment" />
     >>>>>>> origin/main
 </navigation>

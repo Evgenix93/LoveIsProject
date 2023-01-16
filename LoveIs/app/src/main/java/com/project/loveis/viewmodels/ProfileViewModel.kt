@@ -295,7 +295,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
             )
             val dateString = dateFormat.format(date)
             Log.d("MyDebug", "date = $dateString")
-           /* val response = subscriptionRepository.confirmSubsription(SubsriptionRequestData(value, dateString))
+            val response = subscriptionRepository.confirmSubsription(SubsriptionRequestData(value, dateString))
             when (response?.code()) {
                 204 -> {
                     stateLiveData.postValue(State.SuccessState)
@@ -304,7 +304,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 null -> stateLiveData.postValue(State.ErrorState(0))
                 else -> stateLiveData.postValue(State.ErrorState(2))
-            }*/
+            }
 
         }
     }
