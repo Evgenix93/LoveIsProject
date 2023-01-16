@@ -487,6 +487,9 @@
         <action
             android:id="@+id/action_menuFragment_to_walletFragment"
             app:destination="@id/walletFragment" />
+        <argument
+            android:name="subscription"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/addMoneyFragment"

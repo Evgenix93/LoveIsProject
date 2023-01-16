@@ -7,19 +7,19 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.google.firebase.messaging.FirebaseMessaging
 import com.project.loveis.State
-import com.project.loveis.models.Coordinates
-import com.project.loveis.models.GcmDevice
-import com.project.loveis.models.Image
-import com.project.loveis.models.MeetingFilterType
+import com.project.loveis.models.*
 import com.project.loveis.repositories.AuthRepository
 import com.project.loveis.repositories.LoveIsEventIsRepository
 import com.project.loveis.repositories.MainRepository
+import com.project.loveis.repositories.SubsriptionRepository
 import com.project.loveis.util.CloudMessageType
 import com.project.loveis.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -28,8 +28,11 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
     private val mainRepository = MainRepository(app)
     private val authRepository = AuthRepository(app)
     private val loveIsRepository = LoveIsEventIsRepository()
+    private val subscriptionRepository = SubsriptionRepository()
     private var images = mutableListOf<Image>()
     private var photoNumber = 1
+    var subscription = false
+        private set
 
     val state: LiveData<State>
         get() = stateLiveData
@@ -53,6 +56,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                     }
                     Log.d("Debug", user.images.toString())
                     images = user.images.toMutableList()
+                    subscription = user.subscription != null
                     stateLiveData.postValue(State.LoadedSingleState(user))
                 }
                 404 -> stateLiveData.postValue(State.ErrorState(404))
@@ -274,6 +278,34 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
     private suspend fun getErrorFromResponse(response: ResponseBody): String{
         return withContext(Dispatchers.IO) {
             response.string()
+        }
+    }
+
+    fun confirmSubscription(value: Int){
+        viewModelScope.launch {
+            stateLiveData.postValue(State.LoadingState)
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US)
+                .apply { timeZone = TimeZone.getDefault() }
+            val date = Date(
+                2023 - 1900,
+                 2,
+               10,
+                0,
+                0
+            )
+            val dateString = dateFormat.format(date)
+            Log.d("MyDebug", "date = $dateString")
+           /* val response = subscriptionRepository.confirmSubsription(SubsriptionRequestData(value, dateString))
+            when (response?.code()) {
+                204 -> {
+                    stateLiveData.postValue(State.SuccessState)
+                }
+
+                400 -> stateLiveData.postValue(State.ErrorState(400))
+                null -> stateLiveData.postValue(State.ErrorState(0))
+                else -> stateLiveData.postValue(State.ErrorState(2))
+            }*/
+
         }
     }
 }

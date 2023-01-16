@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.databinding.FragmentPremiumBinding
-import com.project.loveis.models.User
 import com.project.loveis.viewmodels.SubsriptionViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -17,6 +16,7 @@ import java.util.*
 class PremiumFragment: Fragment(R.layout.fragment_premium) {
     private val binding: FragmentPremiumBinding by viewBinding()
     private val viewModel: SubsriptionViewModel by viewModels()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,8 +57,6 @@ class PremiumFragment: Fragment(R.layout.fragment_premium) {
         )
 
         return dateFormat.format(date)
-
-
 
     }
 
