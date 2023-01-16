@@ -238,7 +238,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                     Log.d("mylog", task.result.longitude.toString())
                     task.result?.let {
                         //showLoading(false)
-                        viewModel.updateCoordinates(latitude = it.latitude.toLong(), longitude = it.longitude.toLong())
+                        viewModel.updateCoordinates(latitude = it.latitude, longitude = it.longitude)
                     }
                     task.result ?: run {
                         //showLoading(false)

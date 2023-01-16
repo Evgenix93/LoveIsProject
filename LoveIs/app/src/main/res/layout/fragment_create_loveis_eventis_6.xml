@@ -120,6 +120,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writeTelegramRefTextView" />
 
+    <TextView
+        android:id="@+id/telegramExample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/telegram_example"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="14sp"
+        android:textColor="@color/gray2"
+        app:layout_constraintStart_toStartOf="@id/telegramRefEditText"
+        app:layout_constraintTop_toBottomOf="@id/telegramRefEditText"/>
+
     <EditText
         android:id="@+id/whatsAppRefEditText"
         android:layout_width="wrap_content"
@@ -133,6 +144,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/writeWhatsAppRefTextView" />
 
+    <TextView
+        android:id="@+id/whatsAppExample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/whatsapp_example"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="14sp"
+        android:textColor="@color/gray2"
+        app:layout_constraintStart_toStartOf="@id/whatsAppRefEditText"
+        app:layout_constraintTop_toBottomOf="@id/whatsAppRefEditText"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/continueBtn"
         style="@style/buttonFilled"
@@ -145,6 +167,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

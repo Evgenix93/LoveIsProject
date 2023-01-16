@@ -183,5 +183,8 @@
     <string name="apply">Принять</string>
     <string name="verified_user">Проверенный пользователь</string>
     <string name="info_withdrawal_to_card">С возможностью дальнейшего вывода на карту</string>
+    <string name="telegram_example">Пример: https://t.me/+ZxxxxP7hXbg1OGUy</string>
+    <string name="whatsapp_example">Пример: chat.whatsapp.com/ECBQlwGRuJlD9zwFxxxxx</string>
+    <string name="available_to_you">Вам доступно</string>
 
 </resources>

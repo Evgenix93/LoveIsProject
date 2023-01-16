@@ -201,7 +201,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
-    fun updateCoordinates(latitude: Long, longitude: Long) {
+    fun updateCoordinates(latitude: Double, longitude: Double) {
         viewModelScope.launch {
             //stateLiveData.postValue(State.LoadingState)
             val response = mainRepository.updateCoordinates(

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/statusTextView"
+        android:layout_width="317dp"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="1sp"
+        android:text="Премиум до 10.03.2023"
+        android:textAlignment="center"
+        android:textAppearance="@style/infoText4"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:layout_marginTop="55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+         />
+
+    <TextView
+        android:id="@+id/subscribeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/available_to_you"
+        android:textAppearance="@style/infoText"
+        android:textColor="?attr/colorPrimaryVariant"
+        android:layout_marginTop="38dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusTextView" />
+
+    <TextView
+        android:id="@+id/moreEventsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/more_events"
+        android:textAppearance="@style/infoText4"
+        android:textStyle="bold"
+        android:layout_marginTop="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subscribeTextView" />
+
+    <TextView
+        android:id="@+id/unlimitedEventsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/create_events"
+        android:textAppearance="@style/infoText4"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moreEventsTextView" />
+
+    <TextView
+        android:id="@+id/useFiltersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/use_filters"
+        android:textAppearance="@style/infoText4"
+        android:textStyle="bold"
+        android:layout_marginTop="28dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unlimitedEventsTextView" />
+
+    <TextView
+        android:id="@+id/sortingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/sorting"
+        android:textAppearance="@style/infoText4"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/useFiltersTextView" />
+
+    <TextView
+        android:id="@+id/topOfSearchTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/top_search"
+        android:textAppearance="@style/infoText4"
+        android:textStyle="bold"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sortingTextView" />
+
+    <TextView
+        android:id="@+id/goToTopTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:lineSpacingExtra="3sp"
+        android:text="@string/top_search_text"
+        android:textAppearance="@style/infoText4"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topOfSearchTextView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
