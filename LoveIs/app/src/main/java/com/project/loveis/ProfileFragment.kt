@@ -34,7 +34,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("MyDebug", "profileFragment onViewCreated")
         initToolbar()
         showBottomNavigation()
         setClickListeners()
@@ -56,7 +55,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         with(binding.toolbar){
             title.text = requireContext().resources.getString(R.string.profile)
             burgerMenu.setOnClickListener {
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMenuFragment())
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMenuFragment(viewModel.subscription))
 
             }
             logOut.setOnClickListener {
@@ -182,9 +181,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                         (activity as MainActivity).onLogined()
                         getActiveLoveIs()
                         requestLocationPermission()
-                        val user = state.result as User
+                        val user = state.result
                         showProfileInfo(user)
                         sendFcmToken()
+                        Log.d("MyDebug", "user = ${user}")
+                        //if(user.subscription == null)
+                           // viewModel.confirmSubscription(0)
                     }else
                         filePickerLauncher2.launch(arrayOf("image/*"))
                 }
@@ -261,5 +263,4 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
     private fun requestLocationPermission(){
         locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
-
 }

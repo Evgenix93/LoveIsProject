@@ -21,10 +21,16 @@ class CreateLoveIsFragment4 : Fragment(R.layout.fragment_create_loveis_eventis_6
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+        initSteps()
         initContinueButton()
         bindViewModel()
     }
 
+
+    private fun initSteps(){
+        binding.stepTextView2.text = "4"
+        binding.stepTextView4.text = "4"
+    }
 
     private fun initToolbar() {
         with(binding.toolbar) {
