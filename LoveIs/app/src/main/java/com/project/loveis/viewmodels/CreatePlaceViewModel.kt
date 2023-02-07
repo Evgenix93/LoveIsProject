@@ -31,10 +31,10 @@ class CreatePlaceViewModel(app: Application): AndroidViewModel(app) {
     fun createPlace(name: String, address: String){
 
         viewModelScope.launch {
-            if (photoUri == null)
-                return@launch
+           // if (photoUri == null)
+             //   return@launch
             stateLiveData.postValue(State.LoadingState)
-           val response = repository.createPlace(name, address, photoUri!!)
+           val response = repository.createPlace(name, address, photoUri)
             if (response == null)
                 stateLiveData.postValue(State.ErrorState(0))
             else{

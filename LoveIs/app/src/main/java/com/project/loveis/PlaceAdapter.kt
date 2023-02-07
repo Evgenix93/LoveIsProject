@@ -13,15 +13,16 @@ class PlaceAdapter(private val onClick:(Int)->Unit): RecyclerView.Adapter<PlaceA
     private var places = emptyList<Place>()
     private var chosenPlaceId = 1
 
-    class PlaceViewHolder(view: View, onClick: (Int) -> Unit): RecyclerView.ViewHolder(view){
+   inner class PlaceViewHolder(view: View): RecyclerView.ViewHolder(view){
         private val binding: ItemPlaceBinding by viewBinding()
-        init {
-            itemView.setOnClickListener{
-                onClick(adapterPosition + 1)
-            }
-        }
 
-        fun bind(place:Place, chosenPlaceId: Int){
+
+        fun bind(place:Place){
+            itemView.setOnClickListener {
+                chosenPlaceId = place.id
+                onClick(place.id)
+                notifyDataSetChanged()
+            }
             if (chosenPlaceId == place.id){
                 binding.root.cardElevation = 20f
                 binding.root.strokeWidth = 0
@@ -40,15 +41,11 @@ class PlaceAdapter(private val onClick:(Int)->Unit): RecyclerView.Adapter<PlaceA
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         return PlaceViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_place, parent, false))
-        {
-            chosenPlaceId = it
-            notifyDataSetChanged()
-            onClick(it)
-        }
+
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.bind(places[position], chosenPlaceId)
+        holder.bind(places[position])
     }
 
     override fun getItemCount(): Int {

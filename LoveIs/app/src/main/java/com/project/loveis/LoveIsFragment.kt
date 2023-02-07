@@ -103,7 +103,7 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
                 R.id.historyChip -> {
                     binding.list.adapter = finishedLoveIsAdapter
                     //viewModel.getHistoryLoveIsMeetings()
-                    viewModel.getLoveIsMeetings(type = MeetingFilterType.ALL)
+                    viewModel.getLoveIsMeetings(type = MeetingFilterType.HISTORY)
                 }
 
             }

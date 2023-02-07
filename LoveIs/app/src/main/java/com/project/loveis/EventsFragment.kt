@@ -101,7 +101,7 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
                     viewModel.getEventIsMeetings(type = MeetingFilterType.HISTORY)}
                 R.id.allChip -> {
                     binding.eventsList.adapter = eventAdapter
-                    viewModel.getEventIsMeetings(type = MeetingFilterType.ACTIVE)}
+                    viewModel.getEventIsMeetings(type = MeetingFilterType.ALL)}
 
             }
         }
@@ -164,7 +164,7 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
         viewModel.state.observe(viewLifecycleOwner, Observer { state ->
             when(state){
                 is State.StartState -> {
-                    viewModel.getEventIsMeetings(type = MeetingFilterType.ACTIVE )
+                    viewModel.getEventIsMeetings(type = MeetingFilterType.ALL )
                 }
                 is State.LoadingState -> {}
                 is State.EventIsMeetingsLoadedState -> {

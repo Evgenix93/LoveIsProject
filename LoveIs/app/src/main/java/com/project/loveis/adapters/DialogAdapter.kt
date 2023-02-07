@@ -25,9 +25,9 @@ class DialogAdapter(private val onClick: (User) -> Unit, private val onAvatarCli
                 onAvatarClick(dialog.chatWith)
             }
             binding.nameTextView.text = dialog.chatWith.name
-            binding.lastMessageTextView.text = dialog.lastMessage!!.content
-            binding.timeTextView.text = dialog.lastMessage.timestamp.substringAfter('T')
-                .substringBeforeLast(':').substringBeforeLast(':')
+            binding.lastMessageTextView.text = dialog.lastMessage?.content
+            binding.timeTextView.text = dialog.lastMessage?.timestamp?.substringAfter('T')
+                ?.substringBeforeLast(':')?.substringBeforeLast(':')
 
             val photoUrl = "https://loveis.scratch.studio" + dialog.chatWith.photo
             Glide.with(binding.root)
