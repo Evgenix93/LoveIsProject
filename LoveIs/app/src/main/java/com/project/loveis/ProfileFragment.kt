@@ -61,7 +61,12 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             logOut.setOnClickListener {
                 Tokens.token = ""
                 Tokens.fireBaseToken = ""
-                findNavController().navigate(R.id.phoneNumber1Fragment)
+                viewModel.deleteTokenDataFromDisk()
+                //findNavController().clearBackStack(R.id.profileFragment)
+                //findNavController().navigate(R.id.phoneNumber1Fragment)
+                //findNavController().clearBackStack("")
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPhoneNumber1Fragment())
+
             }
 
         }
@@ -144,6 +149,11 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         if(user.verified){
             binding.verifyBtn.isVisible = false
             binding.verifiedUserTextView.isVisible = true
+        }
+        if(user.verificationStatus == User.VERIFY_STATUS_PENDING){
+            binding.verifyBtn.isVisible = false
+            binding.verifiedUserTextView.isVisible = true
+            binding.verifiedUserTextView.text = "Верификация в процессе"
         }
     }
 

@@ -2,6 +2,7 @@ package com.project.loveis.models
 
 import android.os.Parcelable
 import com.project.loveis.util.Gender
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
@@ -23,5 +24,13 @@ data class User(
     val gender: Gender,
     val photo: String,
     var images: List<Image>,
-    val subscription: Subsription?
-): Parcelable
+    val subscription: Subsription?,
+    @Json(name = "verification_status")
+    val verificationStatus: String?
+): Parcelable{
+    companion object{
+        const val VERIFY_STATUS_PENDING = "pending"
+    }
+}
+
+

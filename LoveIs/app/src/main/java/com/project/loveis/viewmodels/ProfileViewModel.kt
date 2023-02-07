@@ -308,4 +308,10 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
 
         }
     }
+
+    public fun deleteTokenDataFromDisk(){
+        viewModelScope.launch {
+            authRepository.deleteTokenData()
+        }
+    }
 }

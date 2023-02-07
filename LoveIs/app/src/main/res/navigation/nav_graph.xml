@@ -32,7 +32,10 @@
             app:destination="@id/verify1Fragment" />
         <action
             android:id="@+id/action_profileFragment_to_phoneNumber1Fragment"
-            app:destination="@id/phoneNumber1Fragment" />
+            app:destination="@id/phoneNumber1Fragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_profileFragment_to_walletFragment"
             app:destination="@id/walletFragment" />

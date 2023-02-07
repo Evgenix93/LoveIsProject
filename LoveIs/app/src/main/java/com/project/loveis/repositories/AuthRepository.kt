@@ -100,6 +100,22 @@ class AuthRepository(val context: Context) {
         }
     }
 
+    suspend fun deleteTokenData() {
+        withContext(Dispatchers.IO) {
+            try {
+                val prefs = context.getSharedPreferences(USER_PHONE_CODE, Context.MODE_PRIVATE)
+                prefs.edit()
+                    .remove(PHONE_KEY)
+                    .commit()
+                prefs.edit().remove(CODE_KEY).commit()
+
+            } catch (e: Throwable) {
+
+            }
+
+        }
+    }
+
     suspend fun getTokenDataFromDisk(): TokenData?{
         return withContext(Dispatchers.IO) {
             val prefs = context.getSharedPreferences(USER_PHONE_CODE, Context.MODE_PRIVATE)
