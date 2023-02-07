@@ -2,7 +2,9 @@ package com.project.loveis
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -90,6 +92,7 @@ class CreatePlaceFragment3: Fragment(R.layout.fragment_add_place2) {
                 is State.ErrorState -> {
                     showLoading(false)
                     (requireActivity() as MainActivity).showErrorNotification()
+                    Toast.makeText(requireContext(), "Ошибка: код ${state.code}", Toast.LENGTH_SHORT).show()
                 }
                 else -> {}
             }

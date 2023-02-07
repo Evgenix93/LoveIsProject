@@ -144,7 +144,9 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
         val age = Calendar.getInstance().get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
 
+        binding.cityTextView.text = user.coordinates.city
         binding.nameTextView.text = "${user.name}, $age"
+        binding.aboutMeTextView.text = user.about
         binding.coinsTextView.text = user.wallet?.value?.toString() ?: "0"
         if(user.verified){
             binding.verifyBtn.isVisible = false

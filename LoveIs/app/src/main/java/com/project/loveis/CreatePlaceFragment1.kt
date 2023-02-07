@@ -2,6 +2,7 @@ package com.project.loveis
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -31,7 +32,10 @@ class CreatePlaceFragment1: Fragment(R.layout.fragment_add_place1) {
 
     private fun initContinueButton(){
         binding.continueBtn.setOnClickListener {
-            findNavController().navigate(CreatePlaceFragment1Directions.actionCreatePlaceFragment1ToCreatePlaceFragment2(
+            if (binding.nameEditText.text.isBlank())
+              Toast.makeText(requireContext(), "Укажите название", Toast.LENGTH_SHORT).show()
+            else
+               findNavController().navigate(CreatePlaceFragment1Directions.actionCreatePlaceFragment1ToCreatePlaceFragment2(
                 binding.nameEditText.text.toString()
             ))
         }

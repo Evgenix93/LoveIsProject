@@ -16,7 +16,7 @@ interface PlaceApi {
     suspend fun createPlace(
         @Part("name") name: String,
         @Part("address") address: String,
-        @Part photo: MultipartBody.Part
+        @Part photo: MultipartBody.Part?
     ): Response<Unit>
 
     @GET("place/")
