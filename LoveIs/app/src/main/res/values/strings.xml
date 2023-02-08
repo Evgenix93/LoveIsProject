@@ -186,5 +186,6 @@
     <string name="telegram_example">Пример: https://t.me/+ZxxxxP7hXbg1OGUy</string>
     <string name="whatsapp_example">Пример: chat.whatsapp.com/ECBQlwGRuJlD9zwFxxxxx</string>
     <string name="available_to_you">Вам доступно</string>
+    <string name="_0_32">0/32</string>
 
 </resources>
