@@ -98,6 +98,7 @@ class UserFragment : Fragment(R.layout.item_user) {
             results
         )
             val distance = (results[0] / 1000)
+            binding.cityTextView.text = user.coordinates.city
             binding.distanceTextView.text = "${distance.toInt()}км от вас"
         } catch (e: Exception) {
             Log.e("Debug", "error = ${e.message}")
