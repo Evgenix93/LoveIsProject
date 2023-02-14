@@ -100,6 +100,7 @@ class LoveIsEventIsRepository {
         whatsAppUrl:String,
         userId:Long
     ): Response<LoveIs>? {
+        Log.d("MyTag", "createLoveIs")
         return  try {
             Network.loveIsEventIsApi.createLoveIs(
                 CreateLoveIsRequest(
@@ -112,7 +113,7 @@ class LoveIsEventIsRepository {
             )
             )
         }catch (e: Exception){
-            Log.e("Debug", "error ${e.message}")
+            Log.e("MyTag", "error ${e.message}")
             if(e is IOException) {
                 null
             }else{

@@ -26,8 +26,13 @@ class DialogAdapter(private val onClick: (User) -> Unit, private val onAvatarCli
             }
             binding.nameTextView.text = dialog.chatWith.name
             binding.lastMessageTextView.text = dialog.lastMessage?.content
-            binding.timeTextView.text = dialog.lastMessage?.timestamp?.substringAfter('T')
-                ?.substringBeforeLast(':')?.substringBeforeLast(':')
+            val timeStamp = dialog.lastMessage?.timestamp
+            val date = timeStamp?.substringBefore('T').orEmpty()
+            val day = date.substringAfterLast('-')
+            val month = date.substringAfter('-').substringBefore('-')
+            val year = date.substringBefore('-')
+            val time = timeStamp?.substringAfter('T')?.substringBeforeLast(':')?.substringBeforeLast(':').orEmpty()
+            binding.timeTextView.text = "$day.$month.$year $time"
 
             val photoUrl = "https://loveis.scratch.studio" + dialog.chatWith.photo
             Glide.with(binding.root)

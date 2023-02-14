@@ -215,7 +215,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="@string/finish"
         android:textColor="?attr/colorPrimaryVariant"
         app:backgroundTint="?attr/colorPrimaryVariant"

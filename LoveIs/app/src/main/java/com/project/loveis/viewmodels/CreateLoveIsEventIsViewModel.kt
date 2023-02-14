@@ -53,6 +53,7 @@ class CreateLoveIsEventIsViewModel(app: Application): AndroidViewModel(app) {
 
                     500 -> stateLiveData.postValue(State.ErrorState(500))
                     -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                    else -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
 
                 }
         }

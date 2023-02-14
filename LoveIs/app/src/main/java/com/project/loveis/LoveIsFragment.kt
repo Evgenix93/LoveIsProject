@@ -49,11 +49,31 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
         initChips()
         (requireActivity() as MainActivity).hideBottomNavigationBar(false)
         bindViewModel()
-
-
+        getLoveIsMeetings()
     }
 
 
+    private fun getLoveIsMeetings(){
+        when(binding.chipGroup.checkedChipId){
+            R.id.activeChip -> {
+                binding.list.adapter = loveIsAdapter
+                viewModel.getLoveIsMeetings(type = MeetingFilterType.ACTIVE)
+            }
+            R.id.myChip -> {
+                binding.list.adapter = loveIsAdapter
+                viewModel.getLoveIsMeetings(type = MeetingFilterType.MY)
+            }
+            R.id.newChip -> {
+                binding.list.adapter = loveIsAdapter
+                viewModel.getLoveIsMeetings(type = MeetingFilterType.INCOMING)
+            }
+            R.id.historyChip -> {
+                binding.list.adapter = finishedLoveIsAdapter
+                //  viewModel.getHistoryLoveIsMeetings()
+                viewModel.getLoveIsMeetings(type = MeetingFilterType.ALL)
+            }
+        }
+    }
     private fun initToolbar() {
         with(binding.toolbar) {
             title.text = requireContext().getString(R.string.love_is)
@@ -73,6 +93,7 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
     }
 
     private fun initChips() {
+
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
             Log.d("debug", "checked")
             group.descendants.forEach {
@@ -102,12 +123,17 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
                 }
                 R.id.historyChip -> {
                     binding.list.adapter = finishedLoveIsAdapter
-                    //viewModel.getHistoryLoveIsMeetings()
-                    viewModel.getLoveIsMeetings(type = MeetingFilterType.HISTORY)
+                  //  viewModel.getHistoryLoveIsMeetings()
+                    viewModel.getLoveIsMeetings(type = MeetingFilterType.ALL)
                 }
 
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("MyTag","onDestroyView")
     }
 
     private fun bindViewModel() {

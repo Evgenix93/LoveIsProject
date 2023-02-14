@@ -42,6 +42,7 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
         initFilterWindow()
         showBottomNavigation()
         bindViewModel()
+        getEvents()
 
         binding.addEventFloatingBtn.setOnClickListener {
             findNavController().navigate(EventsFragmentDirections.actionEventsFragmentToCreateEventIsFragment1())
@@ -53,7 +54,19 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
         }
     }
 
-
+    private fun getEvents(){
+        when(binding.chipGroup.checkedChipId){
+            R.id.myChip ->  {
+                binding.eventsList.adapter = eventAdapter
+                viewModel.getEventIsMeetings(type = MeetingFilterType.MY)}
+            R.id.historyChip -> {
+                binding.eventsList.adapter = finishedEventIsAdapter
+                viewModel.getEventIsMeetings(type = MeetingFilterType.HISTORY)}
+            R.id.allChip -> {
+                binding.eventsList.adapter = eventAdapter
+                viewModel.getEventIsMeetings(type = MeetingFilterType.ALL)}
+        }
+    }
 
     private fun initToolbar(){
         with(binding.toolbar){

@@ -93,7 +93,8 @@ class CreateLoveIsFragment4 : Fragment(R.layout.fragment_create_loveis_eventis_6
 
                     }
                 }
-                is State.ErrorMessageState -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                is State.ErrorMessageState -> {Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                showLoading(false)}
                 else -> {}
             }
         }
