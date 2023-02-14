@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,6 +24,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit) {
         initToolbar()
         hideBottomNavBar()
         setClickListeners()
+        initEditText()
         bindViewModel()
     }
 
@@ -88,6 +90,12 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit) {
         binding.nameEditText.text.append(user.name)
         binding.editText.text.append(user.about)
 
+    }
+
+    private fun initEditText(){
+        binding.editText.addTextChangedListener {
+            binding.charCounterTextView.text = "${binding.editText.length()}/20"
+        }
     }
 
 
