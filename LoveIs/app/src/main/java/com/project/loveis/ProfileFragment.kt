@@ -142,7 +142,9 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             set(strings[0].toInt(), strings[1].toInt(), strings[2].toInt())
         }
 
-        val age = Calendar.getInstance().get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
+        val ageCalendar = Calendar.getInstance()
+        ageCalendar.timeInMillis = ageCalendar.timeInMillis - birthDate.timeInMillis
+        val age = ageCalendar.get(Calendar.YEAR) - 1970
 
         binding.cityTextView.text = user.coordinates.city
         binding.nameTextView.text = "${user.name}, $age"
