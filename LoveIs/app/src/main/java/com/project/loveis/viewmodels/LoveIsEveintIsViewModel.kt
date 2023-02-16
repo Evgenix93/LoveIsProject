@@ -12,6 +12,7 @@ import com.project.loveis.repositories.LoveIsEventIsRepository
 import com.project.loveis.repositories.MainRepository
 import com.project.loveis.util.MeetingStatus
 import kotlinx.coroutines.launch
+import java.util.*
 
 class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
     private val loveIsRepository = LoveIsEventIsRepository()
@@ -30,12 +31,12 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
             when (response?.code()) {
                 200 -> {
                     val loveIsList = when (type) {
-                        MeetingFilterType.ACTIVE -> response.body()!!.list.filter { it.status != MeetingStatus.CREATE.value }
-                        MeetingFilterType.INCOMING -> response.body()!!.list.filter { it.status == MeetingStatus.CREATE.value }
+                        MeetingFilterType.ACTIVE -> response.body()!!.list.filter { it.status != MeetingStatus.CREATE.value }.sortedByDescending { getTimeStampFromString(it.date) }
+                        MeetingFilterType.INCOMING -> response.body()!!.list.filter { it.status == MeetingStatus.CREATE.value }.sortedByDescending { getTimeStampFromString(it.date) }
                         MeetingFilterType.ALL -> response.body()!!.list.filter { it.status == MeetingStatus.COMPLETE.value
                                 || it.status == MeetingStatus.CANCEL.value
-                                || it.status == MeetingStatus.NOT_HAPPEN.value}
-                        else -> response.body()!!.list
+                                || it.status == MeetingStatus.NOT_HAPPEN.value}.sortedByDescending { getTimeStampFromString(it.date) }
+                        else -> response.body()!!.list.sortedByDescending { getTimeStampFromString(it.date) }
                     }
                     stateLiveData.postValue(State.LoveIsMeetingsLoadedState(loveIsList, type))
                 }
@@ -85,7 +86,7 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
             val response = loveIsRepository.getEventIsMeetings(page, size, type)
             when (response?.code()) {
                 200 -> {
-                    val eventIsList = response.body()!!.list
+                    val eventIsList = response.body()!!.list.sortedByDescending { getTimeStampFromString(it.date) }
 
                     stateLiveData.postValue(State.EventIsMeetingsLoadedState(eventIsList, type))
                 }
@@ -317,5 +318,21 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
             }
         }
 
+    }
+
+    private fun getTimeStampFromString(date: String): Long{
+        val dateStringList = date.split("-")
+        val timeString = date.substringAfter("T").removeSuffix("+").split(":").subList(0, 2)
+            .joinToString(":")
+        val calendar = Calendar.getInstance().apply {
+            set(
+                dateStringList[0].toInt(),
+                dateStringList[1].toInt() - 1,
+                dateStringList[2].substringBefore("T").toInt(),
+                timeString.split(":")[0].toInt(),
+                timeString.split(":")[1].toInt()
+            )
+        }
+        return calendar.timeInMillis
     }
 }

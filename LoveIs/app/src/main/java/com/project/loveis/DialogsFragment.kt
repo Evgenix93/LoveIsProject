@@ -72,7 +72,7 @@ class DialogsFragment: Fragment(R.layout.fragment_dialogs) {
             when(state){
                 is State.LoadedSingleState -> {
                     val dialogsWrapper = state.result as DialogsWrapper
-                    dialogAdapter.updateList(dialogsWrapper.list)
+                    dialogAdapter.updateList(dialogsWrapper.list.sortedByDescending { it.lastMessage?.timestamp })
                 }
                 is State.ErrorMessageState -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
             }

@@ -89,14 +89,14 @@ class LoveIsDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details)
                 }
                 val diffMillis = System.currentTimeMillis() - calendar.timeInMillis
                 binding.finishBtn.text = "Завершить"
-        if(loveIs.status == MeetingStatus.CREATE.value && args.filterType == MeetingFilterType.MY.value){
+        if(diffMillis / 1000 < 3600 || loveIs.status == MeetingStatus.CREATE.value ){//loveIs.status == MeetingStatus.CREATE.value && args.filterType == MeetingFilterType.MY.value){
              binding.finishBtn.text = "Отменить"
              binding.finishBtn.setOnClickListener{
                 viewModel.changeLoveIsStatus(loveIs.id, MeetingStatus.CANCEL)
              }
         }else {
             binding.finishBtn.setOnClickListener { completeMeeting() }
-            binding.finishBtn.isVisible = diffMillis / 1000 >= 3600
+            //binding.finishBtn.isVisible = diffMillis / 1000 >= 3600
         }
 
         if(args.filterType == MeetingFilterType.INCOMING.value){
