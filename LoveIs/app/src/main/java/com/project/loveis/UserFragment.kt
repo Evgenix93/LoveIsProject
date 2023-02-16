@@ -52,7 +52,11 @@ class UserFragment : Fragment(R.layout.item_user) {
         val birthDate = Calendar.getInstance().apply {
             set(strings[0].toInt(), strings[1].toInt(), strings[2].toInt())
         }
-        val age = Calendar.getInstance().get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
+
+        val ageCalendar = Calendar.getInstance()
+        ageCalendar.timeInMillis = ageCalendar.timeInMillis - birthDate.timeInMillis
+        val age = ageCalendar.get(Calendar.YEAR) - 1970
+
         binding.nameTextView.text = "${user.name}, $age"
         binding.descriptionTextView.text = user.about
 
