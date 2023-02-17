@@ -15,6 +15,7 @@ import com.project.loveis.repositories.SubsriptionRepository
 import com.project.loveis.util.CloudMessageType
 import com.project.loveis.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
@@ -108,6 +109,8 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+
+
     fun updateAdditionalPhoto(newPhotoUri: Uri) {
         viewModelScope.launch {
             val image = images.firstOrNull { it.number == photoNumber }
@@ -127,6 +130,24 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
                     -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
                     else -> stateLiveData.postValue(State.ErrorMessageState("updateAdditionalPhoto: код ошибки ${response.code()}"))
 
+                }
+            }
+        }
+    }
+
+    fun deleteAdditionalPhoto(){
+        viewModelScope.launch {
+            val image = images.firstOrNull { it.number == photoNumber }
+            if(image != null) {
+                val response = mainRepository.deleteAdditionalPhoto(image.uuid)
+                when (response?.code()) {
+                    200 -> { getUserInfo()}
+                    400 -> stateLiveData.postValue(State.ErrorState(400))
+                    null -> {
+                        stateLiveData.postValue(State.ErrorState(0))
+                    }
+                    -1 -> stateLiveData.postValue(State.ErrorMessageState(getErrorFromResponse(response.errorBody()!!)))
+                    else -> stateLiveData.postValue(State.ErrorMessageState("updateAdditionalPhoto: код ошибки ${response.code()}"))
                 }
             }
         }

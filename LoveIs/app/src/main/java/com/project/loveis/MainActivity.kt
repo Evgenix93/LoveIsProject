@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.getMessages(from)
     }
 
+
+
     private fun registerReceiver(){
         LocalBroadcastManager.getInstance(this).registerReceiver(pushMessageReceiver,
         IntentFilter(MessagingService.PUSH_INTENT)
@@ -344,12 +346,14 @@ class MainActivity : AppCompatActivity() {
                 is State.LoveIsSingleMeetingLoadedState -> {
                     createLoveIsNotification(state.meeting)
                 }
-
+          //   is State.UnreadMessageState ->{
+              //   binding.bottomNavBar.unreadImageView.isVisible = true
+         //    }
             }
-
-
         })
     }
+
+
 
     companion object{
         const val MESSAGE_FROM = "message_from"

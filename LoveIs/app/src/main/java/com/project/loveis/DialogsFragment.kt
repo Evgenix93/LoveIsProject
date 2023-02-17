@@ -1,6 +1,7 @@
 package com.project.loveis
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -12,6 +13,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.project.loveis.adapters.DialogAdapter
 import com.project.loveis.adapters.UsersViewPagerAdapter
 import com.project.loveis.databinding.FragmentDialogsBinding
+import com.project.loveis.models.Dialog
 import com.project.loveis.models.DialogsWrapper
 import com.project.loveis.models.User
 import com.project.loveis.util.autoCleared
@@ -73,9 +75,14 @@ class DialogsFragment: Fragment(R.layout.fragment_dialogs) {
                 is State.LoadedSingleState -> {
                     val dialogsWrapper = state.result as DialogsWrapper
                     dialogAdapter.updateList(dialogsWrapper.list)
+
                 }
                 is State.ErrorMessageState -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun checkDialogs(list: List<Dialog>): Boolean{
+        return list.any{it.unread == "0"}
     }
 }

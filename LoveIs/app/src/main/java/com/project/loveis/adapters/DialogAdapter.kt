@@ -3,6 +3,7 @@ package com.project.loveis.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
@@ -33,6 +34,7 @@ class DialogAdapter(private val onClick: (User) -> Unit, private val onAvatarCli
             val year = date.substringBefore('-')
             val time = timeStamp?.substringAfter('T')?.substringBeforeLast(':')?.substringBeforeLast(':').orEmpty()
             binding.timeTextView.text = "$day.$month.$year $time"
+          //  binding.unreadImageView.isVisible = dialog.unread == "0"
 
             val photoUrl = "https://loveis.scratch.studio" + dialog.chatWith.photo
             Glide.with(binding.root)

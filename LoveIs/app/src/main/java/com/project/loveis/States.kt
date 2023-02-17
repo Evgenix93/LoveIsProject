@@ -13,6 +13,7 @@ sealed class State {
     class ErrorState(val code: Int): State()
     class ErrorMessageState(val message: String): State()
     class LoadedSingleState(val result: Any): State()
+    object UnreadMessageState: State()
     class LoveIsSingleMeetingLoadedState(val meeting: LoveIs): State()
     class LoveIsMeetingsLoadedState(val meetings: List<LoveIs>, val type: MeetingFilterType): State()
     class EventIsSingleMeetingLoadedState(val meeting: EventIs): State()

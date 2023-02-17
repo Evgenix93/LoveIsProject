@@ -1,6 +1,8 @@
 package com.project.loveis
 
 import android.Manifest
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,6 +22,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.project.loveis.databinding.FragmentProfileBinding
+import com.project.loveis.dialogs.DeleteDialog
 import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.models.User
 import com.project.loveis.singletones.Tokens
@@ -93,16 +97,22 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         }
 
         binding.addPhoto1.setOnClickListener {
+            if(binding.additionalPhoto1ImageView.drawable != null)
+                return@setOnClickListener
             viewModel.savePhotoNumber(1)
             filePickerLauncher2.launch(arrayOf("image/*"))
 
         }
         binding.addPhoto2.setOnClickListener {
+            if(binding.additionalPhoto2ImageView.drawable != null)
+                return@setOnClickListener
             viewModel.savePhotoNumber(2)
             filePickerLauncher2.launch(arrayOf("image/*"))
         }
 
         binding.addPhoto3.setOnClickListener {
+            if(binding.additionalPhoto3ImageView.drawable != null)
+                return@setOnClickListener
             viewModel.savePhotoNumber(3)
             filePickerLauncher2.launch(arrayOf("image/*"))
 
@@ -113,7 +123,30 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         binding.loveIsCardView.setOnClickListener{
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoveIsFragment())
         }
+
+        binding.deletePhoto1ImageView.setOnClickListener {
+            viewModel.savePhotoNumber(1)
+            if (binding.additionalPhoto1ImageView.drawable != null) {
+                DeleteDialog{viewModel.deleteAdditionalPhoto()}.show(childFragmentManager, null)
+            }
+        }
+
+        binding.deletePhoto2ImageView.setOnClickListener {
+            viewModel.savePhotoNumber(2)
+            if (binding.additionalPhoto2ImageView.drawable != null) {
+                DeleteDialog{viewModel.deleteAdditionalPhoto()}.show(childFragmentManager, null)
+            }
+        }
+
+        binding.deletePhoto3ImageView.setOnClickListener {
+            viewModel.savePhotoNumber(3)
+            if (binding.additionalPhoto3ImageView.drawable != null) {
+                DeleteDialog{viewModel.deleteAdditionalPhoto()}.show(childFragmentManager, null)
+            }
+        }
     }
+
+
 
     private fun showProfileInfo(user: User){
         val prefix = "https://loveis.scratch.studio/"
@@ -122,6 +155,9 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             .load(mainPhoto)
             .into(binding.mainPhotoImageView)
          Log.d("Debug", user.images.toString())
+        binding.additionalPhoto1ImageView.setImageDrawable(null)
+        binding.additionalPhoto2ImageView.setImageDrawable(null)
+        binding.additionalPhoto3ImageView.setImageDrawable(null)
         user.images.forEach{image ->
             when(image.number){
                 1 -> Glide.with(this)
