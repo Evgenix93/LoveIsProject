@@ -199,7 +199,7 @@ class MainRepository(val context: Context) {
     }
 
     fun getShareUserIntent(userId: Long): Intent{
-        val uri = Uri.withAppendedPath(Uri.parse("https://loveis.ru/user/"), userId.toString())
+        val uri = Uri.withAppendedPath(Uri.parse("https://loveis.scratch.studio/profile/"), userId.toString())
         return Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, uri.toString())

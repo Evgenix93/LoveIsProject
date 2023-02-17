@@ -193,12 +193,8 @@ class EventDetailsFragment : Fragment(R.layout.fragment_loveis_eventis_details) 
     private fun initActionButton() {
         Log.d("MyDebug", "owner phone = ${currentEventIs.owner.phone}, currentUser phone = ${currentUser.phone}")
         if (currentEventIs.owner.phone == currentUser.phone) {
-           // binding.finishBtn.text = "Начать"
             binding.finishBtn.setOnClickListener {
-                if(currentEventIs.participantsCount.toInt() + 1 >= 3)
                 viewModel.completeEventIs(currentEventIs.id)
-                else
-                    showToast("Количество участников события не может быть меньше трёх человек")
             }
 
             val dateStringList = currentEventIs.date.split("-")

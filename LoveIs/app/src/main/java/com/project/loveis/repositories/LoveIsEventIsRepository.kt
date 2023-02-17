@@ -200,20 +200,20 @@ class LoveIsEventIsRepository {
     }
 
     fun getShareEventIntent(id: Long, context: Context): Intent{
-        val url =  "https://loveis.ru/event/$id"
+        val url =  "https://loveis.scratch.studio/eventis/$id"
         val clipboard: ClipboardManager? =
             getSystemService(context, ClipboardManager::class.java )
         val clip = ClipData.newPlainText("", url)
         clipboard?.setPrimaryClip(clip)
         return Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/event/$id")
+            putExtra(Intent.EXTRA_TEXT, url)
             type = "text/plain"
         }
     }
 
     fun getShareLoveIsIntent(id: Long, context: Context): Intent{
-        val url =  "https://loveis.ru/meeting/$id"
+        val url =  "https://loveis.scratch.studio/loveis/$id"
         val clipboard: ClipboardManager? =
             getSystemService(context, ClipboardManager::class.java )
         val clip = ClipData.newPlainText("", url)
@@ -221,7 +221,7 @@ class LoveIsEventIsRepository {
         //data = Uri.parse("https://loveis/meeting/$id")
         return Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "https://loveis.ru/meeting/$id")
+            putExtra(Intent.EXTRA_TEXT, url)
             type = "text/plain"
         }
 

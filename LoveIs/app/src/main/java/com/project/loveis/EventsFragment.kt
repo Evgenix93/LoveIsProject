@@ -17,6 +17,7 @@ import com.google.android.material.chip.Chip
 import com.project.loveis.databinding.FragmentEventsBinding
 import com.project.loveis.models.MeetingFilterType
 import com.project.loveis.models.MeetingType
+import com.project.loveis.models.Type
 import com.project.loveis.util.MeetingTypeEnum
 import com.project.loveis.viewmodels.LoveIsEveintIsViewModel
 
@@ -39,10 +40,10 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
         initToolbar()
         initList()
         initChips()
-        initFilterWindow()
         showBottomNavigation()
         bindViewModel()
         getEvents()
+        getEventTypes()
 
         binding.addEventFloatingBtn.setOnClickListener {
             findNavController().navigate(EventsFragmentDirections.actionEventsFragmentToCreateEventIsFragment1())
@@ -120,11 +121,12 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
         }
     }
 
-    private fun initFilterWindow(){
+    private fun initFilterWindow(types: List<Type>){
+        val typesArray = types.map { it.name }.toTypedArray()
         binding.filterWindow.filterTypeTextView.setAdapter(ArrayAdapter<String>(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,
-            arrayOf("Все", "Прогулка", "Лыжи, сноуборды, коньки", "Поездка", "Суши", "Кафе")
+            arrayOf("Все") + typesArray
         ))
         binding.filterWindow.filterTypeTextView.setOnClickListener {
             binding.filterWindow.filterTypeTextView.showDropDown()
@@ -136,13 +138,13 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
                     finishedEventIsAdapter.setEventTypeId(MeetingTypeEnum.ALL.id)
                     binding.filterWindow.root.isVisible = false
                 }
-                1 -> {
-                    eventAdapter.setEventTypeId(MeetingTypeEnum.WALKING.id)
-                    finishedEventIsAdapter.setEventTypeId(MeetingTypeEnum.WALKING.id)
+                else -> {
+                    eventAdapter.setEventTypeId(types[i - 1].id)
+                    finishedEventIsAdapter.setEventTypeId(types[i - 1].id)
                     binding.filterWindow.root.isVisible = false
 
                 }
-                2 -> {
+                /*2 -> {
                     eventAdapter.setEventTypeId(MeetingTypeEnum.SKI.id)
                     finishedEventIsAdapter.setEventTypeId(MeetingTypeEnum.SKI.id)
                     binding.filterWindow.root.isVisible = false
@@ -161,7 +163,7 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
                     eventAdapter.setEventTypeId(MeetingTypeEnum.CAFE.id)
                     finishedEventIsAdapter.setEventTypeId(MeetingTypeEnum.CAFE.id)
                     binding.filterWindow.root.isVisible = false
-                }
+                }*/
 
             }
         }
@@ -186,6 +188,11 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
                     else
                         finishedEventIsAdapter.updateEventIsList(state.meetings)
                 }
+                is State.LoadedSingleState -> {
+                    val result = state.result as List<Type>
+                    initFilterWindow(result)
+
+                }
                 is State.ErrorState -> {
                     when (state.code) {
                         400 -> showToast("Ошибка")
@@ -202,6 +209,10 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun getEventTypes(){
+        viewModel.getTypes()
     }
 
 }

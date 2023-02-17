@@ -18,6 +18,7 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
     private val loveIsRepository = LoveIsEventIsRepository()
     private val authRepository = AuthRepository(app)
     private val mainRepository = MainRepository(app)
+    private val loveIsEventIsRepository = LoveIsEventIsRepository()
     private val stateLiveData = MutableLiveData<State>(State.StartState)
     private lateinit var currentUser: User
 
@@ -31,7 +32,7 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
             when (response?.code()) {
                 200 -> {
                     val loveIsList = when (type) {
-                        MeetingFilterType.ACTIVE -> response.body()!!.list.filter { it.status != MeetingStatus.CREATE.value }.sortedByDescending { getTimeStampFromString(it.date) }
+                        MeetingFilterType.ACTIVE -> response.body()!!.list.sortedByDescending { getTimeStampFromString(it.date) }
                         MeetingFilterType.INCOMING -> response.body()!!.list.filter { it.status == MeetingStatus.CREATE.value }.sortedByDescending { getTimeStampFromString(it.date) }
                         MeetingFilterType.ALL -> response.body()!!.list.filter { it.status == MeetingStatus.COMPLETE.value
                                 || it.status == MeetingStatus.CANCEL.value
@@ -293,6 +294,16 @@ class LoveIsEveintIsViewModel(app: Application) : AndroidViewModel(app) {
                 else -> stateLiveData.postValue(State.ErrorState(2))
             }
 
+        }
+    }
+
+    fun getTypes(){
+        viewModelScope.launch{
+            val response = loveIsEventIsRepository.getTypes()
+            when(response?.code()){
+                200 -> stateLiveData.postValue(State.LoadedSingleState(response.body()!!.list))
+                else -> stateLiveData.postValue(State.ErrorState(0))
+            }
         }
     }
 

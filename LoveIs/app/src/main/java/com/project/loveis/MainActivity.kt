@@ -262,14 +262,14 @@ class MainActivity : AppCompatActivity() {
      fun onLogined() {
         if(intent == null) return
          else if(intent.data != null)
-         if(intent.data.toString().contains("event"))
+         if(intent.data.toString().contains("loveis.scratch.studio/eventis/"))
         findNavController(R.id.navHostFragment).navigate(
             ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(
                 eventId = intent.data?.lastPathSegment!!.toLong()
             ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
-        ) else if(intent.data.toString().contains("user"))
+        ) else if(intent.data.toString().contains("loveis.scratch.studio/profile/"))
             handleShareUserIntent(intent)
-         else if(intent.data.toString().contains("meeting"))
+         else if(intent.data.toString().contains("loveis.scratch.studio/loveis/"))
              findNavController(R.id.navHostFragment).navigate(
                  ProfileFragmentDirections.actionProfileFragmentToLoveIsDetailsFragment(
                      loveIsId = intent.data?.lastPathSegment!!.toLong(),
@@ -300,8 +300,6 @@ class MainActivity : AppCompatActivity() {
     private fun handleShareUserIntent(intent: Intent?){
         Log.d("mylog", "handle intent")
         intent ?: return
-        if(intent.data.toString().contains("user").not())
-            return
         val userId = intent.data?.lastPathSegment
         Log.d("mylog", intent.data?.lastPathSegment.toString().toLong().toString())
         userId?.let {
