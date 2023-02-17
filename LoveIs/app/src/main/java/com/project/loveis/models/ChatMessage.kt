@@ -8,5 +8,6 @@ data class ChatMessage(
     val user: Sender,
     val attachments: List<Map<String, String>>,
     val content: String?,
-    val timestamp: String
+    val timestamp: String,
+    val unread: Boolean
 )

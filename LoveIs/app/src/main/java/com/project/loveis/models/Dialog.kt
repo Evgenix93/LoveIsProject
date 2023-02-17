@@ -12,5 +12,6 @@ data class Dialog(
     val lastMessage: ChatMessage?,
     val total: Int?,
     val size: Int?,
-    val page: Int?
+    val page: Int?,
+    val unread: String?
 )

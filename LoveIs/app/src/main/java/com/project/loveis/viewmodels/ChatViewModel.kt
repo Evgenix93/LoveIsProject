@@ -49,12 +49,19 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
        viewModelScope.launch {
          val response = chatRepository.getMessages(userId)
          when(response?.code()){
-           200 -> stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
+           200 -> {
+               stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
+             //  val message = response.body()!!.list?.last()
+             //  if(message?.unread == false)
+              //  chatRepository.readMessage(userId, message.id)
+           }
              400 -> stateLiveData.postValue(State.ErrorState(400))
              404 -> stateLiveData.postValue(State.ErrorState(404))
          }
        }
     }
+
+
 
     fun setAttachmentUri(uris: List<Uri>){
         attachmentUris = uris

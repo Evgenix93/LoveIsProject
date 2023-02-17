@@ -74,6 +74,10 @@ class ChatRepository(private val context: Context) {
       }
     }
 
+    suspend fun readMessage(userId: Long, messageId: Long){
+        Network.chatApi.readMessage(userId, messageId)
+    }
+
     suspend fun getDialogs(): Response<DialogsWrapper>?{
       return try {
           Network.chatApi.getDialogs()
