@@ -208,7 +208,7 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
             when (response?.code()) {
                 200 -> {
                     val loveIsList = when (type) {
-                        MeetingFilterType.ACTIVE -> response.body()!!.list.filter { it.status != "create" }
+                        MeetingFilterType.ACTIVE -> response.body()!!.list
                         MeetingFilterType.INCOMING -> response.body()!!.list.filter { it.status == "create" }
                         else -> response.body()!!.list
                     }
