@@ -30,6 +30,7 @@ class CreateLoveIsFragment2 : Fragment(R.layout.fragment_create_loveis_eventis_4
         initAddPlaceText()
         bindViewModel()
         initContinueButton()
+        viewModelIsEvent.getPlaces()
     }
 
     private fun initSteps(){
@@ -65,7 +66,7 @@ class CreateLoveIsFragment2 : Fragment(R.layout.fragment_create_loveis_eventis_4
     private fun bindViewModel(){
         viewModelIsEvent.state.observe(viewLifecycleOwner){ state ->
             when(state){
-                is State.StartState -> viewModelIsEvent.getPlaces()
+               // is State.StartState -> viewModelIsEvent.getPlaces()
                 is State.LoadedSingleState -> {
                     val placeListResult = state.result as PlaceListResult
                     placeAdapter.updateList(placeListResult.list)

@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         // findNavController(R.id.navHostFragment).navigate(R.id.registration1Fragment)
         initBottomNavBar()
         initNavController()
+     //  checkMessages()
         //handleIntent(intent)
     }
 
@@ -96,7 +97,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.getMessages(from)
     }
 
-
+     fun checkMessages(){
+      //   viewModel.checkMessages()
+     }
 
     private fun registerReceiver(){
         LocalBroadcastManager.getInstance(this).registerReceiver(pushMessageReceiver,
@@ -321,6 +324,7 @@ class MainActivity : AppCompatActivity() {
     }
 
      private fun createMessageNotification(dialog: Dialog){
+
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra(MESSAGE_FROM, dialog.chatWith.id)
         intent.putExtra(DIALOG_NAME, dialog.chatWith.name)
@@ -346,9 +350,9 @@ class MainActivity : AppCompatActivity() {
                 is State.LoveIsSingleMeetingLoadedState -> {
                     createLoveIsNotification(state.meeting)
                 }
-          //   is State.UnreadMessageState ->{
-              //   binding.bottomNavBar.unreadImageView.isVisible = true
-         //    }
+             is State.ReadMessageState ->{
+                 binding.bottomNavBar.unreadImageView.isVisible = !state.read
+             }
             }
         })
     }

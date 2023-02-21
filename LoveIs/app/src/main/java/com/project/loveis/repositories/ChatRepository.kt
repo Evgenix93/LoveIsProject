@@ -74,8 +74,12 @@ class ChatRepository(private val context: Context) {
       }
     }
 
-    suspend fun readMessage(userId: Long, messageId: Long){
-        Network.chatApi.readMessage(userId, messageId)
+    suspend fun readMessage(userId: Long, messageId: Long): Response<Unit>?{
+      return try {
+          Network.chatApi.readMessage(userId, messageId)
+      }catch(e: Throwable){
+          null
+      }
     }
 
     suspend fun getDialogs(): Response<DialogsWrapper>?{

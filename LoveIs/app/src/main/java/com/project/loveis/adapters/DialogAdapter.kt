@@ -34,7 +34,7 @@ class DialogAdapter(private val onClick: (User) -> Unit, private val onAvatarCli
             val year = date.substringBefore('-')
             val time = timeStamp?.substringAfter('T')?.substringBeforeLast(':')?.substringBeforeLast(':').orEmpty()
             binding.timeTextView.text = "$day.$month.$year $time"
-          //  binding.unreadImageView.isVisible = dialog.unread == "0"
+        //    binding.unreadImageView.isVisible = dialog.unread == "0"
 
             val photoUrl = "https://loveis.scratch.studio" + dialog.chatWith.photo
             Glide.with(binding.root)

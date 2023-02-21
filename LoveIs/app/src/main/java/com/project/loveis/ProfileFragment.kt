@@ -287,7 +287,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
             }
             locationProvider.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY, cancelToken ).addOnCompleteListener { task ->
                 if(task.isSuccessful){
-                    Log.d("mylog", task.result.longitude.toString())
+                  //  Log.d("mylog", task.result.longitude.toString())
                     task.result?.let {
                         //showLoading(false)
                         viewModel.updateCoordinates(latitude = it.latitude, longitude = it.longitude)
@@ -305,7 +305,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
             }
 
-        }catch (e: SecurityException){
+        }catch (e: Throwable){
 
         }
     }

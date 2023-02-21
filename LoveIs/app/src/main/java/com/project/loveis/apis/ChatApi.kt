@@ -29,6 +29,6 @@ interface ChatApi {
    suspend fun getDialogs(): Response<DialogsWrapper>
 
    @POST("chat/{user_id}/message/{message_id}/")
-   suspend fun readMessage(@Path ("user_id") userId: Long, @Path("message_id")messageId: Long)
+   suspend fun readMessage(@Path ("user_id") userId: Long, @Path("message_id")messageId: Long): Response<Unit>
 
 }
