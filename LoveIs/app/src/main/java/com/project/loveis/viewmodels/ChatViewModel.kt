@@ -2,6 +2,7 @@ package com.project.loveis.viewmodels
 
 import android.app.Application
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.*
 import com.project.loveis.State
 import com.project.loveis.models.User
@@ -51,9 +52,14 @@ class ChatViewModel(application: Application): AndroidViewModel(application) {
          when(response?.code()){
            200 -> {
                stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
-             //  val message = response.body()!!.list?.last()
-             //  if(message?.unread == false)
-              //  chatRepository.readMessage(userId, message.id)
+             /*  val message = response.body()!!.list?.reversed()?.last()
+               if(message?.unread == false) {
+                   Log.d("MyTag", "lastMessage = $message")
+                       val readMessageResponse =
+                           chatRepository.readMessage(userId, message.id)
+                       if (readMessageResponse?.code() == 200)
+                           stateLiveData.postValue(State.ReadMessageState(true))
+               }*/
            }
              400 -> stateLiveData.postValue(State.ErrorState(400))
              404 -> stateLiveData.postValue(State.ErrorState(404))

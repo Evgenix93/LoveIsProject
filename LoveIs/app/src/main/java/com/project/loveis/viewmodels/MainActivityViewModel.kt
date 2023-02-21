@@ -22,9 +22,9 @@ class MainActivityViewModel(app: Application): AndroidViewModel(app) {
             val response = chatRepository.getMessages(userId)
             when (response?.code()) {
                 200 -> {stateLiveData.postValue(State.LoadedSingleState(response.body()!!))
-                // val dialog = response.body() as Dialog
-                 // if(dialog.unread == "0")
-                  //    stateLiveData.postValue(State.UnreadMessageState)
+               //  val dialog = response.body() as Dialog
+
+                   //   stateLiveData.postValue(State.ReadMessageState(dialog.unread == "1"))
                         }
                 400 -> stateLiveData.postValue(State.ErrorState(400))
                 404 -> stateLiveData.postValue(State.ErrorState(404))
@@ -34,7 +34,15 @@ class MainActivityViewModel(app: Application): AndroidViewModel(app) {
     }
 
 
-
+    fun checkMessages(){
+        viewModelScope.launch {
+            val response = chatRepository.getDialogs()
+            if(response?.code() == 200) {
+                val read = response.body()!!.list.all{it.unread == "1"}
+                stateLiveData.postValue(State.ReadMessageState(read))
+            }
+        }
+    }
 
     private val loveIsRepository = LoveIsEventIsRepository()
 

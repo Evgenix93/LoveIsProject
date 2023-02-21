@@ -143,6 +143,10 @@ class ChatFragment: Fragment(R.layout.fragment_chat) {
                     binding.loadingProgressBar.isVisible = false
                     Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
                 }
+                is State.ReadMessageState -> {
+                 //   val mainActivity = activity as MainActivity
+                  //  mainActivity.checkMessages()
+                }
             }
         }
     }

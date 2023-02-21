@@ -87,7 +87,7 @@ class CreatePlaceFragment3: Fragment(R.layout.fragment_add_place2) {
                     if(isFromCreateEvent) {
                     findNavController().popBackStack(R.id.createEventIsFragment4, false)
                 }else{
-                    findNavController().navigate(CreatePlaceFragment3Directions.actionCreatePlaceFragment3ToCreateLoveIsFragment2(1, 1))
+                  findNavController().popBackStack(R.id.createLoveIsFragment2, false)
                 }}
                 is State.ErrorState -> {
                     showLoading(false)
