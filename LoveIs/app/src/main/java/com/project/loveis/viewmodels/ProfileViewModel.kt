@@ -330,9 +330,12 @@ class ProfileViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    public fun deleteTokenDataFromDisk(){
+    fun logout(){
         viewModelScope.launch {
+            authRepository.deleteGcmDevice()
             authRepository.deleteTokenData()
+            stateLiveData.postValue(State.SuccessState)
         }
     }
+
 }

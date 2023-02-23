@@ -42,4 +42,7 @@ interface AuthApi {
 
     @PUT("api/device/gcm/{registration_id}/")
     suspend fun updateGcmDevice(@Path("registration_id") token: String, @Body device: GcmDevice): Response<GcmDevice>
+
+    @DELETE("api/device/gcm/{registration_id}/")
+    suspend fun deleteGcmDevice(@Path("registration_id") token: String)
 }
