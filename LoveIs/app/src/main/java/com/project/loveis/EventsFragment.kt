@@ -35,6 +35,9 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
 
 
 
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
@@ -42,7 +45,6 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
         initChips()
         showBottomNavigation()
         bindViewModel()
-        getEvents()
         getEventTypes()
 
         binding.addEventFloatingBtn.setOnClickListener {
@@ -64,6 +66,7 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
                 binding.eventsList.adapter = finishedEventIsAdapter
                 viewModel.getEventIsMeetings(type = MeetingFilterType.HISTORY)}
             R.id.allChip -> {
+                Log.d("mylog", "all chip")
                 binding.eventsList.adapter = eventAdapter
                 viewModel.getEventIsMeetings(type = MeetingFilterType.ALL)}
         }
@@ -180,6 +183,7 @@ class EventsFragment: Fragment(R.layout.fragment_events) {
             when(state){
                 is State.StartState -> {
                     viewModel.getEventIsMeetings(type = MeetingFilterType.ALL )
+
                 }
                 is State.LoadingState -> {}
                 is State.EventIsMeetingsLoadedState -> {
