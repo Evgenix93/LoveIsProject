@@ -108,7 +108,8 @@ class AuthRepository(val context: Context) {
                     .remove(PHONE_KEY)
                     .commit()
                 prefs.edit().remove(CODE_KEY).commit()
-
+                Tokens.token = ""
+                Tokens.fireBaseToken = ""
             } catch (e: Throwable) {
 
             }
@@ -198,6 +199,12 @@ class AuthRepository(val context: Context) {
         }catch (e: Throwable){
             null
         }
+    }
+
+    suspend fun deleteGcmDevice(){
+        try{
+            authApi.deleteGcmDevice(Tokens.fireBaseToken)
+        }catch (e: Throwable){}
     }
 
     suspend fun updateGcmDevice(token: String, device: GcmDevice): Response<GcmDevice>?{

@@ -63,13 +63,13 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
             }
             logOut.setOnClickListener {
-                Tokens.token = ""
-                Tokens.fireBaseToken = ""
-                viewModel.deleteTokenDataFromDisk()
+                viewModel.logout()
+
+
                 //findNavController().clearBackStack(R.id.profileFragment)
                 //findNavController().navigate(R.id.phoneNumber1Fragment)
                 //findNavController().clearBackStack("")
-                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPhoneNumber1Fragment())
+
 
             }
 
@@ -223,6 +223,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 }
                 is State.SuccessState -> {
                    // viewModel.getUserInfo()
+                    findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToPhoneNumber1Fragment())
                 }
                 is State.LoadingState -> {showLoading(true)}
                 is State.LoadedSingleState -> {
