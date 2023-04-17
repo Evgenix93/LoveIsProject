@@ -49,7 +49,7 @@ class LoveIsFragment : Fragment(R.layout.fragment_love_is) {
         initChips()
         (requireActivity() as MainActivity).hideBottomNavigationBar(false)
         bindViewModel()
-        getLoveIsMeetings()
+
     }
 
 
