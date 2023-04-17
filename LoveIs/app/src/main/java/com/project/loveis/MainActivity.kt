@@ -267,14 +267,14 @@ class MainActivity : AppCompatActivity() {
      fun onLogined() {
         if(intent == null) return
          else if(intent.data != null)
-         if(intent.data.toString().contains("loveis.scratch.studio/eventis/"))
+         if(intent.data.toString().contains("eventis"))
         findNavController(R.id.navHostFragment).navigate(
             ProfileFragmentDirections.actionProfileFragmentToEventDetailsFragment(
                 eventId = intent.data?.lastPathSegment!!.toLong()
             ), NavOptions.Builder().setPopUpTo(R.id.splashScreenFragment, false).build()
-        ) else if(intent.data.toString().contains("loveis.scratch.studio/profile/"))
+        ) else if(intent.data.toString().contains("profile"))
             handleShareUserIntent(intent)
-         else if(intent.data.toString().contains("loveis.scratch.studio/loveis/"))
+         else if(intent.data.toString().contains("loveis"))
              findNavController(R.id.navHostFragment).navigate(
                  ProfileFragmentDirections.actionProfileFragmentToLoveIsDetailsFragment(
                      loveIsId = intent.data?.lastPathSegment!!.toLong(),
