@@ -116,14 +116,14 @@ class UserFragment : Fragment(R.layout.item_user) {
     }
 
     private fun shareUser(user: User){
-        val url =  "https://loveis.scratch.studio/profile/${user.id}"
+        val url =  "https://loveis24.com/profile/${user.id}"
         val clipboard: ClipboardManager? =
             ContextCompat.getSystemService(requireContext(), ClipboardManager::class.java)
         val clip = ClipData.newPlainText("", url)
         clipboard?.setPrimaryClip(clip)
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "https://loveis.scratch.studio/profile/${user.id}")
+            putExtra(Intent.EXTRA_TEXT, "https://loveis24.com/profile/${user.id}")
             type = "text/plain"
         }
         //if(requireContext().packageManager.resolveActivity(shareIntent, PackageManager.MATCH_DEFAULT_ONLY) != null)
