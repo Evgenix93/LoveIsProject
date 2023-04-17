@@ -18,7 +18,7 @@ object Network {
 
     private val retrofit = Retrofit.Builder()
         .client(client)
-        .baseUrl("https://loveis.scratch.studio/api/")
+        .baseUrl("https://loveis24.com/api/")
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 
